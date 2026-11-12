@@ -17,19 +17,58 @@
     {
       "name": "Unity",
       "evidence": [
-        { "text": "2D 트리거로 마법책 획득 시 마법 해금·책 UI 일시정지 구현", "project": "1-the-last-mage" },
-        { "text": "미니게임 3종(주유소·바리케이드·정비소) UI·연출 구현", "project": "2-team-driving" },
-        { "text": "Unity 6·URP 17.3로 7일 생존 1인칭 3D 게임 제작", "project": "3-arcane-shift" }
+        {
+          "text": "2D 트리거로 마법책 획득 시 마법 해금·책 UI 일시정지 구현",
+          "project": "1-the-last-mage"
+        },
+        {
+          "text": "미니게임 3종(주유소·바리케이드·정비소) UI·연출 구현",
+          "project": "2-team-driving"
+        },
+        {
+          "text": "Unity 6·URP 17.3로 7일 생존 1인칭 3D 게임 제작",
+          "project": "3-arcane-shift"
+        }
       ]
     },
     {
       "name": "C#",
       "evidence": [
-        { "text": "BossState enum과 코루틴으로 보스 근접·원거리 공격 타이밍 제어", "project": "1-the-last-mage" },
-        { "text": "코루틴(OverloadRoutine)으로 과부하 깜빡임·2초 버튼 잠금 연출", "project": "2-team-driving" },
-        { "text": "Codex가 작성한 순수 C# DaySession 하루 상태 분리 구조를 읽고 설명", "project": "3-arcane-shift" }
+        {
+          "text": "BossState enum과 코루틴으로 보스 근접·원거리 공격 타이밍 제어",
+          "project": "1-the-last-mage"
+        },
+        {
+          "text": "코루틴(OverloadRoutine)으로 과부하 깜빡임·2초 버튼 잠금 연출",
+          "project": "2-team-driving"
+        },
+        {
+          "text": "Codex가 작성한 순수 C# DaySession 하루 상태 분리 구조를 읽고 설명",
+          "project": "3-arcane-shift"
+        }
+      ]
+    },
+    {
+      "name": "디자인 패턴",
+      "evidence": [
+        {
+          "text": "상태 패턴과 BossState enum+코루틴을 비교해 보스 AI 구조 선택",
+          "project": "1-the-last-mage"
+        },
+        {
+          "text": "Input·Controller·View 3분할로 입력·서버 통신·화면 연출 분리",
+          "project": "2-team-driving"
+        },
+        {
+          "text": "추상 클래스 AnomalyBehaviour 공통 계약으로 이상현상 3종 위험 합산",
+          "project": "3-arcane-shift"
+        }
       ]
     }
   ],
-  "projects": ["1-the-last-mage", "2-team-driving", "3-arcane-shift"]
+  "projects": [
+    "1-the-last-mage",
+    "2-team-driving",
+    "3-arcane-shift"
+  ]
 }
