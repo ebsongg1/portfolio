@@ -5,8 +5,8 @@
 **포트폴리오 웹페이지 세 가지**(포트폴리오 문서 · 발표 덱 · 상세 기술문서)와 **점검 리포트**를 만들어 줍니다.
 결과물은 설치·빌드 과정 없이 GitHub Pages로 바로 배포되고, 제출용 PDF로도 저장할 수 있습니다. 발표 덱은 PowerPoint 파일(PPTX)로 저장해 직접 고쳐 쓸 수도 있습니다.
 
-**예시 보기** → https://krkoohoo.github.io/portfolio-template/
-(이 레포에 들어 있는 샘플 프로필과 선배 수강생 작품 3편으로 만든 페이지입니다.)
+**내 포트폴리오** → https://ebsongg1.github.io/portfolio/
+(송은빈의 프로젝트 3편으로 만든 페이지입니다. 작성 중인 초안입니다.)
 
 ```mermaid
 flowchart LR

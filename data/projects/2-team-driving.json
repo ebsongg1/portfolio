@@ -1,0 +1,362 @@
+{
+  "id": "2-team-driving",
+  "doc": "기술문서.md",
+  "schemaVersion": 2,
+  "title": "누가 이딴 차로 도망을 가!",
+  "tagline": "차량 조작 역할을 나눠 맡아 함께 운전하고 경유지에서 미니게임을 수행하는 2D 협동 게임",
+  "cover": "",
+  "intent": null,
+  "team": { "type": "team", "size": "4인", "role": "주유소·바리케이드·정비소 미니게임 3종의 클라이언트 구현 (UI·연출 구현, 지시서 기반 서버 연동 코드를 Gemini로 생성해 적용)" },
+  "meta": [
+    { "label": "장르", "value": "2D 협동 운전 게임" },
+    { "label": "기간", "value": "2026.08.26 ~ 2026.09.10" },
+    { "label": "인원", "value": "4명 (팀 프로젝트)" },
+    { "label": "환경", "value": "Unity 6000.3.15f1, C#, UniTask, DOTween, Newtonsoft.Json, TextMeshPro, WebSocket 서버" }
+  ],
+  "tags": ["Unity 6.3", "C#", "UniTask", "DOTween", "Newtonsoft.Json", "TextMeshPro", "WebSocket"],
+  "links": {
+    "github": "",
+    "video": "",
+    "extra": []
+  },
+  "highlights": [
+    {
+      "title": "주유소 게이지·노즐 연출",
+      "what": "서버가 보내는 `fuel_state`(게이지 %, 눌림 여부)를 받아 게이지와 노즐·버튼 연출로 그대로 표시합니다. 게이지는 클라이언트가 직접 계산하지 않습니다(서버 판정 원칙은 지시서에서 정한 것).",
+      "how": "`ApplyFuelState`에서 서버의 게이지 퍼센트(0~100)를 `fillAmount`(0~1)로 바꿔 그리고, 노즐·버튼 연출(DOTween)은 `isPressed`가 바뀌는 순간에만 한 번 실행합니다.",
+      "why": "`fuel_state`가 계속 와도 연출이 반복되지 않게 하기 위해서입니다.",
+      "section": "4.2 핵심 코드: 서버 값을 그대로 화면에",
+      "image": null
+    },
+    {
+      "title": "바리케이드 과부하 연출",
+      "what": "오답 결과(`barricade_attempt_failed`)를 받으면 퓨즈·회로를 모두 끄고 빨간 과부하 깜빡임을 보여 준 뒤, 2초 동안 버튼을 잠갔다가 담당자만 다시 켭니다.",
+      "how": "View의 `OverloadRoutine` 코루틴이 버튼을 잠그고 과부하 효과를 보인 뒤 2초 기다려 효과를 숨기고 담당자만 버튼을 다시 활성화합니다. 잠금을 View가 맡는 분담은 지시서에서 정한 것이고, 과부하 깜빡임 같은 화면 연출이 본인이 맡은 UI·연출 영역입니다.",
+      "why": "",
+      "section": "5.2 핵심 코드: 과부하 2초 잠금은 View가",
+      "image": null
+    },
+    {
+      "title": "번호판 드래그 동기화",
+      "what": "정비소에서 담당자가 끄는 번호판의 위치를 관전자 화면에도 같은 자리로 보여 줍니다.",
+      "how": "번호판 지시서에 있던 방식대로 `anchoredPosition` 좌표를 0.05초마다 서버에 보내고, 서버가 돌려준 위치 메시지는 관전자만 적용합니다. 새 번호판은 드롭한 위치가 아니라 고정 장착 슬롯(`plateSlot`)으로 옮깁니다.",
+      "why": "모든 클라이언트의 UI가 같은 기준이어야 같은 위치에 보이고, 담당자는 자기 화면에서 이미 번호판을 움직이고 있기 때문입니다.",
+      "section": "6.2 번호판 드래그 동기화",
+      "image": null
+    }
+  ],
+  "troubleshooting": [],
+  "screenshots": [],
+  "retro": {
+    "achieved": [],
+    "regrets": [],
+    "plans": [],
+    "section": "10. 결과 및 회고"
+  },
+  "deck": {
+    "chapters": [
+      { "key": "overview", "title": "프로젝트 개요", "sectionPath": ["1. 프로젝트 개요"] },
+      { "key": "arch", "title": "담당 파트 구조", "sectionPath": ["2. 담당 파트 구조"] },
+      { "key": "split", "title": "Input · Controller · View 역할 분리", "sectionPath": ["3. Input · Controller · View 역할 분리"] },
+      { "key": "fuel", "title": "주유소 — 서버가 계산한 게이지 표시", "sectionPath": ["4. 주유소 — 서버가 계산한 게이지 표시"] },
+      { "key": "barricade", "title": "바리케이드 — 서버 판정 결과만 표시", "sectionPath": ["5. 바리케이드 — 서버 판정 결과만 표시"] },
+      { "key": "repair", "title": "정비소 — 단계별 상호작용과 번호판 드래그 동기화", "sectionPath": ["6. 정비소 — 단계별 상호작용과 번호판 드래그 동기화"] },
+      { "key": "spec-diff", "title": "지시서와 실제 구현의 차이", "sectionPath": ["7. 지시서와 실제 구현의 차이"] }
+    ],
+    "slides": [
+      {
+        "key": "what",
+        "chapter": "overview",
+        "layout": "overview",
+        "tab": "개요",
+        "title": { "text": "1.1 무엇을 만들었나 (What)", "verbatim": true },
+        "lead": { "text": "플레이어들이 기어, 액셀·브레이크, 내비게이션, 핸들 등 차량 조작 역할을 나눠 맡아 함께 운전하고, 경유지에서 미니게임을 수행하는 2D 협동 게임입니다.", "verbatim": true },
+        "sectionPath": ["1. 프로젝트 개요", "1.1 무엇을 만들었나 (What)"],
+        "points": [
+          { "label": "", "text": "이 문서는 게임 전체 중 제가 맡은 경유지 미니게임 3종의 클라이언트 구현을 다룹니다.", "verbatim": true },
+          { "label": "", "text": "미니게임마다 서버가 담당자 1명을 정하고, 담당자만 조작하며 나머지 플레이어는 같은 화면을 관전합니다.", "verbatim": true }
+        ],
+        "visuals": []
+      },
+      {
+        "key": "team",
+        "chapter": "overview",
+        "layout": "full",
+        "tab": "개요",
+        "title": { "text": "1.3 팀 구성과 내 역할", "verbatim": true },
+        "lead": { "text": "서버 연동 부분(Controller·Input의 통신 코드)은 팀장의 지시서에 구조와 예시 코드가 있었고, 저는 그 지시서를 Gemini에 전달해 코드를 생성하고 적용했습니다", "verbatim": true },
+        "sectionPath": ["1. 프로젝트 개요", "1.3 팀 구성과 내 역할"],
+        "points": [],
+        "visuals": [
+          { "kind": "table", "n": 1, "fp": "담당|역할" }
+        ]
+      },
+      {
+        "key": "origin",
+        "chapter": "overview",
+        "layout": "full",
+        "tab": "개요",
+        "title": { "text": "1.4 설계와 구현의 출처", "verbatim": true },
+        "lead": { "text": "이 문서에서는 누가 무엇을 정했는지를 나눠서 적습니다.", "verbatim": true },
+        "sectionPath": ["1. 프로젝트 개요", "1.4 설계와 구현의 출처"],
+        "points": [],
+        "visuals": [
+          { "kind": "table", "n": 1, "fp": "구분|내용|출처" }
+        ]
+      },
+      {
+        "key": "minigames",
+        "chapter": "overview",
+        "layout": "full",
+        "tab": "개요",
+        "title": { "text": "1.5 내가 맡은 미니게임", "verbatim": true },
+        "lead": null,
+        "sectionPath": ["1. 프로젝트 개요", "1.5 내가 맡은 미니게임"],
+        "points": [],
+        "visuals": [
+          { "kind": "table", "n": 1, "fp": "미니게임|규칙|서버가 판정하는 것 (지시서 기준)" }
+        ]
+      },
+      {
+        "key": "arch-diagram",
+        "chapter": "arch",
+        "layout": "visual",
+        "tab": "구조",
+        "title": { "text": "2.1 전체 구조", "verbatim": true },
+        "lead": null,
+        "sectionPath": ["2. 담당 파트 구조", "2.1 전체 구조"],
+        "points": [
+          { "label": "", "text": "NetworkSession, CheckpointZone, MinigameManager는 팀원이 작성했고, 미니게임 Controller·Input·View와 MinigameUI 일부가 제 담당입니다.", "verbatim": true },
+          { "label": "", "text": "그림을 단순하게 하려고 Input·View는 주유소 하나에만 연결해 그렸습니다. 바리케이드·정비소도 같은 방식입니다.", "verbatim": true }
+        ],
+        "visuals": [
+          { "kind": "mermaid", "n": 1, "fp": "flowchart LR" }
+        ]
+      },
+      {
+        "key": "round-flow",
+        "chapter": "arch",
+        "layout": "overview",
+        "tab": "흐름",
+        "title": { "text": "2.2 미니게임 한 판의 흐름", "verbatim": true },
+        "lead": null,
+        "sectionPath": ["2. 담당 파트 구조", "2.2 미니게임 한 판의 흐름"],
+        "points": [
+          { "label": "", "text": "서버가 minigame_started(미니게임 종류, 담당자 ID)를 방 전원에게 보냅니다.", "verbatim": true },
+          { "label": "", "text": "각 Controller는 내 ID와 담당자 ID를 비교해 담당자인지 관전자인지 정합니다.", "verbatim": true },
+          { "label": "", "text": "담당자의 입력은 서버로 가고, 서버가 판정해 방송한 결과를 담당자와 관전자 모두 같은 방식으로 화면에 반영합니다.", "verbatim": true },
+          { "label": "", "text": "완료 메시지를 받으면 2초 동안 결과를 보여 준 뒤 상태를 초기화하고 MinigameEnded로 패널을 닫습니다.", "verbatim": true }
+        ],
+        "visuals": []
+      },
+      {
+        "key": "roles",
+        "chapter": "split",
+        "layout": "full",
+        "tab": "구조",
+        "title": { "text": "3.1 세 클래스의 책임", "verbatim": true },
+        "lead": { "text": "세 미니게임 모두 같은 3분할 구조입니다. (분할 방식은 지시서에서 정해졌습니다.)", "verbatim": true },
+        "sectionPath": ["3. Input · Controller · View 역할 분리", "3.1 세 클래스의 책임"],
+        "points": [],
+        "visuals": [
+          { "kind": "table", "n": 1, "fp": "클래스|하는 일|하지 않는 일" }
+        ]
+      },
+      {
+        "key": "roles-flow",
+        "chapter": "split",
+        "layout": "visual",
+        "tab": "흐름",
+        "title": { "text": "3.1 세 클래스의 책임", "verbatim": true },
+        "lead": { "text": "정비소에는 이 표와 다른 점이 두 가지 있습니다.", "verbatim": true },
+        "sectionPath": ["3. Input · Controller · View 역할 분리", "3.1 세 클래스의 책임"],
+        "points": [
+          { "label": "드롭 영역 판정", "text": "정비소 Input은 번호판을 놓은 곳이 TrashZone·DropZone 태그인지 직접 판정해 결과(IsValidDrop)를 Controller에 넘깁니다.", "verbatim": false },
+          { "label": "나사 버튼", "text": "나사 버튼은 Input을 거치지 않고, 버튼 OnClick에 Controller의 RequestRemoveOldScrew(int) / RequestFastenNewScrew(int)가 직접 연결돼 있습니다.", "verbatim": true }
+        ],
+        "visuals": [
+          { "kind": "mermaid", "n": 1, "fp": "flowchart LR" }
+        ]
+      },
+      {
+        "key": "guard",
+        "chapter": "split",
+        "layout": "code",
+        "tab": "구현",
+        "title": { "text": "3.2 입력을 보낼 수 있는지 세 가지로 확인", "verbatim": true },
+        "lead": { "text": "Controller의 모든 전송 메서드는 같은 세 조건을 먼저 확인합니다. (이 세 조건과 확인 코드의 형태는 지시서에 제시돼 있던 것입니다.)", "verbatim": true },
+        "sectionPath": ["3. Input · Controller · View 역할 분리", "3.2 입력을 보낼 수 있는지 세 가지로 확인"],
+        "points": [
+          { "label": "", "text": "관전자는 IsOperator가 false라서 버튼을 눌러도 아무것도 보내지 않습니다.", "verbatim": true }
+        ],
+        "visuals": [
+          { "kind": "code", "n": 1, "fp": "// GasStationMinigameController" },
+          { "kind": "table", "n": 1, "fp": "조건|의미|바뀌는 때" }
+        ]
+      },
+      {
+        "key": "server-auth",
+        "chapter": "split",
+        "layout": "overview",
+        "tab": "구조",
+        "title": { "text": "3.3 서버가 판정하고, 클라이언트는 결과만 그린다", "verbatim": true },
+        "lead": { "text": "서버가 판정하고 클라이언트는 결과만 표시한다는 원칙은 지시서에서 정한 것입니다.", "verbatim": true },
+        "sectionPath": ["3. Input · Controller · View 역할 분리", "3.3 서버가 판정하고, 클라이언트는 결과만 그린다"],
+        "points": [
+          { "label": "", "text": "세 미니게임 모두 입력을 보낸 직후에는 화면을 바꾸지 않고, 서버의 결과 메시지를 받은 뒤에 바꿉니다.", "verbatim": true },
+          { "label": "", "text": "그래서 담당자 화면과 관전자 화면이 같은 메시지로 같은 상태가 됩니다.", "verbatim": true },
+          { "label": "", "text": "예외: 정비소 번호판을 담당자가 끄는 동안에는 담당자 화면에서 바로 움직입니다", "verbatim": true }
+        ],
+        "visuals": []
+      },
+      {
+        "key": "fuel-flow",
+        "chapter": "fuel",
+        "layout": "visual",
+        "tab": "흐름",
+        "title": { "text": "4.1 동작", "verbatim": true },
+        "lead": { "text": "담당자가 버튼을 누르면 fuel_press, 떼면 fuel_release만 보냅니다.", "verbatim": true },
+        "sectionPath": ["4. 주유소 — 서버가 계산한 게이지 표시", "4.1 동작"],
+        "points": [
+          { "label": "", "text": "클라이언트는 서버가 보내는 fuel_state(게이지 %, 눌림 여부)를 받아 그대로 표시하며, 게이지를 직접 계산하지 않습니다.", "verbatim": true },
+          { "label": "", "text": "서버 코드는 직접 확인하지 않았습니다. 이 문단의 서버 동작은 설계 문서 기준입니다.", "verbatim": true }
+        ],
+        "visuals": [
+          { "kind": "mermaid", "n": 1, "fp": "sequenceDiagram" }
+        ]
+      },
+      {
+        "key": "fuel-view",
+        "chapter": "fuel",
+        "layout": "code",
+        "tab": "구현",
+        "title": { "text": "4.2 핵심 코드: 서버 값을 그대로 화면에", "verbatim": true },
+        "lead": null,
+        "sectionPath": ["4. 주유소 — 서버가 계산한 게이지 표시", "4.2 핵심 코드: 서버 값을 그대로 화면에"],
+        "points": [
+          { "label": "", "text": "게이지는 클라이언트가 직접 올리지 않고 서버가 보낸 값만 그립니다. 담당자도 관전자와 같은 값을 봅니다.", "verbatim": true },
+          { "label": "", "text": "노즐·버튼 연출은 isPressed가 바뀌는 순간에만 한 번 실행합니다. fuel_state가 계속 와도 연출이 반복되지 않습니다.", "verbatim": true }
+        ],
+        "visuals": [
+          { "kind": "code", "n": 1, "fp": "// GasStationMinigameView" }
+        ]
+      },
+      {
+        "key": "fuel-input",
+        "chapter": "fuel",
+        "layout": "code",
+        "tab": "구현",
+        "title": { "text": "4.3 중복 입력 막기", "verbatim": true },
+        "lead": { "text": "IsPressedLocally로 누르기·떼기가 두 번 보내지지 않게 하는 방식은 지시서의 예시 코드에 있던 것입니다.", "verbatim": true },
+        "sectionPath": ["4. 주유소 — 서버가 계산한 게이지 표시", "4.3 중복 입력 막기"],
+        "points": [],
+        "visuals": [
+          { "kind": "code", "n": 1, "fp": "// GasStationMinigameInput" }
+        ]
+      },
+      {
+        "key": "barricade-msg",
+        "chapter": "barricade",
+        "layout": "full",
+        "tab": "흐름",
+        "title": { "text": "5.1 동작", "verbatim": true },
+        "lead": { "text": "담당자가 퓨즈를 클릭하면 퓨즈 번호(0~2)만 보냅니다. 클라이언트 코드에는 정답 순서가 없습니다.", "verbatim": true },
+        "sectionPath": ["5. 바리케이드 — 서버 판정 결과만 표시", "5.1 동작"],
+        "points": [],
+        "visuals": [
+          { "kind": "table", "n": 1, "fp": "서버 메시지|화면" }
+        ]
+      },
+      {
+        "key": "overload",
+        "chapter": "barricade",
+        "layout": "code",
+        "tab": "구현",
+        "title": { "text": "5.2 핵심 코드: 과부하 2초 잠금은 View가", "verbatim": true },
+        "lead": { "text": "과부하 깜빡임 같은 화면 연출은 제가 맡은 UI·연출 영역입니다.", "verbatim": true },
+        "sectionPath": ["5. 바리케이드 — 서버 판정 결과만 표시", "5.2 핵심 코드: 과부하 2초 잠금은 View가"],
+        "points": [
+          { "label": "", "text": "과부하 동안 버튼 잠금을 Controller 타이머가 아니라 View가 맡는 분담은 지시서에서 정한 것입니다.", "verbatim": true }
+        ],
+        "visuals": [
+          { "kind": "code", "n": 1, "fp": "// BarricadeMinigameView" }
+        ]
+      },
+      {
+        "key": "repair-steps",
+        "chapter": "repair",
+        "layout": "visual",
+        "tab": "흐름",
+        "title": { "text": "6.1 단계 진행", "verbatim": true },
+        "lead": null,
+        "sectionPath": ["6. 정비소 — 단계별 상호작용과 번호판 드래그 동기화", "6.1 단계 진행"],
+        "points": [
+          { "label": "", "text": "단계마다 서버 승인 메시지를 받아야 Controller의 상태가 바뀌고, 그 상태가 다음 단계의 조작 가능 여부를 정합니다.", "verbatim": true },
+          { "label": "", "text": "새 나사를 4개 다 조였는지는 클라이언트가 세지 않고, 서버가 완료 메시지로 알려 줍니다.", "verbatim": true }
+        ],
+        "visuals": [
+          { "kind": "mermaid", "n": 1, "fp": "flowchart TD" }
+        ]
+      },
+      {
+        "key": "repair-perm",
+        "chapter": "repair",
+        "layout": "code",
+        "tab": "구현",
+        "title": { "text": "6.1 단계 진행", "verbatim": true },
+        "lead": { "text": "아래 드래그 권한 코드와 6.2의 전송 간격·좌표·고정 장착 슬롯 방식은 번호판 지시서에 있던 것입니다.", "verbatim": true },
+        "sectionPath": ["6. 정비소 — 단계별 상호작용과 번호판 드래그 동기화", "6.1 단계 진행"],
+        "points": [],
+        "visuals": [
+          { "kind": "code", "n": 1, "fp": "// RepairShopMinigameController — 드래그 권한" },
+          { "kind": "table", "n": 1, "fp": "상태 값|바뀌는 때" }
+        ]
+      },
+      {
+        "key": "plate-sync",
+        "chapter": "repair",
+        "layout": "visual",
+        "tab": "흐름",
+        "title": { "text": "6.2 번호판 드래그 동기화", "verbatim": true },
+        "lead": null,
+        "sectionPath": ["6. 정비소 — 단계별 상호작용과 번호판 드래그 동기화", "6.2 번호판 드래그 동기화"],
+        "points": [
+          { "label": "", "text": "담당자는 자기 화면에서 이미 번호판을 움직이고 있으므로, 서버가 돌려준 위치 메시지는 관전자만 적용합니다.", "verbatim": true },
+          { "label": "", "text": "폐기·장착·원위치 복귀는 서버 결과를 받은 뒤에 모든 화면에서 같이 실행됩니다.", "verbatim": true }
+        ],
+        "visuals": [
+          { "kind": "mermaid", "n": 1, "fp": "sequenceDiagram" }
+        ]
+      },
+      {
+        "key": "plate-drag",
+        "chapter": "repair",
+        "layout": "code",
+        "tab": "구현",
+        "title": { "text": "6.2 번호판 드래그 동기화", "verbatim": true },
+        "lead": null,
+        "sectionPath": ["6. 정비소 — 단계별 상호작용과 번호판 드래그 동기화", "6.2 번호판 드래그 동기화"],
+        "points": [
+          { "label": "", "text": "좌표는 화면 픽셀이 아니라 anchoredPosition(부모 UI 기준 위치)으로 보냅니다. 모든 클라이언트의 UI가 같은 기준이어야 같은 위치에 보입니다.", "verbatim": true },
+          { "label": "", "text": "위치는 매 프레임이 아니라 0.05초(초당 최대 20번)마다 보내고, 드래그 시작과 드롭 직전에도 한 번씩 보냅니다.", "verbatim": true }
+        ],
+        "visuals": [
+          { "kind": "code", "n": 1, "fp": "// RepairShopMinigameInput" }
+        ]
+      },
+      {
+        "key": "spec-table",
+        "chapter": "spec-diff",
+        "layout": "full",
+        "tab": "선택",
+        "title": { "text": "7. 지시서와 실제 구현의 차이", "verbatim": true },
+        "lead": { "text": "팀장의 지시서와 실제 코드를 비교했을 때 다른 부분입니다.", "verbatim": true },
+        "sectionPath": ["7. 지시서와 실제 구현의 차이"],
+        "points": [],
+        "visuals": [
+          { "kind": "table", "n": 1, "fp": "#|항목|지시서|실제 구현|누가·왜" }
+        ]
+      }
+    ]
+  }
+}
