@@ -89,7 +89,7 @@
   "troubleshooting": [
     {
       "title": "카메라 추적 오류",
-      "problem": "카메라 추적 기능을 추가한 날(06/24), 카메라가 플레이어에 딱 붙어 움직여서 부드럽게 따라오지 않았습니다.",
+      "problem": "카메라 추적 기능을 추가했을 때 카메라가 플레이어에 딱 붙어 움직여서 부드럽게 따라오지 않았습니다.",
       "cause": "`PlayerCameraFollow.LateUpdate`에서 `Vector3.Lerp`의 시작점이 `target.position`(플레이어 위치)이어서, 카메라가 어디에 있었는지와 상관없이 늘 플레이어 근처로 정해졌습니다.",
       "solution": "시작점을 `transform.position`(카메라의 현재 위치)으로 바꿨습니다.",
       "result": "카메라가 현재 위치에서 목표 위치로 매 프레임 조금씩 다가가며 부드럽게 따라갑니다.",
