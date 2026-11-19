@@ -52,7 +52,7 @@
       "name": "디자인 패턴",
       "evidence": [
         {
-          "text": "상태 패턴과 BossState enum+코루틴을 비교해 보스 AI 구조 선택",
+          "text": "보스 AI의 BossState enum+코루틴 구조를 상태 패턴과 비교해 장단점 정리",
           "project": "1-the-last-mage"
         },
         {
