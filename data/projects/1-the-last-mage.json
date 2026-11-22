@@ -11,12 +11,31 @@
     "role": "기획, Unity 개발, 연출"
   },
   "meta": [
-    { "label": "장르", "value": "2D 액션 플랫포머 · 다회차 서사 연출" },
-    { "label": "기간", "value": "2주 (2026.06.24 ~ 2026.07.06)" },
-    { "label": "인원", "value": "1인 (개인 프로젝트)" },
-    { "label": "환경", "value": "Unity 6000.3.15f1 · C#" }
+    {
+      "label": "장르",
+      "value": "2D 액션 플랫포머 · 다회차 서사 연출"
+    },
+    {
+      "label": "기간",
+      "value": "2주 (2026.06.24 ~ 2026.07.06)"
+    },
+    {
+      "label": "인원",
+      "value": "1인 (개인 프로젝트)"
+    },
+    {
+      "label": "환경",
+      "value": "Unity 6000.3.15f1 · C#"
+    }
   ],
-  "tags": ["Unity 6.3", "C#", "코루틴", "PlayerPrefs", "거리 기반 몬스터 AI", "다회차 스토리 분기"],
+  "tags": [
+    "Unity 6.3",
+    "C#",
+    "코루틴",
+    "PlayerPrefs",
+    "거리 기반 몬스터 AI",
+    "다회차 스토리 분기"
+  ],
   "links": {
     "github": "",
     "video": "https://youtu.be/PN3ytIBvCoc",
@@ -30,7 +49,7 @@
     {
       "title": "마법책과 스킬 전환",
       "what": "스테이지에 놓인 두 권의 책을 찾으면 적을 꿰뚫는 관통탄과 넓은 범위에 쏟아지는 운석을 고를 수 있게 되고, 책을 닫은 뒤 Q/E로 새 마법을 장착해 Z로 발사합니다.",
-      "how": "`SpellBook`은 책을 얻는 순간 `UnlockMagic`으로 해금 플래그만 켜고, `PlayerAttack`이 장착 마법과 마법별 쿨타임을 관리해 발사하며, 발사된 뒤의 이동과 충돌은 마법별 발사체 스크립트가 맡습니다.",
+      "how": "`SpellBook`은 책을 얻는 순간 `UnlockMagic`으로 해금만 요청하고, `PlayerAttack`이 해금 · 장착 · 쿨타임을 맡아 발사하며, 발사된 뒤의 이동과 충돌은 마법별 발사체 스크립트가 맡습니다.",
       "why": "마법이 세 가지뿐이고 마법마다 충돌 후 동작이 확실히 달라서, 공통 기반 클래스 대신 각 동작이 한 파일에서 바로 보이는 마법별 독립 발사체를 택했습니다. 대신 피해 · 이펙트 처리가 세 파일에 반복됩니다.",
       "section": "3.2 책을 얻고, 고르고, 쏘기까지",
       "image": {
@@ -68,8 +87,8 @@
   "troubleshooting": [
     {
       "title": "카메라가 플레이어에 붙어 버린 문제",
-      "problem": "카메라 추적 기능을 추가했을 때 카메라가 플레이어에 딱 붙어 움직여서 부드럽게 따라오지 않았습니다.",
-      "cause": "`PlayerCameraFollow.LateUpdate`에서 `Vector3.Lerp`의 시작점이 `target.position`(플레이어 위치)이어서, 카메라가 어디에 있었는지와 상관없이 늘 플레이어 근처로 정해졌습니다.",
+      "problem": "카메라 추적 기능을 추가했을 때 카메라가 플레이어에 딱 붙어 움직여서 부드럽게 따라오지 않았고, 플레이어가 늘 화면 한가운데에 오면서 화면 아래쪽에 땅 밑 빈 공간이 크게 보였습니다.",
+      "cause": "`PlayerCameraFollow.LateUpdate`에서 `Vector3.Lerp`의 시작점이 `target.position`(플레이어 위치)이어서, 카메라가 어디에 있었는지와 상관없이 늘 플레이어 근처로 정해졌습니다. 카메라를 플레이어보다 3만큼 위에 두려고 했지만 거의 플레이어 높이에 머물렀습니다.",
       "solution": "시작점을 `transform.position`(카메라의 현재 위치)으로 바꿨습니다.",
       "result": "카메라가 현재 위치에서 목표 위치로 매 프레임 조금씩 다가가며 부드럽게 따라갑니다.",
       "lesson": "`Lerp`를 매 프레임 불러 따라가는 움직임을 만들려면, 시작점이 매 프레임 바뀌는 자기 자신의 현재 위치여야 합니다.",
@@ -95,12 +114,36 @@
     }
   ],
   "screenshots": [
-    { "src": "images/spellbook.webp", "caption": "마법책을 주워 책 UI가 열린 화면" },
-    { "src": "images/boss_fight.png", "w": 1920, "h": 1080, "caption": "보스전 화면" },
-    { "src": "images/title_first.webp", "caption": "첫 플레이 타이틀" },
-    { "src": "images/title_next.webp", "caption": "다음 플레이 타이틀" },
-    { "src": "images/boss_room.png", "w": 1920, "h": 1080, "caption": "보스방에 들어가 연출과 대사가 시작된 화면" },
-    { "src": "images/enemy_ai.gif", "w": 1080, "h": 608, "caption": "일반 몬스터가 플레이어를 보고 다가오는 장면" }
+    {
+      "src": "images/spellbook.webp",
+      "caption": "마법책을 주워 책 UI가 열린 화면"
+    },
+    {
+      "src": "images/boss_fight.png",
+      "w": 1920,
+      "h": 1080,
+      "caption": "보스전 화면"
+    },
+    {
+      "src": "images/title_first.webp",
+      "caption": "첫 플레이 타이틀"
+    },
+    {
+      "src": "images/title_next.webp",
+      "caption": "다음 플레이 타이틀"
+    },
+    {
+      "src": "images/boss_room.png",
+      "w": 1920,
+      "h": 1080,
+      "caption": "보스방에 들어가 연출과 대사가 시작된 화면"
+    },
+    {
+      "src": "images/enemy_ai.gif",
+      "w": 1080,
+      "h": 608,
+      "caption": "일반 몬스터가 플레이어를 보고 다가오는 장면"
+    }
   ],
   "retro": {
     "section": "8. 결과와 돌아보기",
@@ -125,13 +168,55 @@
   },
   "deck": {
     "chapters": [
-      { "key": "overview", "title": "프로젝트 개요", "sectionPath": ["1. 프로젝트 개요"] },
-      { "key": "play", "title": "플레이", "sectionPath": ["2. 플레이"] },
-      { "key": "spell", "title": "마법책과 스킬 전환", "sectionPath": ["3. 마법책과 스킬 전환"] },
-      { "key": "ai", "title": "일반 몬스터와 보스 AI", "sectionPath": ["4. 일반 몬스터와 보스 AI"] },
-      { "key": "branch", "title": "다회차 스토리 분기", "sectionPath": ["5. 다회차 스토리 분기"] },
-      { "key": "trouble", "title": "만들며 생긴 문제", "sectionPath": ["6. 만들며 생긴 문제"] },
-      { "key": "ai-work", "title": "AI와 일한 방식", "sectionPath": ["7. AI와 일한 방식"] }
+      {
+        "key": "overview",
+        "title": "프로젝트 개요",
+        "sectionPath": [
+          "1. 프로젝트 개요"
+        ]
+      },
+      {
+        "key": "play",
+        "title": "플레이",
+        "sectionPath": [
+          "2. 플레이"
+        ]
+      },
+      {
+        "key": "spell",
+        "title": "마법책과 스킬 전환",
+        "sectionPath": [
+          "3. 마법책과 스킬 전환"
+        ]
+      },
+      {
+        "key": "ai",
+        "title": "일반 몬스터와 보스 AI",
+        "sectionPath": [
+          "4. 일반 몬스터와 보스 AI"
+        ]
+      },
+      {
+        "key": "branch",
+        "title": "다회차 스토리 분기",
+        "sectionPath": [
+          "5. 다회차 스토리 분기"
+        ]
+      },
+      {
+        "key": "trouble",
+        "title": "만들며 생긴 문제",
+        "sectionPath": [
+          "6. 만들며 생긴 문제"
+        ]
+      },
+      {
+        "key": "ai-work",
+        "title": "AI와 일한 방식",
+        "sectionPath": [
+          "7. AI와 일한 방식"
+        ]
+      }
     ],
     "slides": [
       {
@@ -139,13 +224,33 @@
         "chapter": "overview",
         "layout": "overview",
         "tab": "개요",
-        "title": { "text": "1. 프로젝트 개요", "verbatim": true },
-        "lead": { "text": "The Last Mage는 스테이지를 탐색하며 마법책을 모아 공격 방식을 넓히고, 스테이지 끝에서 보스 마법사와 마주하는 2D 액션 플랫포머입니다.", "verbatim": true },
-        "sectionPath": ["1. 프로젝트 개요"],
+        "title": {
+          "text": "1. 프로젝트 개요",
+          "verbatim": true
+        },
+        "lead": {
+          "text": "The Last Mage는 스테이지를 탐색하며 마법책을 모아 공격 방식을 넓히고, 스테이지 끝에서 보스 마법사와 마주하는 2D 액션 플랫포머입니다.",
+          "verbatim": true
+        },
+        "sectionPath": [
+          "1. 프로젝트 개요"
+        ],
         "points": [
-          { "label": "", "text": "처음 플레이할 때는 의뢰를 받고 보스를 쓰러뜨리는 흐름이지만, 한 번 클리어한 뒤 다시 시작하면 타이틀 화면 · 보스와의 대화 등이 달라지고, 결말도 바뀝니다.", "verbatim": true },
-          { "label": "", "text": "탐색 중 발견한 마법책으로 공격 방식이 늘어나는 성장감, 그리고 같은 세계를 다시 볼 때 같은 텍스트의 의미가 달라지는 발견감입니다.", "verbatim": true },
-          { "label": "", "text": "2주 안에 전투 · 보스 조우 · 두 번째 플레이의 서사 변화를 하나로 잇는 완성된 게임을 만드는 것이 목표였습니다.", "verbatim": true }
+          {
+            "label": "",
+            "text": "처음 플레이할 때는 의뢰를 받고 보스를 쓰러뜨리는 흐름이지만, 한 번 클리어한 뒤 다시 시작하면 타이틀 화면 · 보스와의 대화 등이 달라지고, 결말도 바뀝니다.",
+            "verbatim": true
+          },
+          {
+            "label": "",
+            "text": "탐색 중 발견한 마법책으로 공격 방식이 늘어나는 성장감, 그리고 같은 세계를 다시 볼 때 같은 텍스트의 의미가 달라지는 발견감입니다.",
+            "verbatim": true
+          },
+          {
+            "label": "",
+            "text": "2주 안에 전투 · 보스 조우 · 두 번째 플레이의 서사 변화를 하나로 잇는 완성된 게임을 만드는 것이 목표였습니다.",
+            "verbatim": true
+          }
         ],
         "visuals": []
       },
@@ -154,15 +259,33 @@
         "chapter": "play",
         "layout": "visual",
         "tab": "흐름",
-        "title": { "text": "2.1 한 판의 흐름", "verbatim": true },
+        "title": {
+          "text": "2.1 한 판의 흐름",
+          "verbatim": true
+        },
         "lead": null,
-        "sectionPath": ["2. 플레이", "2.1 한 판의 흐름"],
+        "sectionPath": [
+          "2. 플레이",
+          "2.1 한 판의 흐름"
+        ],
         "points": [
-          { "label": "", "text": "스테이지와 보스방은 별도 씬이 아니라 `Scenes_Stage_01` 한 씬 안에 있습니다.", "verbatim": true },
-          { "label": "", "text": "보스 대화가 끝난 뒤의 전개만 클리어 기록에 따라 갈립니다.", "verbatim": true }
+          {
+            "label": "",
+            "text": "스테이지와 보스방은 별도 씬이 아니라 `Scenes_Stage_01` 한 씬 안에 있습니다.",
+            "verbatim": true
+          },
+          {
+            "label": "",
+            "text": "보스 대화가 끝난 뒤의 전개만 클리어 기록에 따라 갈립니다.",
+            "verbatim": true
+          }
         ],
         "visuals": [
-          { "kind": "mermaid", "n": 1, "fp": "flowchart LR" }
+          {
+            "kind": "mermaid",
+            "n": 1,
+            "fp": "flowchart LR"
+          }
         ]
       },
       {
@@ -170,30 +293,64 @@
         "chapter": "spell",
         "layout": "visual",
         "tab": "흐름",
-        "title": { "text": "3.2 책을 얻고, 고르고, 쏘기까지", "verbatim": true },
-        "lead": { "text": "`SpellBook`은 책을 얻는 순간을, `PlayerAttack`은 해금 · 장착 · 쿨타임을, 발사체 스크립트는 발사된 뒤의 이동과 충돌을 맡습니다.", "verbatim": true },
-        "sectionPath": ["3. 마법책과 스킬 전환", "3.2 책을 얻고, 고르고, 쏘기까지"],
+        "title": {
+          "text": "3.2 책을 얻고, 고르고, 쏘기까지",
+          "verbatim": true
+        },
+        "lead": {
+          "text": "`SpellBook`은 책을 얻는 순간을, `PlayerAttack`은 해금 · 장착 · 쿨타임을, 발사체 스크립트는 발사된 뒤의 이동과 충돌을 맡습니다.",
+          "verbatim": true
+        },
+        "sectionPath": [
+          "3. 마법책과 스킬 전환",
+          "3.2 책을 얻고, 고르고, 쏘기까지"
+        ],
         "points": [],
         "visuals": [
-          { "kind": "mermaid", "n": 1, "fp": "flowchart LR" }
+          {
+            "kind": "mermaid",
+            "n": 1,
+            "fp": "flowchart LR"
+          }
         ]
       },
       {
         "key": "spell-switch",
         "chapter": "spell",
-        "layout": "visual",
-        "tab": "흐름",
-        "title": { "text": "3.2 책을 얻고, 고르고, 쏘기까지", "verbatim": true },
-        "lead": null,
-        "sectionPath": ["3. 마법책과 스킬 전환", "3.2 책을 얻고, 고르고, 쏘기까지"],
-        "points": [
-          { "label": "", "text": "책에 닿으면 해금만 합니다.", "verbatim": true },
-          { "label": "", "text": "해금과 장착은 별개입니다.", "verbatim": true },
-          { "label": "", "text": "Q/E로 장착합니다.", "verbatim": true },
-          { "label": "", "text": "Z로 발사합니다.", "verbatim": true }
+        "layout": "screens",
+        "tab": "결과",
+        "title": {
+          "text": "3.2 책을 얻고, 고르고, 쏘기까지",
+          "verbatim": true
+        },
+        "lead": {
+          "text": "`UpdateSkillUI`는 관통 · 운석의 남은 시간을 각 쿨타임으로 나눠 스킬 아이콘의 가림 비율을 갱신합니다.",
+          "verbatim": true
+        },
+        "sectionPath": [
+          "3. 마법책과 스킬 전환",
+          "3.2 책을 얻고, 고르고, 쏘기까지"
         ],
+        "points": [],
         "visuals": [
-          { "kind": "image", "src": "images/magic_switch.gif", "w": 1080, "h": 608, "caption": { "text": "Q/E로 마법을 바꿔 운석 · 관통 · 기본 마법을 차례로 쓰는 장면", "verbatim": true } }
+          {
+            "kind": "image",
+            "src": "images/spellbook.webp",
+            "caption": {
+              "text": "마법책을 주워 책 UI가 열린 화면",
+              "verbatim": true
+            }
+          },
+          {
+            "kind": "image",
+            "src": "images/magic_switch.gif",
+            "w": 1080,
+            "h": 608,
+            "caption": {
+              "text": "Q/E로 마법을 바꿔 운석 · 관통 · 기본 마법을 차례로 쓰는 장면",
+              "verbatim": true
+            }
+          }
         ]
       },
       {
@@ -201,12 +358,25 @@
         "chapter": "spell",
         "layout": "full",
         "tab": "구현",
-        "title": { "text": "3.3 마법별 발사와 충돌", "verbatim": true },
-        "lead": { "text": "세 발사체 모두 `Enemy.TakeDamage`와 `BossHealth.TakeDamage`를 호출하고, 이펙트 프리팹이 연결되어 있으면 생성합니다.", "verbatim": true },
-        "sectionPath": ["3. 마법책과 스킬 전환", "3.3 마법별 발사와 충돌"],
+        "title": {
+          "text": "3.3 마법별 발사와 충돌",
+          "verbatim": true
+        },
+        "lead": {
+          "text": "세 발사체 모두 `Enemy.TakeDamage`와 `BossHealth.TakeDamage`를 호출하고, 이펙트 프리팹이 연결되어 있으면 생성합니다.",
+          "verbatim": true
+        },
+        "sectionPath": [
+          "3. 마법책과 스킬 전환",
+          "3.3 마법별 발사와 충돌"
+        ],
         "points": [],
         "visuals": [
-          { "kind": "table", "n": 1, "fp": "마법|발사 (PlayerAttack)|충돌 · 피해 (발사체 스크립트)" }
+          {
+            "kind": "table",
+            "n": 1,
+            "fp": "마법|발사 (PlayerAttack)|충돌 · 피해 (발사체 스크립트)"
+          }
         ]
       },
       {
@@ -214,16 +384,38 @@
         "chapter": "spell",
         "layout": "code",
         "tab": "구현",
-        "title": { "text": "3.4 해금과 발사를 나눈 지점", "verbatim": true },
+        "title": {
+          "text": "3.4 해금과 발사를 나눈 지점",
+          "verbatim": true
+        },
         "lead": null,
-        "sectionPath": ["3. 마법책과 스킬 전환", "3.4 해금과 발사를 나눈 지점"],
+        "sectionPath": [
+          "3. 마법책과 스킬 전환",
+          "3.4 해금과 발사를 나눈 지점"
+        ],
         "points": [
-          { "label": "", "text": "책은 \"쓸 수 있다\"까지만 정합니다. 책은 `PlayerAttack`에 해금을 요청할 뿐, 무엇을 쏠지는 모릅니다.", "verbatim": true },
-          { "label": "", "text": "무엇을 쏠지는 장착된 마법이 정합니다. `Attack`은 `currentMagic`에 따라 분기하고, 그 마법의 타이머만 검사합니다.", "verbatim": true },
-          { "label": "", "text": "마법마다 타이머가 따로 있습니다. 운석을 쓴 직후에도 기본 마법은 바로 쓸 수 있습니다.", "verbatim": true }
+          {
+            "label": "",
+            "text": "책은 \"쓸 수 있다\"까지만 정합니다. 책은 마법을 풀어 달라고 요청할 뿐, 무엇을 쏠지는 모릅니다.",
+            "verbatim": true
+          },
+          {
+            "label": "",
+            "text": "Z를 누르면 지금 장착한 마법이 나갑니다. 이때 그 마법의 대기 시간만 확인합니다.",
+            "verbatim": true
+          },
+          {
+            "label": "",
+            "text": "마법마다 대기 시간이 따로 흐릅니다. 운석을 쓴 직후에도 기본 마법은 바로 쓸 수 있습니다.",
+            "verbatim": true
+          }
         ],
         "visuals": [
-          { "kind": "code", "n": 2, "fp": "// PlayerAttack.Attack — 관통 · 운석 분기 발췌" }
+          {
+            "kind": "code",
+            "n": 2,
+            "fp": "// PlayerAttack.Attack — 관통 · 운석 분기 발췌"
+          }
         ]
       },
       {
@@ -231,16 +423,41 @@
         "chapter": "spell",
         "layout": "full",
         "tab": "선택",
-        "title": { "text": "3.5 마법별 발사체를 어떻게 나눌까", "verbatim": true },
-        "lead": { "text": "마법별로 독립된 발사체 세 개([B])를 골랐습니다.", "verbatim": true },
-        "sectionPath": ["3. 마법책과 스킬 전환", "3.5 마법별 발사체를 어떻게 나눌까"],
+        "title": {
+          "text": "3.5 마법별 발사체를 어떻게 나눌까?",
+          "verbatim": true
+        },
+        "lead": {
+          "text": "마법별로 독립된 발사체 세 개([B])를 골랐습니다.",
+          "verbatim": true
+        },
+        "sectionPath": [
+          "3. 마법책과 스킬 전환",
+          "3.5 마법별 발사체를 어떻게 나눌까?"
+        ],
         "points": [
-          { "label": "이유", "text": "마법이 세 가지뿐이고 마법마다 충돌 후 동작이 확실히 달라서, 각 동작이 한 파일에서 바로 보이는 쪽을 택했습니다.", "verbatim": true },
-          { "label": "", "text": "대신 새 마법을 하나 추가하려면 enum, 해금 플래그, 입력 · 발사 분기, 타이머 · UI, 발사체 스크립트를 함께 고쳐야 합니다.", "verbatim": true },
-          { "label": "", "text": "마법이 더 늘어나면 공통 피격 처리부터 기반 클래스로 옮기는 것이 다음 단계입니다.", "verbatim": true }
+          {
+            "label": "이유",
+            "text": "마법이 세 가지뿐이고 마법마다 충돌 후 동작이 확실히 달라서, 각 동작이 한 파일에서 바로 보이는 쪽을 택했습니다.",
+            "verbatim": true
+          },
+          {
+            "label": "",
+            "text": "대신 새 마법을 하나 추가하려면 enum, 해금 플래그, 입력 · 발사 분기, 타이머 · UI, 발사체 스크립트를 함께 고쳐야 합니다.",
+            "verbatim": true
+          },
+          {
+            "label": "",
+            "text": "마법이 더 늘어나면 공통 피격 처리부터 기반 클래스로 옮기는 것이 다음 단계입니다.",
+            "verbatim": true
+          }
         ],
         "visuals": [
-          { "kind": "table", "n": 1, "fp": "|[A] 공통 기반 클래스 + 마법별 차이|[B] 마법별 독립 발사체 3종 ✓" }
+          {
+            "kind": "table",
+            "n": 1,
+            "fp": "|[A] 공통 기반 클래스 + 마법별 차이|[B] 마법별 독립 발사체 3종 ✓"
+          }
         ]
       },
       {
@@ -248,16 +465,50 @@
         "chapter": "ai",
         "layout": "visual",
         "tab": "구현",
-        "title": { "text": "4.2 일반 몬스터 · 거리로 고르는 행동", "verbatim": true },
-        "lead": { "text": "`EnemyAI.Update`는 상태를 따로 저장하지 않고, 매 프레임 플레이어와의 거리를 비교해 행동을 고릅니다.", "verbatim": true },
-        "sectionPath": ["4. 일반 몬스터와 보스 AI", "4.2 일반 몬스터 · 거리로 고르는 행동"],
+        "title": {
+          "text": "4.2 일반 몬스터 · 거리로 고르는 행동",
+          "verbatim": true
+        },
+        "lead": {
+          "text": "`EnemyAI.Update`는 상태를 따로 저장하지 않고, 매 프레임 플레이어와의 거리를 비교해 행동을 고릅니다.",
+          "verbatim": true
+        },
+        "sectionPath": [
+          "4. 일반 몬스터와 보스 AI",
+          "4.2 일반 몬스터 · 거리로 고르는 행동"
+        ],
         "points": [
-          { "label": "공격 거리 안", "text": "멈춘 뒤 쿨타임마다 `AttackPlayer`로 피해", "verbatim": true },
-          { "label": "감지 거리 안", "text": "플레이어 쪽으로 추적", "verbatim": true },
-          { "label": "그 밖", "text": "발 앞으로 Raycast를 쏴 낭떠러지와 벽을 확인하며 순찰", "verbatim": true }
+          {
+            "label": "공격 거리 안",
+            "text": "멈춘 뒤 쿨타임마다 `AttackPlayer`로 피해",
+            "verbatim": true
+          },
+          {
+            "label": "감지 거리 안",
+            "text": "플레이어 쪽으로 추적",
+            "verbatim": true
+          },
+          {
+            "label": "그 밖",
+            "text": "발 앞으로 Raycast를 쏴 낭떠러지와 벽을 확인하며 순찰",
+            "verbatim": true
+          }
         ],
         "visuals": [
-          { "kind": "image", "src": "images/enemy_ai.gif", "w": 1080, "h": 608, "caption": { "text": "일반 몬스터가 플레이어를 보고 다가오는 장면", "verbatim": true } }
+          {
+            "kind": "image",
+            "src": "images/enemy_ai.gif",
+            "w": 1080,
+            "h": 608,
+            "caption": {
+              "text": "일반 몬스터가 플레이어를 보고 다가오는 장면",
+              "verbatim": true
+            },
+            "sectionPath": [
+              "4. 일반 몬스터와 보스 AI",
+              "4.1 거리에 따라 달라지는 적의 반응"
+            ]
+          }
         ]
       },
       {
@@ -265,16 +516,46 @@
         "chapter": "ai",
         "layout": "visual",
         "tab": "구조",
-        "title": { "text": "4.3 보스 · 상태 enum과 공격 코루틴", "verbatim": true },
-        "lead": { "text": "보스 대화가 끝나면 `DialogueManager.EndCinematic`이 보스 상태를 `Move`로 바꿔 전투가 시작됩니다.", "verbatim": true },
-        "sectionPath": ["4. 일반 몬스터와 보스 AI", "4.3 보스 · 상태 enum과 공격 코루틴"],
+        "title": {
+          "text": "4.3 보스 · 상태 enum과 공격 코루틴",
+          "verbatim": true
+        },
+        "lead": {
+          "text": "보스 대화가 끝나면 `DialogueManager.EndCinematic`이 보스 상태를 `Move`로 바꿔 전투가 시작됩니다.",
+          "verbatim": true
+        },
+        "sectionPath": [
+          "4. 일반 몬스터와 보스 AI",
+          "4.3 보스 · 상태 enum과 공격 코루틴"
+        ],
         "points": [
-          { "label": "", "text": "`BossAI`는 `BossState` enum과 `isAttacking`, `magicTimer`로 지금 무엇을 하는 중인지 관리합니다.", "verbatim": true },
-          { "label": "", "text": "보스 씬의 설정값은 근접 3.5, 원거리 7, 감지 40, 특수 공격 쿨타임 6초입니다.", "verbatim": true }
+          {
+            "label": "",
+            "text": "`BossAI`는 `BossState` enum과 `isAttacking`, `magicTimer`로 지금 무엇을 하는 중인지 관리합니다.",
+            "verbatim": true
+          },
+          {
+            "label": "",
+            "text": "보스 씬의 설정값은 근접 3.5, 원거리 7, 감지 40, 특수 공격 쿨타임 6초입니다.",
+            "verbatim": true
+          }
         ],
         "visuals": [
-          { "kind": "mermaid", "n": 1, "fp": "stateDiagram-v2" },
-          { "kind": "image", "src": "images/boss_fight.png", "w": 1920, "h": 1080, "caption": { "text": "보스전 화면", "verbatim": true } }
+          {
+            "kind": "mermaid",
+            "n": 1,
+            "fp": "stateDiagram-v2"
+          },
+          {
+            "kind": "image",
+            "src": "images/boss_fight.png",
+            "w": 1920,
+            "h": 1080,
+            "caption": {
+              "text": "보스전 화면",
+              "verbatim": true
+            }
+          }
         ]
       },
       {
@@ -282,16 +563,38 @@
         "chapter": "ai",
         "layout": "code",
         "tab": "구현",
-        "title": { "text": "4.4 거리 판단과 공격 코루틴", "verbatim": true },
+        "title": {
+          "text": "4.4 거리 판단과 공격 코루틴",
+          "verbatim": true
+        },
         "lead": null,
-        "sectionPath": ["4. 일반 몬스터와 보스 AI", "4.4 거리 판단과 공격 코루틴"],
+        "sectionPath": [
+          "4. 일반 몬스터와 보스 AI",
+          "4.4 거리 판단과 공격 코루틴"
+        ],
         "points": [
-          { "label": "", "text": "가까운 공격부터 검사합니다. 범위가 겹치면 근접 공격이 우선합니다.", "verbatim": true },
-          { "label": "", "text": "`UpdateMove`가 맨 앞에서 `isAttacking`을 보고 바로 빠져나가므로, 공격이 겹쳐 실행되지 않습니다.", "verbatim": true },
-          { "label": "", "text": "공격의 시간 순서가 한 메서드 안에 있습니다. 원거리 공격은 0.6초 모션 → 발사 → 1.4초 후딜레이 순서입니다.", "verbatim": true }
+          {
+            "label": "",
+            "text": "가까운 공격부터 검사합니다. 범위가 겹치면 근접 공격이 우선합니다.",
+            "verbatim": true
+          },
+          {
+            "label": "",
+            "text": "`UpdateMove`가 맨 앞에서 `isAttacking`을 보고 바로 빠져나가므로, 공격이 겹쳐 실행되지 않습니다.",
+            "verbatim": true
+          },
+          {
+            "label": "",
+            "text": "공격의 시간 순서가 한 메서드 안에 있습니다. 원거리 공격은 0.6초 모션 → 발사 → 1.4초 후딜레이 순서입니다.",
+            "verbatim": true
+          }
         ],
         "visuals": [
-          { "kind": "code", "n": 1, "fp": "// BossAI.UpdateMove 발췌" }
+          {
+            "kind": "code",
+            "n": 1,
+            "fp": "// BossAI.UpdateMove 발췌"
+          }
         ]
       },
       {
@@ -299,16 +602,41 @@
         "chapter": "ai",
         "layout": "full",
         "tab": "선택",
-        "title": { "text": "4.5 보스 AI를 어떻게 구성할까", "verbatim": true },
-        "lead": { "text": "AI가 제안한 enum + 코루틴 구조를 그대로 썼습니다.", "verbatim": true },
-        "sectionPath": ["4. 일반 몬스터와 보스 AI", "4.5 보스 AI를 어떻게 구성할까"],
+        "title": {
+          "text": "4.5 보스 AI를 어떻게 구성할까?",
+          "verbatim": true
+        },
+        "lead": {
+          "text": "AI가 제안한 enum + 코루틴 구조를 그대로 썼습니다.",
+          "verbatim": true
+        },
+        "sectionPath": [
+          "4. 일반 몬스터와 보스 AI",
+          "4.5 보스 AI를 어떻게 구성할까?"
+        ],
         "points": [
-          { "label": "이유", "text": "보스 패턴이 근접 · 원거리 · 특수 공격 두 종류로 많지 않았기 때문입니다.", "verbatim": true },
-          { "label": "", "text": "이때 상태 패턴과는 비교하지 않았습니다.", "verbatim": true },
-          { "label": "", "text": "대신 지금 구조는 상태 패턴이라기보다 enum으로 분기하는 제어기에 가깝습니다.", "verbatim": true }
+          {
+            "label": "이유",
+            "text": "보스 패턴이 근접 · 원거리 · 특수 공격 두 종류로 많지 않았기 때문입니다.",
+            "verbatim": true
+          },
+          {
+            "label": "",
+            "text": "이때 상태 패턴과는 비교하지 않았습니다.",
+            "verbatim": true
+          },
+          {
+            "label": "",
+            "text": "대신 지금 구조는 상태 패턴이라기보다 enum으로 분기하는 제어기에 가깝습니다.",
+            "verbatim": true
+          }
         ],
         "visuals": [
-          { "kind": "table", "n": 1, "fp": "|[A] 상태별 클래스 (상태 패턴)|[B] enum + 코루틴 (선택)" }
+          {
+            "kind": "table",
+            "n": 1,
+            "fp": "|[A] 상태별 클래스 (상태 패턴)|[B] enum + 코루틴 (선택)"
+          }
         ]
       },
       {
@@ -316,14 +644,31 @@
         "chapter": "branch",
         "layout": "full",
         "tab": "구조",
-        "title": { "text": "5.3 클리어 횟수 하나로 달라지는 장면들", "verbatim": true },
-        "lead": { "text": "보스 대사 자체는 두 회차가 같습니다.", "verbatim": true },
-        "sectionPath": ["5. 다회차 스토리 분기", "5.3 클리어 횟수 하나로 달라지는 장면들"],
+        "title": {
+          "text": "5.3 클리어 횟수 하나로 달라지는 장면들",
+          "verbatim": true
+        },
+        "lead": {
+          "text": "보스 대사 자체는 두 회차가 같습니다.",
+          "verbatim": true
+        },
+        "sectionPath": [
+          "5. 다회차 스토리 분기",
+          "5.3 클리어 횟수 하나로 달라지는 장면들"
+        ],
         "points": [
-          { "label": "", "text": "같은 대사를 두고 그 앞뒤의 타이틀 · 책 문장 · 버튼이 달라지면서, 첫 플레이에서는 평범했던 대사가 다른 의미로 읽히도록 구성했습니다.", "verbatim": true }
+          {
+            "label": "",
+            "text": "같은 대사를 두고 그 앞뒤의 타이틀 · 책 문장 · 버튼이 달라지면서, 첫 플레이에서는 평범했던 대사가 다른 의미로 읽히도록 구성했습니다.",
+            "verbatim": true
+          }
         ],
         "visuals": [
-          { "kind": "table", "n": 1, "fp": "요소|ClearCount == 0|ClearCount >= 1|처리하는 곳" }
+          {
+            "kind": "table",
+            "n": 1,
+            "fp": "요소|ClearCount == 0|ClearCount >= 1|처리하는 곳"
+          }
         ]
       },
       {
@@ -331,13 +676,37 @@
         "chapter": "branch",
         "layout": "screens",
         "tab": "결과",
-        "title": { "text": "5.3 클리어 횟수 하나로 달라지는 장면들", "verbatim": true },
+        "title": {
+          "text": "5.3 클리어 횟수 하나로 달라지는 장면들",
+          "verbatim": true
+        },
         "lead": null,
-        "sectionPath": ["5. 다회차 스토리 분기", "5.3 클리어 횟수 하나로 달라지는 장면들"],
+        "sectionPath": [
+          "5. 다회차 스토리 분기",
+          "5.3 클리어 횟수 하나로 달라지는 장면들"
+        ],
         "points": [],
         "visuals": [
-          { "kind": "image", "src": "images/book_glitch.gif", "w": 1080, "h": 608, "caption": { "text": "다음 플레이에서 마법책 문장이 붉은 글자로 바뀌는 장면", "verbatim": true } },
-          { "kind": "image", "src": "images/button_glitch.gif", "w": 1080, "h": 608, "caption": { "text": "보스 대화 끝 *공격 버튼이 * ...로 일그러지는 장면", "verbatim": true } }
+          {
+            "kind": "image",
+            "src": "images/book_glitch.gif",
+            "w": 1080,
+            "h": 608,
+            "caption": {
+              "text": "다음 플레이에서 마법책 문장이 붉은 글자로 바뀌는 장면",
+              "verbatim": true
+            }
+          },
+          {
+            "kind": "image",
+            "src": "images/button_glitch.gif",
+            "w": 1080,
+            "h": 608,
+            "caption": {
+              "text": "보스 대화 끝 *공격 버튼이 * ...로 일그러지는 장면",
+              "verbatim": true
+            }
+          }
         ]
       },
       {
@@ -345,16 +714,46 @@
         "chapter": "branch",
         "layout": "visual",
         "tab": "흐름",
-        "title": { "text": "5.4 보스방 진입부터 결말까지", "verbatim": true },
-        "lead": { "text": "같은 버튼이 회차에 따라 다른 결과를 냅니다.", "verbatim": true },
-        "sectionPath": ["5. 다회차 스토리 분기", "5.4 보스방 진입부터 결말까지"],
+        "title": {
+          "text": "5.4 보스방 진입부터 결말까지",
+          "verbatim": true
+        },
+        "lead": {
+          "text": "같은 버튼이 회차에 따라 다른 결과를 냅니다.",
+          "verbatim": true
+        },
+        "sectionPath": [
+          "5. 다회차 스토리 분기",
+          "5.4 보스방 진입부터 결말까지"
+        ],
         "points": [
-          { "label": "", "text": "보스방에 들어가면 연출이 시작됩니다.", "verbatim": true },
-          { "label": "", "text": "대사는 한 글자씩 출력됩니다.", "verbatim": true }
+          {
+            "label": "",
+            "text": "보스방에 들어가면 연출이 시작됩니다.",
+            "verbatim": true
+          },
+          {
+            "label": "",
+            "text": "대사는 한 글자씩 출력됩니다.",
+            "verbatim": true
+          }
         ],
         "visuals": [
-          { "kind": "mermaid", "n": 1, "fp": "flowchart LR" },
-          { "kind": "image", "src": "images/boss_room.png", "w": 1920, "h": 1080, "caption": { "text": "보스방에 들어가 연출과 대사가 시작된 화면", "verbatim": true } }
+          {
+            "kind": "mermaid",
+            "n": 1,
+            "fp": "flowchart LR"
+          },
+          {
+            "kind": "image",
+            "src": "images/boss_room.png",
+            "w": 1920,
+            "h": 1080,
+            "caption": {
+              "text": "보스방에 들어가 연출과 대사가 시작된 화면",
+              "verbatim": true
+            }
+          }
         ]
       },
       {
@@ -362,15 +761,36 @@
         "chapter": "branch",
         "layout": "full",
         "tab": "선택",
-        "title": { "text": "5.5 2회차의 차이를 어디에 둘까", "verbatim": true },
-        "lead": { "text": "같은 버튼의 글자가 바뀌는 쪽([B])을 골랐습니다.", "verbatim": true },
-        "sectionPath": ["5. 다회차 스토리 분기", "5.5 2회차의 차이를 어디에 둘까"],
+        "title": {
+          "text": "5.5 2회차의 차이를 어디에 둘까?",
+          "verbatim": true
+        },
+        "lead": {
+          "text": "같은 버튼의 글자가 바뀌는 쪽([B])을 골랐습니다.",
+          "verbatim": true
+        },
+        "sectionPath": [
+          "5. 다회차 스토리 분기",
+          "5.5 2회차의 차이를 어디에 둘까?"
+        ],
         "points": [
-          { "label": "이유", "text": "선택지를 넣으려다가, 선택지 글자가 바뀌는 연출이 더 극적일 것 같아서 그쪽으로 정했습니다.", "verbatim": true },
-          { "label": "", "text": "대사도 버튼도 1회차와 똑같이 흘러가 같은 장면이 되풀이되는 것처럼 보이다가, 마지막에 그 버튼이 일그러지면서 사실은 같지 않았다는 것이 드러나는 반전을 주고 싶었습니다.", "verbatim": true }
+          {
+            "label": "이유",
+            "text": "선택지를 넣으려다가, 선택지 글자가 바뀌는 연출이 더 극적일 것 같아서 그쪽으로 정했습니다.",
+            "verbatim": true
+          },
+          {
+            "label": "",
+            "text": "대사도 버튼도 1회차와 똑같이 흘러가 같은 장면이 되풀이되는 것처럼 보이다가, 마지막에 그 버튼이 일그러지면서 사실은 같지 않았다는 것이 드러나는 반전을 주고 싶었습니다.",
+            "verbatim": true
+          }
         ],
         "visuals": [
-          { "kind": "table", "n": 1, "fp": "|[A] 대화 끝에 선택지 두 개|[B] 같은 버튼의 글자가 바뀜 ✓" }
+          {
+            "kind": "table",
+            "n": 1,
+            "fp": "|[A] 대화 끝에 선택지 두 개|[B] 같은 버튼의 글자가 바뀜 ✓"
+          }
         ]
       },
       {
@@ -378,17 +798,48 @@
         "chapter": "trouble",
         "layout": "problem",
         "tab": "문제 해결",
-        "title": { "text": "6.1 카메라가 플레이어에 붙어 버린 문제", "verbatim": true },
+        "title": {
+          "text": "6.1 카메라가 플레이어에 붙어 버린 문제",
+          "verbatim": true
+        },
         "lead": null,
-        "sectionPath": ["6. 만들며 생긴 문제", "6.1 카메라가 플레이어에 붙어 버린 문제"],
+        "sectionPath": [
+          "6. 만들며 생긴 문제",
+          "6.1 카메라가 플레이어에 붙어 버린 문제"
+        ],
         "points": [
-          { "label": "문제", "text": "카메라 추적 기능을 추가했을 때 카메라가 플레이어에 딱 붙어 움직여서 부드럽게 따라오지 않았습니다.", "verbatim": true },
-          { "label": "원인", "text": "원인은 `PlayerCameraFollow.LateUpdate`에서 `Vector3.Lerp`의 시작점이 `target.position`(플레이어 위치)이었던 것입니다.", "verbatim": true },
-          { "label": "해결", "text": "그래서 시작점을 `transform.position`(카메라의 현재 위치)으로 바꿨습니다.", "verbatim": true },
-          { "label": "결과", "text": "이제 카메라가 현재 위치에서 목표 위치로 매 프레임 조금씩 다가가며 부드럽게 따라갑니다.", "verbatim": true }
+          {
+            "label": "문제",
+            "text": "카메라 추적 기능을 추가했을 때 카메라가 플레이어에 딱 붙어 움직여서 부드럽게 따라오지 않았습니다.",
+            "verbatim": true
+          },
+          {
+            "label": "원인",
+            "text": "원인은 `PlayerCameraFollow.LateUpdate`에서 `Vector3.Lerp`의 시작점이 `target.position`(플레이어 위치)이었던 것입니다.",
+            "verbatim": true
+          },
+          {
+            "label": "해결",
+            "text": "그래서 시작점을 `transform.position`(카메라의 현재 위치)으로 바꿨습니다.",
+            "verbatim": true
+          },
+          {
+            "label": "결과",
+            "text": "이제 카메라가 현재 위치에서 목표 위치로 매 프레임 조금씩 다가가며 부드럽게 따라갑니다.",
+            "verbatim": true
+          }
         ],
         "visuals": [
-          { "kind": "code", "n": 1, "fp": "// Before — 플레이어 위치에서 보간 시작" }
+          {
+            "kind": "image",
+            "src": "images/camera_follow.gif",
+            "w": 640,
+            "h": 612,
+            "caption": {
+              "text": "고치기 전(위)은 카메라가 플레이어에 붙어 땅 아래 빈 공간이 보이고, 고친 뒤(아래)는 카메라가 조금 늦게 따라가는 장면 — 왼쪽 Scene 뷰의 흰 사각형이 카메라 범위",
+              "verbatim": true
+            }
+          }
         ]
       },
       {
@@ -396,17 +847,53 @@
         "chapter": "trouble",
         "layout": "problem",
         "tab": "문제 해결",
-        "title": { "text": "6.2 쓰러진 몬스터에게 맞는 문제", "verbatim": true },
+        "title": {
+          "text": "6.2 쓰러진 몬스터에게 맞는 문제",
+          "verbatim": true
+        },
         "lead": null,
-        "sectionPath": ["6. 만들며 생긴 문제", "6.2 쓰러진 몬스터에게 맞는 문제"],
+        "sectionPath": [
+          "6. 만들며 생긴 문제",
+          "6.2 쓰러진 몬스터에게 맞는 문제"
+        ],
         "points": [
-          { "label": "문제", "text": "몬스터에 바짝 붙어서 처치하면, 몬스터가 쓰러지는 중인데도 플레이어가 한 대 맞았습니다.", "verbatim": true },
-          { "label": "원인", "text": "그 2초 동안에도 `EnemyAI.Update`는 계속 돌면서 거리를 비교하고, 플레이어가 공격 거리(1.2) 안에 있으면 `AttackPlayer`를 부릅니다.", "verbatim": true },
-          { "label": "해결", "text": "그래서 사망할 때 같은 오브젝트의 `EnemyAI`도 끄도록 고쳤습니다.", "verbatim": true },
-          { "label": "결과", "text": "새 빌드에서는 몬스터에 붙어서 처치해도 더 이상 맞지 않습니다.", "verbatim": true }
+          {
+            "label": "문제",
+            "text": "몬스터에 바짝 붙어서 처치하면, 몬스터가 쓰러지는 중인데도 플레이어가 한 대 맞았습니다.",
+            "verbatim": true
+          },
+          {
+            "label": "원인",
+            "text": "그 2초 동안에도 `EnemyAI.Update`는 계속 돌면서 거리를 비교하고, 플레이어가 공격 거리(1.2) 안에 있으면 `AttackPlayer`를 부릅니다.",
+            "verbatim": true
+          },
+          {
+            "label": "해결",
+            "text": "그래서 사망할 때 같은 오브젝트의 `EnemyAI`도 끄도록 고쳤습니다.",
+            "verbatim": true
+          },
+          {
+            "label": "결과",
+            "text": "새 빌드에서는 몬스터에 붙어서 처치해도 더 이상 맞지 않습니다.",
+            "verbatim": true
+          }
         ],
         "visuals": [
-          { "kind": "code", "n": 1, "fp": "// Enemy.Die 발췌" }
+          {
+            "kind": "code",
+            "n": 1,
+            "fp": "// Enemy.Die 발췌"
+          },
+          {
+            "kind": "image",
+            "src": "images/dead_enemy_hit.gif",
+            "w": 640,
+            "h": 400,
+            "caption": {
+              "text": "예전 빌드 — 붙어서 처치하자 쓰러지는 몬스터에게 한 대 맞고 밀려나는 장면",
+              "verbatim": true
+            }
+          }
         ]
       },
       {
@@ -414,16 +901,38 @@
         "chapter": "trouble",
         "layout": "problem",
         "tab": "문제 해결",
-        "title": { "text": "6.3 보스 대화 중 공격하면 연출이 겹치는 문제 (미해결)", "verbatim": true },
+        "title": {
+          "text": "6.3 보스 대화 중 공격하면 연출이 겹치는 문제 (미해결)",
+          "verbatim": true
+        },
         "lead": null,
-        "sectionPath": ["6. 만들며 생긴 문제", "6.3 보스 대화 중 공격하면 연출이 겹치는 문제 (미해결)"],
+        "sectionPath": [
+          "6. 만들며 생긴 문제",
+          "6.3 보스 대화 중 공격하면 연출이 겹치는 문제 (미해결)"
+        ],
         "points": [
-          { "label": "문제", "text": "보스 대화 중에 대사를 넘기지 않고 공격하면 연출이 이상하게 겹치는 오류가 있다는 것을 알고 있었습니다.", "verbatim": true },
-          { "label": "원인", "text": "문서를 정리하면서 코드에서 겹칠 수 있는 경로를 세 곳 찾았습니다.", "verbatim": true },
-          { "label": "", "text": "대화가 시작되면 이동 · 공격 · 대사 진행 · 버튼 입력을 함께 잠그고, 한 단계가 끝나야 다음 단계 입력을 받도록 바꿀 계획입니다.", "verbatim": true }
+          {
+            "label": "문제",
+            "text": "보스 대화 중에 대사를 넘기지 않고 공격하면 연출이 이상하게 겹치는 오류가 있다는 것을 알고 있었습니다.",
+            "verbatim": true
+          },
+          {
+            "label": "원인",
+            "text": "문서를 정리하면서 코드에서 겹칠 수 있는 경로를 세 곳 찾았습니다.",
+            "verbatim": true
+          },
+          {
+            "label": "",
+            "text": "대화가 시작되면 이동 · 공격 · 대사 진행 · 버튼 입력을 함께 잠그고, 한 단계가 끝나야 다음 단계 입력을 받도록 바꿀 계획입니다.",
+            "verbatim": true
+          }
         ],
         "visuals": [
-          { "kind": "table", "n": 1, "fp": "경로|내용" }
+          {
+            "kind": "table",
+            "n": 1,
+            "fp": "경로|내용"
+          }
         ]
       },
       {
@@ -431,12 +940,21 @@
         "chapter": "ai-work",
         "layout": "full",
         "tab": "",
-        "title": { "text": "7. AI와 일한 방식", "verbatim": true },
+        "title": {
+          "text": "7. AI와 일한 방식",
+          "verbatim": true
+        },
         "lead": null,
-        "sectionPath": ["7. AI와 일한 방식"],
+        "sectionPath": [
+          "7. AI와 일한 방식"
+        ],
         "points": [],
         "visuals": [
-          { "kind": "table", "n": 1, "fp": "구분|내용" }
+          {
+            "kind": "table",
+            "n": 1,
+            "fp": "구분|내용"
+          }
         ]
       }
     ]
