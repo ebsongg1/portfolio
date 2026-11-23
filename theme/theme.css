@@ -1,13 +1,46 @@
 /* ─────────────────────────────────────────────────────────────
-   테마 (theme/theme.css) — 포트폴리오 문서·발표 덱·상세 문서가 마지막에 싣는 파일
-   지금은 비어 있어 기본 테마(어두운 바탕 · profile.md 강조색 → 보랏빛 그러데이션)를 씁니다.
-
-   바꾸려면: Claude Code에서 마음에 드는 웹페이지 스크린샷을 첨부하고
-     /portfolio-theme
-   를 입력하세요. Claude가 색·모양·영문 글꼴·효과를 정해진 규칙으로 뽑아 이 파일을 채웁니다.
-   손잡이(--t-*) 설명: .claude/skills/portfolio-theme/rules.md
-   이 파일은 /portfolio-update가 건드리지 않습니다(템플릿을 업데이트해도 내 테마가 남음).
+   테마 (theme/theme.css) — /portfolio-theme가 만듦 · 2026-11-23
+   참고한 화면: 참고 화면 없이 대화로 정한 테마(내 게임 화면의 마법서·설계 노트 분위기)
+   뽑은 인상: 따뜻한 종이색 바탕 · 짙은 먹색 글자 · 호박색 단색 강조 · 단정한 카드 · 둥근 네모 버튼 · 세리프 영문 라벨
+   값을 고쳐도 됩니다(저장 → 새로고침). 손잡이 설명: .claude/skills/portfolio-theme/rules.md
+   이 파일은 /portfolio-update가 건드리지 않습니다. 기본 테마로 되돌리기: /portfolio-theme 되돌리기
    ───────────────────────────────────────────────────────────── */
+@import url("https://cdn.jsdelivr.net/npm/@fontsource/playfair-display@5.3.0/latin-700.css");
+@import url("https://cdn.jsdelivr.net/npm/@fontsource/playfair-display@5.3.0/latin-800.css");
+
+:root {
+  /* ① 바탕과 글자 — 바탕 대비: 제목 12 · 본문 7 · 보조 4.5 이상(check-theme.py가 확인) */
+  --t-scheme: light;
+  --t-bg: #F6F1E7;              /* 따뜻한 종이색 */
+  --t-surface: #FFFDF8;         /* 카드·판 */
+  --t-ink: #1F1A14;             /* 제목 */
+  --t-body: #4A4238;            /* 본문 */
+  --t-muted: #6F6556;           /* 보조 글자(대비 4.5 맞추려고 대화의 #857A6B에서 밝기만 한 단 진하게) */
+  --t-line: #E4DACA;            /* 얇은 구분선·카드 테두리 */
+  --t-line-2: #CDBFA8;          /* 버튼·태그 테두리 */
+
+  /* ② 강조색 — 이 줄을 지우면 profile.md의 강조색을 씀. 글자용 진하기·흰 글자 칠은 페이지가 자동으로 맞춤 */
+  --t-accent: #A8571A;          /* 호박색 */
+  --t-accent-2: #A8571A;        /* 한 색 강조라 같은 값 */
+  --t-accent-3: #A8571A;
+
+  /* ③ 모양 */
+  --t-radius: 10px;
+  --t-pill: 8px;
+  --t-shadow: rgb(20 22 30 / .16);
+
+  /* ④ 영문 라벨 글꼴 — 한글은 늘 Pretendard */
+  --t-display: 'Playfair Display';
+
+  /* ⑤ 효과 */
+  --t-grad: linear-gradient(var(--accent-ink), var(--accent-ink));
+  --t-badge: var(--accent-fill);
+  --t-glow: 0;
+  --t-mark: 0;
+
+  /* ⑥ 다이어그램 판 — 밝은 바탕이라 카드 색과 같게 */
+  --t-diagram: #FFFDF8;
+}
 
 /* ── 상세 문서 그림 폭 (직접 추가) ─────────────────────────────
    상세 기술문서(doc.html)의 그림을 본문 글줄 폭(--measure, 40rem)에 맞춥니다.
