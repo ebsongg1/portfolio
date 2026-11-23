@@ -39,7 +39,12 @@
   "links": {
     "github": "https://github.com/KooHoo-Dev/3rd-2D-Project-ebsongg1",
     "video": "https://youtu.be/PN3ytIBvCoc",
-    "extra": []
+    "extra": [
+      {
+        "label": "쇼츠",
+        "url": "https://youtube.com/shorts/ItFXu3OJLfg"
+      }
+    ]
   },
   "intent": {
     "text": "특히 중요하게 다룬 것은 발견감입니다. 첫 플레이에서는 평범한 의뢰와 보스전으로 보이던 장면이, 두 번째 플레이에서는 같은 대사와 같은 마법책 문장인데도 다른 의미로 읽히도록 만들고 싶었습니다.",

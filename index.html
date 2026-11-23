@@ -18,6 +18,9 @@
 <script crossorigin src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js"></script>
 <script src="https://unpkg.com/@babel/standalone@7.24.7/babel.min.js"></script>
 <script src="assets/strings.js"></script>
+<script>/* 첫 그림 전에 고른 모드를 붙여 깜빡임을 막음 */
+try { if (localStorage.getItem('pf-mode') === 'night') document.documentElement.dataset.mode = 'night'; } catch (e) {}
+</script>
 <style>
 :root{
   --bg:var(--t-bg,#F6F1E7);--surface:var(--t-surface,#FFFDF8);--ink:var(--t-ink,#1F1A14);--body:var(--t-body,#4A4238);
@@ -25,6 +28,33 @@
   --accent:var(--t-accent,#A8571A);--accent-ink:color-mix(in srgb,var(--accent) 72%,#000);--accent-soft:color-mix(in srgb,var(--accent) 12%,var(--surface));
   --r:var(--t-radius,10px);--btn:var(--t-pill,8px);--serif:var(--t-display,'Playfair Display'),Georgia,serif;
 }
+/* 밤에 읽기 — 가죽 표지 같은 짙은 갈색 바탕 · 크림색 글자 · 등불 같은 호박색. 배치는 그대로, 색만 바꿈.
+   화면에서만 적용(@media screen) → 제출 PDF(인쇄)는 늘 흰 종이. 버튼으로 바꾸고, 고른 값은 이 브라우저에 기억함 */
+@media screen{
+  html[data-mode="night"]{
+    color-scheme:dark;
+    --bg:#120E0B;--surface:#1C1612;--ink:#F2E7D3;--body:#D8CBB5;--muted:#A69780;--line:#2F271F;--line2:#4E4134;
+    --accent:#E2A462;--accent-ink:color-mix(in srgb,var(--accent) 82%,#fff);--accent-soft:color-mix(in srgb,var(--accent) 16%,var(--surface));
+  }
+  html[data-mode="night"] .btn.pri:hover{color:var(--bg)}
+  html[data-mode="night"] .page .pic,html[data-mode="night"] .chap .shot{background:#0B0806}
+}
+/* 시연 영상 고르기 (전체 영상 / 쇼츠) */
+.vmenu{position:relative;display:inline-flex}
+.vmenu .caret{font-size:10px;margin-left:6px;color:var(--accent);transition:transform .2s}
+.vmenu:hover .caret,.vmenu.open .caret{transform:rotate(180deg)}
+.vlist{position:absolute;left:0;top:100%;padding-top:6px;z-index:25;display:none}
+.vmenu:hover .vlist,.vmenu:focus-within .vlist,.vmenu.open .vlist{display:block}
+.vbox{display:block;min-width:150px;background:var(--surface);border:1px solid var(--line2);border-radius:var(--btn);padding:4px;box-shadow:0 12px 26px -14px rgba(40,25,10,.45)}
+.vbox a{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:calc(var(--btn) - 2px);font-size:13.5px;color:var(--ink);white-space:nowrap}
+.vbox a:hover{background:var(--accent-soft);color:var(--accent-ink)}
+.vbox i.yt{flex:none;width:18px;height:18px;background:var(--accent);-webkit-mask-size:contain;mask-size:contain;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:center;mask-position:center}
+.vbox a span{margin-left:auto;color:var(--muted);font-size:12px}
+@media print{.vlist{display:none!important}.vmenu .caret{display:none}}
+html.mode-ready body{transition:background-color .35s,color .35s}
+.mode{display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;margin-left:14px;border:1px solid var(--line2);border-radius:50%;background:var(--surface);transition:border-color .2s,transform .3s}
+.mode:hover{border-color:var(--accent);transform:rotate(-15deg)}
+.mode i{font-style:normal;color:var(--accent);font-size:15px;line-height:1}
 html{scroll-behavior:smooth}
 body{background:var(--bg);color:var(--body);font-family:Pretendard,system-ui,sans-serif;line-height:1.7;-webkit-font-smoothing:antialiased}
 code{font-family:D2Coding,monospace;font-size:.88em;background:var(--accent-soft);color:var(--accent-ink);padding:1px 5px;border-radius:4px}
@@ -43,7 +73,7 @@ code{font-family:D2Coding,monospace;font-size:.88em;background:var(--accent-soft
 .bar{position:sticky;top:0;z-index:30;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
 .bar .wrap{display:flex;align-items:center;justify-content:space-between;height:56px}
 .bar b{color:var(--ink);font-size:15px}
-.bar nav{display:flex;gap:18px;font-size:13.5px}
+.bar nav{display:flex;align-items:center;gap:18px;font-size:13.5px}
 .bar nav a:hover{color:var(--accent-ink)}
 
 /* 첫 화면: 책의 목차 */
@@ -67,6 +97,50 @@ code{font-family:D2Coding,monospace;font-size:.88em;background:var(--accent-soft
 .skill li{display:flex;flex-wrap:wrap;align-items:center;gap:8px;padding:4px 0;font-size:15px}
 .ptag{font-size:12px;border:1px solid var(--line2);border-radius:999px;padding:0 9px;color:var(--accent-ink);background:var(--surface);white-space:nowrap}
 .ptag:hover{border-color:var(--accent)}
+/* 기술 스택: 책 뒤 찾아보기(색인) — 기술 ······ 01 02 03, 근거 문장 ······ 01 프로젝트 */
+.ix-item{padding:24px 0 18px;border-bottom:1px solid var(--line)}
+.dots{flex:1 1 24px;min-width:24px;border-bottom:2px dotted var(--line2);transform:translateY(-5px)}
+.ix-head{display:flex;align-items:baseline;gap:12px}
+.ix-head h3{font-size:22px;font-weight:700;color:var(--ink);white-space:nowrap}
+.ix-head .pages{font-family:var(--serif);font-size:19px;color:var(--accent);letter-spacing:.08em;white-space:nowrap}
+.ix-head .pages a{margin-left:10px}.ix-head .pages a:hover{color:var(--accent-ink);text-decoration:underline}
+.ix-row{display:flex;align-items:baseline;gap:10px;padding:5px 0 5px 22px;font-size:15px}
+.ix-row .t{flex:0 1 auto;min-width:0}
+.ix-row .dots{border-bottom-width:1px;transform:translateY(-4px)}
+.pg{white-space:nowrap;font-size:13px;color:var(--muted)}
+.pg i{font-family:var(--serif);font-style:normal;font-weight:700;color:var(--accent);margin-right:5px}
+.pg:hover{color:var(--accent-ink)}
+/* 기술 스택: 책의 세 단 — 장 번호 · 기술 이름 · 할 줄 아는 기능 */
+.sk-cols{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));margin-top:30px}
+.sk{padding:6px 32px 10px}
+.sk:first-child{padding-left:0}.sk:last-child{padding-right:0}
+.sk+.sk{border-left:1px solid var(--line2)}
+.sk-no{font-family:var(--serif);font-size:34px;line-height:1;color:var(--accent)}
+.sk h3{font-size:21px;font-weight:800;color:var(--ink);margin:12px 0 14px;padding-bottom:12px;border-bottom:3px double color-mix(in srgb,var(--accent) 55%,transparent)}
+.sk li{position:relative;padding:6px 0 6px 16px;font-size:15px;line-height:1.55;color:var(--body)}
+.sk li::before{content:'';position:absolute;left:2px;top:17px;width:7px;height:1px;background:var(--accent)}
+@media(max-width:860px){.sk-cols{grid-template-columns:1fr;gap:26px}.sk,.sk:first-child,.sk:last-child{padding:0}.sk+.sk{border-left:0;border-top:1px dashed var(--line2);padding-top:22px}}
+/* 부록 · 작업 도구: 펼친 책 두 쪽 (profile.md '작업 도구'의 묶음마다 한 쪽) */
+.apx{margin-top:48px;padding-top:20px;border-top:1px solid var(--ink)}
+.apx-h{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap}
+.apx-h b{font-size:17px;color:var(--ink)}
+.apx-book{position:relative;display:grid;grid-template-columns:repeat(var(--pages,2),minmax(0,1fr));margin-top:24px;background:var(--surface);border:1px solid var(--line2);border-radius:4px;box-shadow:0 10px 24px -18px rgba(60,40,20,.45)}
+.apx-book.even::after{content:'';position:absolute;top:0;bottom:0;left:50%;width:36px;transform:translateX(-50%);background:linear-gradient(90deg,transparent,rgba(80,55,25,.10) 48%,rgba(80,55,25,.16) 50%,rgba(80,55,25,.10) 52%,transparent);pointer-events:none}
+.apx-page{padding:26px 40px 16px;display:flex;flex-direction:column}
+.apx-page+.apx-page{border-left:1px solid var(--line)}
+.apx-book.even .apx-page+.apx-page{border-left:0}
+.apx-gt{display:flex;align-items:baseline;gap:12px;font-size:16px;font-weight:700;color:var(--ink);padding-bottom:12px;border-bottom:1px solid var(--line);margin-bottom:20px}
+.apx-gt i{font-family:var(--serif);font-size:13px;font-weight:400;color:var(--accent-ink);letter-spacing:.06em}
+.apx-row{display:flex;flex-wrap:wrap;gap:14px 12px;flex:1;align-content:flex-start}
+.tool{display:flex;align-items:center;gap:10px;padding:8px 14px 8px 10px;border:1px solid var(--line);border-radius:var(--btn);background:var(--bg);font-size:14px;font-weight:600;color:var(--ink);transition:border-color .2s,transform .2s}
+.tool:hover{border-color:var(--accent);transform:translateY(-1px)}
+.tool .ic{width:22px;height:22px;flex:none;background:var(--accent);-webkit-mask-size:contain;mask-size:contain;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:center;mask-position:center}
+.tool .ic.raw{background:none;color:var(--accent);display:flex;align-items:center;justify-content:center}
+.tool .ic.raw svg{width:24px;height:24px}
+.tool .ic.letter{background:none;font-family:var(--serif);font-weight:700;font-size:17px;line-height:22px;text-align:center;color:var(--accent);border:1px solid var(--accent);border-radius:50%}
+.folio{font-family:var(--serif);font-size:12px;color:var(--muted);text-align:center;margin-top:22px;letter-spacing:.1em}
+@media(max-width:760px){.apx-book{grid-template-columns:1fr}.apx-book.even::after{display:none}.apx-page+.apx-page{border-left:0;border-top:1px dashed var(--line2)}.ix-row{padding-left:8px;flex-wrap:wrap;gap:0 10px}.ix-row .dots{display:none}}
+@media print{.ix-item,.apx-book{break-inside:avoid}.tool .ic,.apx-book{-webkit-print-color-adjust:exact;print-color-adjust:exact}.apx-book{box-shadow:none}}
 
 /* 프로젝트: 펼친 책 */
 .proj{padding-top:96px;border-bottom:1px solid var(--line)}
@@ -117,24 +191,50 @@ code{font-family:D2Coding,monospace;font-size:.88em;background:var(--accent-soft
 .page figcaption b{font-family:var(--serif);color:var(--accent-ink);white-space:nowrap}
 
 /* 한눈에 보기 · 연락처 */
-.glance{width:100%;border-collapse:collapse;margin-top:12px;font-size:14px}
-.glance th{text-align:left;font-weight:600;color:var(--muted);font-size:12.5px;padding:10px 12px;border-bottom:1px solid var(--ink);white-space:nowrap}
-.glance td{padding:14px 12px;border-bottom:1px solid var(--line);vertical-align:top}
-.glance td:nth-child(2),.glance td:nth-child(3),.glance td:nth-child(5){white-space:nowrap}
-.glance td:first-child{min-width:180px}
-.glance td b{color:var(--ink);font-size:15px}
-.glance .no{font-family:var(--serif);color:var(--accent);margin-right:6px}
-.contact{display:grid;grid-template-columns:5fr 7fr;gap:56px;align-items:start}
-.contact h2{font-size:34px;font-weight:800;color:var(--ink);letter-spacing:-.02em;margin-top:10px}
-.clist div{display:grid;grid-template-columns:190px 1fr;gap:12px;padding:12px 0;border-bottom:1px solid var(--line);font-size:15px}
-.clist dt{color:var(--muted)}
-.clist a{color:var(--ink)}.clist a:hover{color:var(--accent-ink)}
+/* 프로젝트 요약: 도서관 목록 카드 — 청구 번호 · 제목 / 한 줄 소개 / 수록 · 분류 · 열람 */
+.cat{display:grid;gap:26px;margin-top:30px}
+.card{position:relative;background:var(--surface);border:1px solid var(--line2);border-radius:3px;padding:22px 30px 34px;box-shadow:5px 5px 0 -1px var(--surface),5px 5px 0 0 var(--line2)}
+.card-top{display:grid;grid-template-columns:auto 1fr auto;align-items:baseline;gap:16px;padding-bottom:12px;border-bottom:3px double color-mix(in srgb,var(--accent) 60%,transparent)}
+.call{font-family:var(--serif);font-size:28px;color:var(--accent);line-height:1}
+.card-top h3{font-size:20px;font-weight:800;color:var(--ink);letter-spacing:-.01em}
+.card-top h3 a:hover{color:var(--accent-ink)}
+.card-meta{font-size:13px;color:var(--muted);white-space:nowrap}
+.card-tag{font-size:16px;color:var(--ink);margin:14px 0 12px;line-height:1.6}
+.card-dl div{display:grid;grid-template-columns:44px 1fr;gap:14px;padding:7px 0;font-size:14px;border-top:1px dashed var(--line2)}
+.card-dl dt{font-size:12.5px;font-weight:700;letter-spacing:.12em;color:var(--accent-ink);padding-top:1px}
+.card-dl dd{color:var(--body)}
+.card-dl .env{color:var(--muted)}
+.card-links{display:flex;flex-wrap:wrap;gap:4px 16px}
+.card-links a{color:var(--ink);border-bottom:1px solid var(--line2)}
+.card-links a:hover{color:var(--accent-ink);border-color:var(--accent)}
+.hole{position:absolute;left:50%;bottom:10px;width:12px;height:12px;margin-left:-6px;border-radius:50%;background:var(--bg);box-shadow:inset 0 1px 2px rgba(60,40,20,.35)}
+/* 연락처: 책 맨 뒤 판권면 — 지은이 이름 · 연락처 · 작품 링크 */
+.colo{max-width:680px;margin:0 auto;text-align:center}
+.colo-title{font-size:clamp(36px,5vw,48px);font-weight:800;color:var(--ink);letter-spacing:-.02em;margin-top:14px;line-height:1.15}
+.colo-en{font-family:var(--serif);font-style:italic;color:var(--muted);font-size:17px;margin-top:4px}
+.colo-head{font-size:15px;color:var(--body);margin-top:10px}
+.colo-box{margin-top:30px;border-top:3px double var(--ink);border-bottom:3px double var(--ink);padding:8px 0;text-align:left}
+.colo-row{display:grid;grid-template-columns:88px 1fr;gap:14px;align-items:baseline;padding:11px 4px;border-bottom:1px solid var(--line);font-size:15px}
+.colo-row:last-child{border-bottom:0}
+.colo-row dt{font-size:12.5px;font-weight:700;letter-spacing:.12em;color:var(--accent-ink)}
+.colo-row a{color:var(--ink)}.colo-row a:hover{color:var(--accent-ink)}
+.copy{margin-left:10px;font-size:12px;border:1px solid var(--line2);border-radius:var(--btn);padding:1px 9px;color:var(--muted);background:var(--surface);vertical-align:1px}
+.copy:hover{border-color:var(--accent);color:var(--accent-ink)}
+.colo-sub{font-family:var(--serif);font-size:12px;letter-spacing:.22em;color:var(--muted);text-transform:uppercase;margin:30px 0 6px}
+.colo-links li{display:flex;align-items:baseline;gap:10px;padding:8px 4px;font-size:15px;text-align:left}
+.colo-links .no{font-family:var(--serif);font-weight:700;color:var(--accent)}
+.colo-links b{color:var(--ink);font-weight:700;white-space:nowrap}
+.colo-links .dots{border-bottom-width:1px;transform:translateY(-4px)}
+.colo-links .ls{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:2px 12px;white-space:nowrap}
+.colo-links .ls a{color:var(--ink);font-size:14px}.colo-links .ls a:hover{color:var(--accent-ink)}
+.colo-foot{margin-top:30px;font-size:12.5px;color:var(--muted)}
+.colo-foot span{font-family:var(--serif);letter-spacing:.3em;color:var(--accent);display:block;margin-bottom:6px}
 .foot{text-align:center;padding:40px 24px 56px;color:var(--muted);font-size:12.5px}
 .note{padding:120px 24px;text-align:center}
 
 /* 좁은 화면: 한 열로(그림 → 글), 책장은 넘기지 않고 차례대로 펼침 */
 @media (max-width:760px){
-  .bar nav{display:none}
+  .bar nav a{display:none}.mode{margin-left:0}
   .hero,.spread,.contact{grid-template-columns:1fr;gap:28px}
   .hero{padding-top:56px}
   .spread>div:last-child{order:-1}
@@ -146,8 +246,9 @@ code{font-family:D2Coding,monospace;font-size:.88em;background:var(--accent-soft
   .stage .book{display:none}
   .chap{cursor:default}.chap .body{grid-template-rows:1fr}.chap h4{color:var(--ink)}.chap i{color:var(--accent)}
   .chap .shot{display:block!important;margin-top:10px;border:1px solid var(--line);border-radius:6px;background:#1b1712}
-  .glance-wrap{overflow-x:auto}
-  .clist div{grid-template-columns:1fr;gap:0}
+  .card{padding:18px 18px 32px}.card-top{grid-template-columns:auto 1fr}.card-meta{grid-column:1/-1}
+  .colo-links li{flex-wrap:wrap}.colo-links .dots{display:none}.colo-links .ls{width:100%;justify-content:flex-start;padding-left:30px}
+  .colo-row{grid-template-columns:1fr;gap:2px}
 }
 .chap .shot{display:none;width:100%}
 
@@ -174,7 +275,8 @@ code{font-family:D2Coding,monospace;font-size:.88em;background:var(--accent-soft
   .reader{margin-top:20px}
   .chap{break-inside:avoid;padding:14px 0}
   .chap .shot{max-height:85mm;width:auto;max-width:100%;object-fit:contain;margin-left:auto;margin-right:auto}
-  .skill,.glance tr,.clist div,.intent,.facts div{break-inside:avoid}
+  .sk,.card,.colo,.intent,.facts div{break-inside:avoid}
+  .card{box-shadow:none}.hole,.copy{display:none}
   .sec-h,.chap-h,.spread h2{break-after:avoid}
   #glance{break-before:page}
   .btns .btn,.btn{box-shadow:none}
@@ -283,7 +385,7 @@ function Project({ p, i, total }) {
             <a className="btn pri" href={doc(p)} target="_blank" rel="noopener">{T('name.doc')}</a>
             <a className="btn" href={slide(p)} target="_blank" rel="noopener">{T('name.deck')}</a>
             {L.github && <a className="btn" href={L.github} target="_blank" rel="noopener">GitHub ↗</a>}
-            {L.video && <a className="btn" href={L.video} target="_blank" rel="noopener">{T('name.video')} ↗</a>}
+            <VideoBtn L={L} />
           </div>
         </div>
         <div>
@@ -297,7 +399,99 @@ function Project({ p, i, total }) {
   );
 }
 
-function App({ pf, P }) {
+// 작업 도구: profile.md의 '## 작업 도구' 절에서 '- 묶음: 도구, 도구' 줄을 읽음 (data/에 없음 → 다시 빌드해도 그대로)
+function parseTools(md) {
+  const out = []; let on = false;
+  for (const line of String(md || '').split(/\r?\n/)) {
+    if (/^##\s/.test(line)) { on = /^##\s*작업\s*도구/.test(line); continue; }
+    const m = on && line.match(/^\s*[-*]\s*([^:：]+)[:：]\s*(.+)$/);
+    if (!m) continue;
+    const items = m[2].split(/[,，、]/).map((x) => x.trim()).filter(Boolean);
+    if (items.length) out.push({ title: m[1].trim(), items });
+  }
+  return out;
+}
+const SI = 'https://cdn.jsdelivr.net/npm/simple-icons@13.21.0/icons/';
+const ICON = { git: 'git', github: 'github', asana: 'asana', 'claude code': 'claude', claude: 'claude', codex: 'openai', chatgpt: 'openai',
+  notion: 'notion', slack: 'slack', jira: 'jira', discord: 'discord', figma: 'figma', trello: 'trello', sourcetree: 'sourcetree',
+  'github copilot': 'githubcopilot', gemini: 'googlegemini', cursor: 'cursor', rider: 'jetbrains', 'visual studio code': 'visualstudiocode' };
+const FORK_SVG = <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6 2h1.6v7h1.2V2h1.6v7h1.2V2h1.6v7.5a3.2 3.2 0 0 1-2.6 3.15V22H9V12.65A3.2 3.2 0 0 1 6 9.5z" transform="translate(2.6 0)"/></svg>;
+function ToolIcon({ n }) {
+  const k = n.toLowerCase();
+  if (k === 'fork') return <span className="ic raw">{FORK_SVG}</span>;
+  if (ICON[k]) return <span className="ic" style={{ WebkitMaskImage: `url(${SI}${ICON[k]}.svg)`, maskImage: `url(${SI}${ICON[k]}.svg)` }} />;
+  return <span className="ic letter">{n[0]}</span>;
+}
+
+function Skills({ pf, P, byId, tools }) {
+  const ROMAN = ['Ⅰ', 'Ⅱ', 'Ⅲ', 'Ⅳ', 'Ⅴ', 'Ⅵ', 'Ⅶ', 'Ⅷ'];
+  const letter = (i) => String.fromCharCode(65 + i);
+  return (
+    <section className="sec" id="skills"><div className="wrap">
+      <div className="sec-h"><div><div className="eyebrow">{T('en.skills')}</div><h2>{T('page.stack')}</h2></div></div>
+      <div className="sk-cols">{pf.skills.map((s, n) => (
+        <div className="sk" key={s.name}>
+          <div className="sk-no">{ROMAN[n] || n + 1}</div>
+          <h3>{s.name}</h3>
+          <ul>{s.evidence.map((e, k) => <li key={k}>{md(e.text)}</li>)}</ul>
+        </div>
+      ))}</div>
+      {tools.length > 0 && <div className="apx">
+        <div className="apx-h"><span className="eyebrow">Appendix</span><b>부록 · 작업 도구</b></div>
+        <div className={'apx-book' + (tools.length === 2 ? ' even' : '')} style={{ '--pages': Math.min(tools.length, 3) }}>{tools.map((g, gi) => (
+          <div className="apx-page" key={g.title}>
+            <div className="apx-gt"><i>Appendix {letter(gi)}</i>{g.title}</div>
+            <div className="apx-row">{g.items.map((n) => <div className="tool" key={n}><ToolIcon n={n} /><span>{n}</span></div>)}</div>
+            <div className="folio">— {letter(gi)} —</div>
+          </div>
+        ))}</div>
+      </div>}
+    </div></section>
+  );
+}
+
+// 시연 영상: 전체 영상과 쇼츠가 둘 다 있으면 커서를 올리거나(휴대폰은 누르면) 둘 중 고르는 작은 목록
+const maskOf = (slug) => ({ WebkitMaskImage: `url(${SI}${slug}.svg)`, maskImage: `url(${SI}${slug}.svg)` });
+const shortsOf = (L) => ((L && L.extra) || []).find((x) => x && x.url && (x.label === '쇼츠' || /\/shorts\//.test(x.url)));
+function VideoBtn({ L }) {
+  const sh = shortsOf(L);
+  const [open, setOpen] = useState(false);
+  const ext = { target: '_blank', rel: 'noopener' };
+  if (!L.video && !sh) return null;
+  if (!sh) return <a className="btn" href={L.video} {...ext}>{T('name.video')} ↗</a>;
+  if (!L.video) return <a className="btn" href={sh.url} {...ext}>쇼츠 ↗</a>;
+  return (
+    <span className={'vmenu' + (open ? ' open' : '')} onMouseLeave={() => setOpen(false)}>
+      <button type="button" className="btn" aria-haspopup="true" aria-expanded={open} onClick={() => setOpen(!open)}>{T('name.video')} <span className="caret">▾</span></button>
+      <span className="vlist"><span className="vbox" role="menu">
+        <a role="menuitem" href={L.video} {...ext}><i className="yt" style={maskOf('youtube')} />전체 영상<span>↗</span></a>
+        <a role="menuitem" href={sh.url} {...ext}><i className="yt" style={maskOf('youtubeshorts')} />쇼츠<span>↗</span></a>
+      </span></span>
+    </span>
+  );
+}
+
+// 낮에 읽기 ↔ 밤에 읽기
+function ModeBtn() {
+  const [night, setNight] = useState(document.documentElement.dataset.mode === 'night');
+  useEffect(() => { const t = setTimeout(() => document.documentElement.classList.add('mode-ready'), 600); return () => clearTimeout(t); }, []);
+  const flip = () => {
+    const next = !night;
+    if (next) document.documentElement.dataset.mode = 'night'; else delete document.documentElement.dataset.mode;
+    try { localStorage.setItem('pf-mode', next ? 'night' : 'day'); } catch (e) {}
+    setNight(next);
+  };
+  const label = night ? '밝은 화면으로' : '어두운 화면으로';
+  return <button type="button" className="mode no-print" onClick={flip} aria-pressed={night} aria-label={label} title={label}><i>{night ? '☀' : '☾'}</i></button>;
+}
+
+function CopyBtn({ text }) {
+  const [done, setDone] = useState(false);
+  const go = () => navigator.clipboard && navigator.clipboard.writeText(text).then(() => { setDone(true); setTimeout(() => setDone(false), 1400); }).catch(() => {});
+  return <button type="button" className="copy no-print" onClick={go}>{done ? '복사됨' : '복사'}</button>;
+}
+
+function App({ pf, P, tools = [] }) {
   const pr = pf.profile, byId = Object.fromEntries(P.map((p) => [p.id, p]));
   useEffect(() => { document.title = `${pr.name} · ${T('name.portfolio')}`; }, []);
   return (
@@ -307,6 +501,7 @@ function App({ pf, P }) {
         <nav>
           <a href="#about">{T('page.nav-intro')}</a><a href="#skills">{T('page.nav-stack')}</a>
           <a href={P[0] ? '#' + P[0].id : '#'}>{T('page.nav-projects')}</a><a href="#glance">{T('page.nav-glance')}</a><a href="#contact">{T('page.nav-contact')}</a>
+          <ModeBtn />
         </nav>
       </div></header>
 
@@ -340,42 +535,54 @@ function App({ pf, P }) {
         <p className="intro">{pr.intro}</p>
       </div></section>}
 
-      {pf.skills && pf.skills.length > 0 && <section className="sec" id="skills"><div className="wrap">
-        <div className="sec-h"><div><div className="eyebrow">{T('en.skills')}</div><h2>{T('page.stack')}</h2></div><span>{T('page.stack-note')}</span></div>
-        {pf.skills.map((s) => (
-          <div className="skill" key={s.name}><h3>{s.name}</h3>
-            <ul>{s.evidence.map((e, k) => <li key={k}>{e.text} {byId[e.project] && <a className="ptag" href={'#' + e.project}>{byId[e.project].title}</a>}</li>)}</ul>
-          </div>
-        ))}
-      </div></section>}
+      {pf.skills && pf.skills.length > 0 && <Skills pf={pf} P={P} byId={byId} tools={tools} />}
 
       {P.map((p, i) => <Project key={p.id} p={p} i={i} total={P.length} />)}
 
       <section className="sec" id="glance"><div className="wrap">
         <div className="sec-h"><div><div className="eyebrow">{T('en.glance')}</div><h2>{T('page.glance')}</h2></div></div>
-        <div className="glance-wrap"><table className="glance">
-          <thead><tr><th>{T('page.nav-projects')}</th><th>기간</th><th>인원</th><th>{T('name.role')}</th><th></th></tr></thead>
-          <tbody>{P.map((p, i) => (
-            <tr key={p.id}><td><span className="no">{no(i)}</span><b>{p.title}</b></td>
-              <td>{metaOf(p, '기간').split('(')[0].trim()}</td><td>{p.team.size}</td><td>{p.team.role}</td>
-              <td><a className="ptag" href={doc(p)} target="_blank" rel="noopener">{T('name.doc-short')}</a> <a className="ptag" href={slide(p)} target="_blank" rel="noopener">{T('name.deck')}</a></td></tr>
-          ))}</tbody>
-        </table></div>
+        <div className="cat">{P.map((p, i) => {
+          const genre = metaOf(p, '장르'), per = metaOf(p, '기간').split('(')[0].trim();
+          const env = (p.tags || []).slice(0, 3).join(' · ');
+          const L = p.links || {};
+          return (
+            <article className="card" key={p.id}>
+              <div className="card-top"><span className="call">{no(i)}</span><h3><a href={'#' + p.id}>{p.title}</a></h3><span className="card-meta">{[p.team.type === 'team' ? '팀' : '개인', p.team.size, per].filter(Boolean).join(' · ')}</span></div>
+              {p.tagline && <p className="card-tag">{p.tagline}</p>}
+              <dl className="card-dl">
+                {(p.highlights || []).length > 0 && <div><dt>수록</dt><dd>{md(p.highlights.map((h) => h.title).join(' · '))}</dd></div>}
+                {genre && <div><dt>분류</dt><dd>{genre}{env && <span className="env"> — {env}</span>}</dd></div>}
+                <div><dt>열람</dt><dd className="card-links">
+                  <a href={doc(p)} target="_blank" rel="noopener">{T('name.doc-short')} ↗</a>
+                  <a href={slide(p)} target="_blank" rel="noopener">{T('name.deck')} ↗</a>
+                  {L.github && <a href={L.github} target="_blank" rel="noopener">GitHub ↗</a>}
+                  {L.video && <a href={L.video} target="_blank" rel="noopener">{T('name.video')} ↗</a>}
+                  {shortsOf(L) && <a href={shortsOf(L).url} target="_blank" rel="noopener">쇼츠 ↗</a>}
+                </dd></div>
+              </dl>
+              <span className="hole" aria-hidden="true" />
+            </article>
+          );
+        })}</div>
       </div></section>
 
-      <section className="sec" id="contact" style={{ borderBottom: 'none' }}><div className="wrap contact">
-        <div><div className="eyebrow">{T('en.contact')}</div><h2>{T('page.nav-contact')}</h2></div>
-        <dl className="clist">
-          {pr.email && <div><dt>{T('page.print-email')}</dt><dd><a href={`mailto:${pr.email}`}>{pr.email}</a></dd></div>}
-          {pr.github && <div><dt>GitHub</dt><dd><a href={pr.github} target="_blank" rel="noopener">{pr.github.replace(/^https?:\/\//, '')}</a></dd></div>}
-          {P.filter((p) => p.links && (p.links.video || p.links.github)).map((p) => (
-            <div key={p.id}><dt>{p.title}</dt><dd>
-              {p.links.video && <a href={p.links.video} target="_blank" rel="noopener">{T('name.video')} ↗</a>}
-              {p.links.video && p.links.github && ' · '}
-              {p.links.github && <a href={p.links.github} target="_blank" rel="noopener">GitHub ↗</a>}
-            </dd></div>
-          ))}
+      <section className="sec" id="contact" style={{ borderBottom: 'none' }}><div className="wrap colo">
+        <div className="eyebrow">{T('en.contact')}</div>
+        <div className="colo-title">{pr.name}</div>
+        {pr.nameEn && <div className="colo-en">{pr.nameEn}</div>}
+        {pr.headline && <p className="colo-head">{pr.headline}</p>}
+        <dl className="colo-box">
+          {pr.email && <div className="colo-row"><dt>{T('page.print-email')}</dt><dd><a href={`mailto:${pr.email}`}>{pr.email}</a><CopyBtn text={pr.email} /></dd></div>}
+          {pr.github && <div className="colo-row"><dt>GitHub</dt><dd><a href={pr.github} target="_blank" rel="noopener">{pr.github.replace(/^https?:\/\//, '')} ↗</a></dd></div>}
+          {(pr.links || []).filter((l) => l.url).map((l) => <div className="colo-row" key={l.url}><dt>{l.label || 'Link'}</dt><dd><a href={l.url} target="_blank" rel="noopener">{l.url.replace(/^https?:\/\//, '')} ↗</a></dd></div>)}
         </dl>
+        <div className="colo-sub">Links</div>
+        <ul className="colo-links">{P.map((p, i) => {
+          const L = p.links || {};
+          const ls = [L.github && ['GitHub', L.github], L.video && [T('name.video'), L.video], ...(L.extra || []).map((x) => x && x.url && [x.label || '링크', x.url])].filter(Boolean);
+          return ls.length > 0 && <li key={p.id}><span className="no">{no(i)}</span><b>{p.title}</b><span className="dots" /><span className="ls">{ls.map(([t, u]) => <a key={u} href={u} target="_blank" rel="noopener">{t} ↗</a>)}</span></li>;
+        })}</ul>
+        <div className="colo-foot"><span>※ ※ ※</span>{pf.generatedAt && `${pf.generatedAt} 엮음 · `}{pr.name} 지음</div>
       </div></section>
       <div className="foot">{pr.name} · {T('name.portfolio')}</div>
     </>
@@ -388,7 +595,8 @@ function App({ pf, P }) {
     if (STR) await STR.load('theme/strings.tsv').catch(() => {});
     const pf = await (await fetch('data/portfolio.json')).json();
     const P = await Promise.all(pf.projects.map((id) => fetch(`data/projects/${id}.json`).then((r) => r.json())));
-    root.render(<App pf={pf} P={P} />);
+    const tools = await fetch('profile.md').then((r) => (r.ok ? r.text() : '')).then(parseTools).catch(() => []);
+    root.render(<App pf={pf} P={P} tools={tools} />);
   } catch (e) {
     root.render(<p className="note">데이터를 불러오지 못했습니다. 로컬 서버로 열었는지 확인하고, 없으면 /portfolio-build를 먼저 실행하세요. ({String(e.message || e)})</p>);
   }

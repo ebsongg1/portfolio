@@ -12,7 +12,7 @@
   "team": {
     "type": "solo",
     "size": "1인",
-    "role": ""
+    "role": "기획, 플레이 검증 · 수치 조정 (C# 구현은 Codex 활용)"
   },
   "meta": [
     {
@@ -44,7 +44,12 @@
   "links": {
     "github": "https://github.com/KooHoo-Dev/3rd_3D_1-3D-Project-ebsongg1",
     "video": "https://youtu.be/BsUoh9fcSFY",
-    "extra": []
+    "extra": [
+      {
+        "label": "쇼츠",
+        "url": "https://youtube.com/shorts/uJ-7VZIiDtA"
+      }
+    ]
   },
   "highlights": [
     {

@@ -44,7 +44,12 @@
   "links": {
     "github": "https://github.com/KooHoo-Dev/3rd-TeamProject-CY",
     "video": "https://youtu.be/fnubGqbx0IQ",
-    "extra": []
+    "extra": [
+      {
+        "label": "쇼츠",
+        "url": "https://youtube.com/shorts/Skf6Uw4gG7s"
+      }
+    ]
   },
   "highlights": [
     {
