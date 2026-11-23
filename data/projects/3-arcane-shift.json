@@ -29,14 +29,13 @@
     },
     {
       "label": "환경",
-      "value": "Unity 6 (6000.3.15f1) · URP 17.3 · C# · Input System · Cinemachine(Starter Assets 1인칭 컨트롤러) · Rider"
+      "value": "Unity 6 (6000.3.15f1) · URP 17.3 · C# · Rider"
     }
   ],
   "tags": [
     "Unity 6.3",
     "URP 17.3",
     "C#",
-    "Input System",
     "시드 기반 재도전",
     "DAY별 가중치 생성",
     "Codex 활용"
