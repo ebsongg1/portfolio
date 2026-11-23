@@ -47,3 +47,38 @@
    기본값은 그림이 본문 칸 끝까지(최대 1200px) 넓어집니다. 다이어그램 · 표 · 코드는 그대로.
    되돌리려면 아래 한 줄을 지우세요. */
 .md > .pf-figure { max-width: min(100%, var(--measure)); }
+
+/* ── 밤에 읽기 (직접 추가) ─────────────────────────────────────
+   포트폴리오 페이지의 ☾/☀ 버튼으로 고른 모드를 상세 문서·슬라이드도 따릅니다(theme/night.js).
+   가죽 표지 같은 짙은 갈색 바탕 · 크림색 글자 · 등불 같은 호박색. 화면에서만 — 인쇄(PDF)는 늘 흰 종이.
+   다이어그램 판은 문서의 밝은 다이어그램 색이 그대로 읽히게 크림색 종이로 둡니다. */
+@media screen {
+  html[data-mode="night"] {
+    --t-scheme: dark;
+    --t-bg: #120E0B;
+    --t-surface: #1C1612;
+    --t-ink: #F2E7D3;
+    --t-body: #D8CBB5;
+    --t-muted: #A69780;
+    --t-line: #2F271F;
+    --t-line-2: #4E4134;
+    --t-accent: #E2A462;
+    --t-accent-2: #E2A462;
+    --t-accent-3: #E2A462;
+    --t-shadow: rgb(0 0 0 / .5);
+    --t-diagram: #EFE6D4;
+  }
+  /* 다이어그램 글자는 밝은 판 위라 진한 글자로(밤 글자색을 물려받지 않게) */
+  html[data-mode="night"] .mmd .mermaid,
+  html[data-mode="night"] .lb-stage.lb-svg,
+  html[data-mode="night"] .vbox[data-kind="mermaid"] .vmedia { color: #1F1A14; }
+  html[data-mode="night"] .mmd .mermaid :is(p, li, strong, em),
+  html[data-mode="night"] .lb-stage.lb-svg :is(p, li, strong, em),
+  html[data-mode="night"] .vbox[data-kind="mermaid"] .vmedia :is(p, li, strong, em) { color: inherit; }
+}
+/* 상세 문서 머리 막대의 ☾/☀ 버튼 (theme/night.js가 닮) */
+.pf-mode-btn { display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; flex: none;
+  border: 1px solid var(--t-line-2); border-radius: 50%; background: var(--t-surface); color: var(--t-accent);
+  font-size: 15px; line-height: 1; cursor: pointer; transition: border-color .2s, transform .3s; }
+.pf-mode-btn:hover { border-color: var(--t-accent); transform: rotate(-15deg); }
+@media print { .pf-mode-btn { display: none; } }
