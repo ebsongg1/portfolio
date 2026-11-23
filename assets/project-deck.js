@@ -190,8 +190,9 @@
     ? `<div class="cards${row ? ' row' : ''}${two ? ' two' : ''}" style="--n:${Math.min(points.length, 4)}">${points.map((pt, i) =>
       `<div class="ncard${num ? '' : ' nonum'}">${num ? `<span class="num" aria-hidden="true">${i + 1}</span>` : ''}<div>${pt.label ? `<span class="lb">${esc(PF.label(pt.label))}</span>` : ''}<p>${inline(txt(pt))}</p></div></div>`).join('')}</div>` : '');
   const FLOW = { '문제': '', '원인': '', '해결': 'accent', '결과': 'ok', '배운 점': '' };   // data 값 → 칩 색(보이는 글자만 PF.label로 바뀜)
-  const flowHtml = (points, dir) => `<div class="flow ${dir}" style="--n:${Math.min(points.length, 4)}">${points.map((pt) =>
-    `<div class="fstep${pt.label === '결과' ? ' res' : ''}">${pt.label ? `<span class="labelchip${FLOW[pt.label] ? ' ' + FLOW[pt.label] : ''}">${esc(PF.label(pt.label))}</span>` : ''}<p>${inline(txt(pt))}</p></div>`).join('')}</div>`;
+  // link: 옆 시각 자료가 표 하나면 '원인' 카드에서 그 표로 화살표(원인을 표로 정리한 문제 해결 장면)
+  const flowHtml = (points, dir, link = false) => `<div class="flow ${dir}" style="--n:${Math.min(points.length, 4)}">${points.map((pt) =>
+    `<div class="fstep${pt.label === '결과' ? ' res' : ''}${link && pt.label === '원인' ? ' to-vis' : ''}">${pt.label ? `<span class="labelchip${FLOW[pt.label] ? ' ' + FLOW[pt.label] : ''}">${esc(PF.label(pt.label))}</span>` : ''}<p>${inline(txt(pt))}</p></div>`).join('')}</div>`;
   function bodyHtml(sl, vs, variant) {
     const points = sl.points || [];
     const vis = (list) => `<div class="vis">${list.join('')}</div>`;
@@ -205,7 +206,8 @@
     }
     if (sl.layout === 'problem') {
       if (variant.stack || !points.length) return `<div class="dk dk-stack${tight}">${vis(vs)}${points.length ? flowHtml(points, 'row') : ''}</div>`;
-      return `<div class="dk dk-side flip${tight}" style="--vw:${variant.vw}fr">${vis(vs)}${flowHtml(points, 'col')}</div>`;
+      const link = vs.length === 1 && /<table/.test(vs[0]);
+      return `<div class="dk dk-side flip${tight}${link ? ' linked' : ''}" style="--vw:${variant.vw}fr">${vis(vs)}${flowHtml(points, 'col', link)}</div>`;
     }
     // 요점이 없으면(나눈 장면 등) 옆 칸이 비지 않게 시각 자료를 가로 전체로
     if (sl.layout === 'full' || variant.stack || !points.length) return `<div class="dk dk-stack${tight}">${vis(vs)}${ncards(points, { row: true, num: sl.layout !== 'full' })}</div>`;
@@ -303,7 +305,8 @@
 
     // 표지 = 프로젝트 소개 템플릿(PF.projectIntro, 결정 G4). 상세 문서 링크는 표지·맺음에만(G1)
     const cards = [
-      ...ext.map((l) => ({ k: PF.extEn(l), label: l.label, href: l.url, kind: 'external', visible: shortUrl(l.url) })),
+      // 표지에는 GitHub 링크를 싣지 않음(맺음 장면에는 그대로)
+      ...ext.filter((l) => !/github\.com/i.test(l.url || '')).map((l) => ({ k: PF.extEn(l), label: l.label, href: l.url, kind: 'external', visible: shortUrl(l.url) })),
       { k: PF.t('en.techdoc'), label: PF.t('name.doc'), href: PF.docUrl(p.id), kind: 'page', visible: PF.visibleUrl(PF.docUrl(p.id)) },
       { k: PF.t('en.portfolio'), label: PF.t('name.portfolio'), href: 'index.html', kind: 'page', visible: PF.visibleUrl('') },
     ];
@@ -378,6 +381,9 @@
   // 장 표지: 장면이 적으면(4개 이하) 넉넉한 변형 — 목차 크기 목록 + 장면마다 도입(결정 I7). 안 들어가면 보통 → 촘촘
   const ROOMY_MAX = 4;
   function chapterScene(c, ci, chId, slides, foot, auto, ptitle) {
+    // 같은 제목의 장면이 이어지면(한 절을 여러 장면으로 나눔) 목록에는 처음 장면만 보임
+    const seen = new Set();
+    slides = slides.filter((x) => { const t = txt(x.sl.title) || c.title; if (seen.has(t)) return false; seen.add(t); return true; });
     const make = (mode) => {
       const s = PF.scene({ id: chId, tpl: 'CH', kind: 'bare', cls: mode === 'compact' ? 'compact' : '', foot, sec: c.title, group: c.title, stitle: c.title });
       const roomy = mode === 'roomy';
@@ -393,7 +399,7 @@
   }
 
   function tocScene(p, foot, items, retro, auto) {
-    const rows = [...items.map((x, i) => [String(i + 1).padStart(2, '0'), x.c.title, PF.t('deck.toc-count', { n: x.n }), x.chId]),
+    const rows = [...items.map((x, i) => [String(i + 1).padStart(2, '0'), x.c.title, '', x.chId]),   // 장마다 "장면 N장" 줄은 싣지 않음
       retro.length && [String(items.length + 1).padStart(2, '0'), PF.t('deck.retro'), PF.t('deck.retro-desc'), retro[0].id],
       [String(items.length + (retro.length ? 2 : 1)).padStart(2, '0'), PF.t('deck.more'), PF.t('deck.more-desc'), 'end']].filter(Boolean);
     const make = (compact) => {
@@ -409,7 +415,14 @@
 
   // 결과와 회고: ✓ 달성 카드 │ 아쉬운 점 → 개선 계획 표. 안 들어가면 두 장으로
   function buildRetro(r, p, foot, auto) {
-    const ach = r.achieved || [], reg = r.regrets || [], plan = r.plans || [];
+    const ach = r.achieved || [];
+    let reg = r.regrets || [], plan = r.plans || [];
+    // deck.retroHide: 슬라이드에서만 뺄 "아쉬운 점 → 개선 계획" 줄 번호(1부터, /portfolio-edit → deck-edits.json의 retroHide)
+    const hide = new Set(((p.deck && p.deck.retroHide) || []).map(Number));
+    if (hide.size) {
+      const idx = Array.from({ length: Math.max(reg.length, plan.length) }, (_, i) => i).filter((i) => !hide.has(i + 1));
+      reg = idx.map((i) => reg[i] || ''); plan = idx.map((i) => plan[i] || '');
+    }
     if (!ach.length && !reg.length && !plan.length) return [];
     const n = Math.max(reg.length, plan.length);
     const achHtml = ach.length ? `<div class="rt-ach card"><p class="rt-h ok">✓ ${esc(PF.t('deck.achieved'))}</p><ul>${ach.map((x) => `<li>${inline(x)}</li>`).join('')}</ul></div>` : '';

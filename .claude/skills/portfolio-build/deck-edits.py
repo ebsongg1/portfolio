@@ -787,6 +787,18 @@ def _run_apply(pid, write, rep):
         new_deck['slides'] = slides
         new_deck['base'] = base
         new_deck['applied'] = digest(slides)
+    # retroHide: 슬라이드 회고 표에서만 뺄 "아쉬운 점 → 개선 계획" 줄 번호(1부터). 회고 데이터·문서는 그대로
+    rh = (edits or {}).get('retroHide') or []
+    retro = data.get('retro') or {}
+    rows = max(len(retro.get('regrets') or []), len(retro.get('plans') or []))
+    good = sorted({x for x in rh if isinstance(x, int) and not isinstance(x, bool) and 1 <= x <= rows}) if isinstance(rh, list) else []
+    if rh and (not isinstance(rh, list) or len(good) != len(set(x for x in rh if not isinstance(x, (list, dict))))):
+        rep.add('권장', 'retroHide는 회고 표 줄 번호(1~%d) 목록이어야 합니다(%r) → 맞는 번호만 반영했습니다' % (rows, rh))
+    if good:
+        new_deck['retroHide'] = good
+        rep.add('참고', '슬라이드 회고 표에서 %s번째 줄(아쉬운 점 → 개선 계획)을 뺐습니다' % ', '.join(map(str, good)))
+    else:
+        new_deck.pop('retroHide', None)
     if new_deck == deck:
         if edits is not None:
             rep.add('참고', '바뀐 것 없음')

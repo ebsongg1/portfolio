@@ -270,6 +270,12 @@ table.md-table img { max-height: 120px; max-width: 100%; height: auto; }   /* wi
 .fstep.res { background: color-mix(in srgb, var(--ok) 16%, var(--card)); border-color: color-mix(in srgb, var(--ok) 50%, var(--card)); }
 .flow.col .fstep { display: grid; grid-template-columns: 86px minmax(0, 1fr); gap: 12px; align-items: start; padding: 11px 14px; }
 .flow.col .fstep .labelchip { justify-content: center; }
+.flow.col .fstep > p:only-child { grid-column: 1 / -1; }   /* 라벨 없는 카드: 글이 라벨 칸(86px)에 갇히지 않게 */
+/* 문제 해결: '원인' 카드 → 옆 표 화살표(.dk 칸 사이 28px를 가로지름) */
+.fstep.to-vis { position: relative; border-color: var(--accent); box-shadow: inset 0 0 0 1px var(--accent); }
+.fstep.to-vis::after { content: ''; position: absolute; left: 100%; top: 50%; width: 20px; height: 2px; margin-top: -1px; background: var(--accent); }
+.fstep.to-vis::before { content: ''; position: absolute; left: calc(100% + 19px); top: 50%; margin-top: -7px; border: 7px solid transparent; border-left: 9px solid var(--accent); border-right: 0; }
+.dk.linked > .vis table.md-table { box-shadow: -3px 0 0 var(--accent); }
 .scr-row { display: grid; grid-template-columns: repeat(var(--n, 3), minmax(0, 1fr)); gap: 22px; }
 .pf-sizing .scr-row { align-items: stretch; }
 .pf-vband { margin: 0; padding: 12px 14px; border-left: 4px solid #F04438; background: #2A1212; color: #FDA29B; font-size: 13px; line-height: 1.45; border-radius: 8px; min-width: 260px; }
