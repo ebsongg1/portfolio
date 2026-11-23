@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "pin": [
+    {
+      "key": "intro",
+      "chapter": "overview",
+      "layout": "visual",
+      "tab": "개요",
+      "title": {"text": "1. 개요", "verbatim": true},
+      "lead": {"text": "AETHER SHIFT는 플레이어가 마법 시설의 근무자가 되어 7일 동안 시설을 지키는 1인칭 3D 게임입니다.", "verbatim": true},
+      "sectionPath": ["1. 개요"],
+      "points": [
+        {"label": "핵심 조작", "text": "플레이어는 이상현상을 감지하고, 종류에 맞는 마법(봉인·정화·안정화)으로 처리해야 합니다.", "verbatim": true},
+        {"label": "목표한 경험", "text": "플레이어가 쏟아지는 이상현상 사이에서 무엇부터 막을지 자연스럽게 판단하며 하루를 버텨 내는 긴장감을 느끼기를 바랐습니다.", "verbatim": true},
+        {"label": "목표", "text": "개인적인 목표는 지난 프로젝트에서 써 보지 않은 랜덤 요소와 강화 시스템을 넣어 보는 것이었습니다.", "verbatim": true}
+      ],
+      "visuals": [
+        {
+          "kind": "image",
+          "src": "images/loop_day.gif",
+          "w": 960,
+          "h": 540,
+          "caption": {"text": "운영 기록 → 봉인 → 근무 종료 후 정리 → 강화 선택", "verbatim": true},
+          "sectionPath": ["2. 플레이", "2.1 한 판의 흐름"]
+        }
+      ],
+      "from": {"key": "intro", "sectionPath": ["1. 개요"], "sig": []}
+    }
+  ],
+  "hide": []
+}

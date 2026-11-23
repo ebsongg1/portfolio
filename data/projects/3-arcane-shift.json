@@ -160,309 +160,132 @@
   },
   "deck": {
     "chapters": [
-      {
-        "key": "overview",
-        "title": "개요",
-        "sectionPath": [
-          "1. 개요"
-        ]
-      },
-      {
-        "key": "play",
-        "title": "플레이",
-        "sectionPath": [
-          "2. 플레이"
-        ]
-      },
-      {
-        "key": "day",
-        "title": "하루 진행: 근무가 끝나도 끝나지 않는 하루",
-        "sectionPath": [
-          "3. 하루 진행: 근무가 끝나도 끝나지 않는 하루"
-        ]
-      },
-      {
-        "key": "anomaly",
-        "title": "이상현상: 세 종류를 하나의 규칙으로",
-        "sectionPath": [
-          "4. 이상현상: 세 종류를 하나의 규칙으로"
-        ]
-      },
-      {
-        "key": "magic",
-        "title": "마법: 감지하고, 종류에 맞게 해결하기",
-        "sectionPath": [
-          "5. 마법: 감지하고, 종류에 맞게 해결하기"
-        ]
-      },
-      {
-        "key": "ai",
-        "title": "AI와 일한 방식",
-        "sectionPath": [
-          "6. AI와 일한 방식"
-        ]
-      }
+      {"key": "overview", "title": "개요", "sectionPath": ["1. 개요"]},
+      {"key": "play", "title": "플레이", "sectionPath": ["2. 플레이"]},
+      {"key": "day", "title": "하루 진행: 근무가 끝나도 끝나지 않는 하루", "sectionPath": ["3. 하루 진행: 근무가 끝나도 끝나지 않는 하루"]},
+      {"key": "anomaly", "title": "이상현상: 세 종류를 하나의 규칙으로", "sectionPath": ["4. 이상현상: 세 종류를 하나의 규칙으로"]},
+      {"key": "magic", "title": "마법: 감지하고, 종류에 맞게 해결하기", "sectionPath": ["5. 마법: 감지하고, 종류에 맞게 해결하기"]},
+      {"key": "ai", "title": "AI와 일한 방식", "sectionPath": ["6. AI와 일한 방식"]}
     ],
     "slides": [
       {
         "key": "intro",
         "chapter": "overview",
-        "layout": "overview",
+        "layout": "visual",
         "tab": "개요",
-        "title": {
-          "text": "1. 개요",
-          "verbatim": true
-        },
-        "lead": null,
-        "sectionPath": [
-          "1. 개요"
-        ],
+        "title": {"text": "1. 개요", "verbatim": true},
+        "lead": {"text": "AETHER SHIFT는 플레이어가 마법 시설의 근무자가 되어 7일 동안 시설을 지키는 1인칭 3D 게임입니다.", "verbatim": true},
+        "sectionPath": ["1. 개요"],
         "points": [
+          {"label": "핵심 조작", "text": "플레이어는 이상현상을 감지하고, 종류에 맞는 마법(봉인·정화·안정화)으로 처리해야 합니다.", "verbatim": true},
           {
-            "label": "",
-            "text": "AETHER SHIFT는 플레이어가 마법 시설의 근무자가 되어 7일 동안 시설을 지키는 1인칭 3D 게임입니다.",
+            "label": "목표한 경험",
+            "text": "플레이어가 쏟아지는 이상현상 사이에서 무엇부터 막을지 자연스럽게 판단하며 하루를 버텨 내는 긴장감을 느끼기를 바랐습니다.",
             "verbatim": true
           },
+          {"label": "목표", "text": "개인적인 목표는 지난 프로젝트에서 써 보지 않은 랜덤 요소와 강화 시스템을 넣어 보는 것이었습니다.", "verbatim": true}
+        ],
+        "visuals": [
           {
-            "label": "",
-            "text": "플레이어는 이상현상을 감지하고, 종류에 맞는 마법(봉인·정화·안정화)으로 처리해야 합니다.",
-            "verbatim": true
-          },
-          {
-            "label": "",
-            "text": "처음 기획에서는 이상현상을 일부러 키워 더 큰 보상을 노리는 전략적인 선택까지 의도했습니다.",
-            "verbatim": true
+            "kind": "image",
+            "src": "images/loop_day.gif",
+            "w": 960,
+            "h": 540,
+            "caption": {"text": "운영 기록 → 봉인 → 근무 종료 후 정리 → 강화 선택", "verbatim": true},
+            "sectionPath": ["2. 플레이", "2.1 한 판의 흐름"]
           }
         ],
-        "visuals": []
+        "edited": true
       },
       {
         "key": "play-loop",
         "chapter": "play",
         "layout": "visual",
         "tab": "흐름",
-        "title": {
-          "text": "2.1 한 판의 흐름",
-          "verbatim": true
-        },
+        "title": {"text": "2.1 한 판의 흐름", "verbatim": true},
         "lead": null,
-        "sectionPath": [
-          "2. 플레이",
-          "2.1 한 판의 흐름"
-        ],
+        "sectionPath": ["2. 플레이", "2.1 한 판의 흐름"],
         "points": [
-          {
-            "label": "",
-            "text": "하루 안에서는 감지 → 처리 → 보상이 반복되고, 하루가 끝나면 강화·보급으로 다음 날을 준비합니다.",
-            "verbatim": true
-          },
-          {
-            "label": "",
-            "text": "근무 시간이 끝나도 남은 이상현상을 모두 처리해야 그날이 끝납니다(3.5).",
-            "verbatim": true
-          }
+          {"label": "", "text": "하루 안에서는 감지 → 처리 → 보상이 반복되고, 하루가 끝나면 강화·보급으로 다음 날을 준비합니다.", "verbatim": true},
+          {"label": "", "text": "근무 시간이 끝나도 남은 이상현상을 모두 처리해야 그날이 끝납니다(3.5).", "verbatim": true}
         ],
-        "visuals": [
-          {
-            "kind": "mermaid",
-            "n": 1,
-            "fp": "flowchart LR"
-          }
-        ]
+        "visuals": [{"kind": "mermaid", "n": 1, "fp": "flowchart LR"}]
       },
       {
         "key": "anomaly-types",
         "chapter": "play",
         "layout": "full",
         "tab": "개요",
-        "title": {
-          "text": "2.2 이상현상 세 가지",
-          "verbatim": true
-        },
+        "title": {"text": "2.2 이상현상 세 가지", "verbatim": true},
         "lead": null,
-        "sectionPath": [
-          "2. 플레이",
-          "2.2 이상현상 세 가지"
-        ],
-        "points": [
-          {
-            "label": "",
-            "text": "2단계·3단계에서는 시설 안정도가 초당 0.5·1씩 줄고, 파열하면 한 번에 20이 줄어듭니다.",
-            "verbatim": true
-          }
-        ],
-        "visuals": [
-          {
-            "kind": "table",
-            "n": 1,
-            "fp": "이상현상|생기는 곳|대응 마법|처리 방법|방치하면"
-          }
-        ]
+        "sectionPath": ["2. 플레이", "2.2 이상현상 세 가지"],
+        "points": [{"label": "", "text": "2단계·3단계에서는 시설 안정도가 초당 0.5·1씩 줄고, 파열하면 한 번에 20이 줄어듭니다.", "verbatim": true}],
+        "visuals": [{"kind": "table", "n": 1, "fp": "이상현상|생기는 곳|대응 마법|처리 방법|방치하면"}]
       },
       {
         "key": "day-state",
         "chapter": "day",
         "layout": "visual",
         "tab": "흐름",
-        "title": {
-          "text": "3.1 하루가 흘러가는 순서",
-          "verbatim": true
-        },
-        "lead": {
-          "text": "하루는 준비 → 근무 → (정리) → 성공 · 실패 순서로 진행됩니다.",
-          "verbatim": true
-        },
-        "sectionPath": [
-          "3. 하루 진행: 근무가 끝나도 끝나지 않는 하루",
-          "3.1 하루가 흘러가는 순서"
-        ],
+        "title": {"text": "3.1 하루가 흘러가는 순서", "verbatim": true},
+        "lead": {"text": "하루는 준비 → 근무 → (정리) → 성공 · 실패 순서로 진행됩니다.", "verbatim": true},
+        "sectionPath": ["3. 하루 진행: 근무가 끝나도 끝나지 않는 하루", "3.1 하루가 흘러가는 순서"],
         "points": [
-          {
-            "label": "",
-            "text": "하루의 흐름을 바꾸는 것은 시간 종료, 시설 실패, UI 버튼 세 가지입니다.",
-            "verbatim": true
-          },
-          {
-            "label": "",
-            "text": "정리 단계는 별도 상태가 아니라 `Playing` 안의 `IsCleaningUp` 표시입니다.",
-            "verbatim": true
-          },
-          {
-            "label": "",
-            "text": "정리 중에도 위험 계산은 계속되므로 실패할 수 있습니다.",
-            "verbatim": true
-          }
+          {"label": "", "text": "하루의 흐름을 바꾸는 것은 시간 종료, 시설 실패, UI 버튼 세 가지입니다.", "verbatim": true},
+          {"label": "", "text": "정리 단계는 별도 상태가 아니라 `Playing` 안의 `IsCleaningUp` 표시입니다.", "verbatim": true},
+          {"label": "", "text": "정리 중에도 위험 계산은 계속되므로 실패할 수 있습니다.", "verbatim": true}
         ],
-        "visuals": [
-          {
-            "kind": "mermaid",
-            "n": 1,
-            "fp": "stateDiagram-v2"
-          }
-        ]
+        "visuals": [{"kind": "mermaid", "n": 1, "fp": "stateDiagram-v2"}]
       },
       {
         "key": "day-session",
         "chapter": "day",
         "layout": "code",
         "tab": "구조",
-        "title": {
-          "text": "3.2 상태와 명령 나누기",
-          "verbatim": true
-        },
+        "title": {"text": "3.2 상태와 명령 나누기", "verbatim": true},
         "lead": null,
-        "sectionPath": [
-          "3. 하루 진행: 근무가 끝나도 끝나지 않는 하루",
-          "3.2 상태와 명령 나누기"
-        ],
+        "sectionPath": ["3. 하루 진행: 근무가 끝나도 끝나지 않는 하루", "3.2 상태와 명령 나누기"],
         "points": [
-          {
-            "label": "",
-            "text": "`DaySession`은 Unity 오브젝트를 몰라서, 상태가 어떻게 바뀌는지만 따로 읽을 수 있습니다.",
-            "verbatim": true
-          },
+          {"label": "", "text": "`DaySession`은 Unity 오브젝트를 몰라서, 상태가 어떻게 바뀌는지만 따로 읽을 수 있습니다.", "verbatim": true},
           {
             "label": "",
             "text": "예를 들어 DAY 7에서 `CompleteDay`를 부르면 `DayClear`가 아니라 `Ending`이 되는 규칙이 이 클래스 한 곳에 있습니다.",
             "verbatim": true
           }
         ],
-        "visuals": [
-          {
-            "kind": "code",
-            "n": 1,
-            "fp": "// Day/DaySession.cs — 상태 전이 일부"
-          }
-        ]
+        "visuals": [{"kind": "code", "n": 1, "fp": "// Day/DaySession.cs — 상태 전이 일부"}]
       },
       {
         "key": "day-tick",
         "chapter": "day",
         "layout": "code",
         "tab": "구현",
-        "title": {
-          "text": "3.3 근무 시간 흐름",
-          "verbatim": true
-        },
+        "title": {"text": "3.3 근무 시간 흐름", "verbatim": true},
         "lead": null,
-        "sectionPath": [
-          "3. 하루 진행: 근무가 끝나도 끝나지 않는 하루",
-          "3.3 근무 시간 흐름"
-        ],
+        "sectionPath": ["3. 하루 진행: 근무가 끝나도 끝나지 않는 하루", "3.3 근무 시간 흐름"],
         "points": [
-          {
-            "label": "",
-            "text": "일시정지 중에는 시간이 흐르지 않습니다.",
-            "verbatim": true
-          },
-          {
-            "label": "",
-            "text": "끝나기 20초 전부터 새 이상현상이 생기지 않습니다.",
-            "verbatim": true
-          },
-          {
-            "label": "",
-            "text": "끝나기 직전에 생긴 현상 때문에 처리할 시간 없이 정리 단계로 넘어가는 것을 막기 위해서입니다.",
-            "verbatim": true
-          },
-          {
-            "label": "",
-            "text": "남은 현상이 없으면 생존 여부를 판정합니다.",
-            "verbatim": true
-          }
+          {"label": "", "text": "일시정지 중에는 시간이 흐르지 않습니다.", "verbatim": true},
+          {"label": "", "text": "끝나기 20초 전부터 새 이상현상이 생기지 않습니다.", "verbatim": true},
+          {"label": "", "text": "끝나기 직전에 생긴 현상 때문에 처리할 시간 없이 정리 단계로 넘어가는 것을 막기 위해서입니다.", "verbatim": true},
+          {"label": "", "text": "남은 현상이 없으면 생존 여부를 판정합니다.", "verbatim": true}
         ],
-        "visuals": [
-          {
-            "kind": "code",
-            "n": 1,
-            "lines": [
-              1,
-              20
-            ],
-            "fp": "// Day/DayFlowManager.cs — LateUpdate 일부"
-          }
-        ]
+        "visuals": [{"kind": "code", "n": 1, "lines": [1, 20], "fp": "// Day/DayFlowManager.cs — LateUpdate 일부"}]
       },
       {
         "key": "retry-seed",
         "chapter": "day",
         "layout": "code",
         "tab": "구현",
-        "title": {
-          "text": "3.4 재도전과 같은 날 같은 난수",
-          "verbatim": true
-        },
-        "lead": {
-          "text": "실패하면 그날 시작 상태로 돌아갑니다.",
-          "verbatim": true
-        },
-        "sectionPath": [
-          "3. 하루 진행: 근무가 끝나도 끝나지 않는 하루",
-          "3.4 재도전과 같은 날 같은 난수"
-        ],
+        "title": {"text": "3.4 재도전과 같은 날 같은 난수", "verbatim": true},
+        "lead": {"text": "실패하면 그날 시작 상태로 돌아갑니다.", "verbatim": true},
+        "sectionPath": ["3. 하루 진행: 근무가 끝나도 끝나지 않는 하루", "3.4 재도전과 같은 날 같은 난수"],
         "points": [
-          {
-            "label": "",
-            "text": "재도전 때는 하루 시드를 바꾸지 않습니다.",
-            "verbatim": true
-          },
-          {
-            "label": "",
-            "text": "실패한 날을 다시 할 때 운이 아니라 대처 방법을 바꿔서 넘을 수 있게 하려는 것입니다.",
-            "verbatim": true
-          }
+          {"label": "", "text": "재도전 때는 하루 시드를 바꾸지 않습니다.", "verbatim": true},
+          {"label": "", "text": "실패한 날을 다시 할 때 운이 아니라 대처 방법을 바꿔서 넘을 수 있게 하려는 것입니다.", "verbatim": true}
         ],
         "visuals": [
-          {
-            "kind": "table",
-            "n": 1,
-            "fp": "저장 대상|방법"
-          },
-          {
-            "kind": "code",
-            "n": 1,
-            "fp": "// Day/DayRetryCheckpoint.cs — 참여 컴포넌트가 무엇을 저장할지 스스로 정함"
-          }
+          {"kind": "table", "n": 1, "fp": "저장 대상|방법"},
+          {"kind": "code", "n": 1, "fp": "// Day/DayRetryCheckpoint.cs — 참여 컴포넌트가 무엇을 저장할지 스스로 정함"}
         ]
       },
       {
@@ -470,61 +293,25 @@
         "chapter": "day",
         "layout": "full",
         "tab": "선택",
-        "title": {
-          "text": "3.5 근무가 끝났을 때 남은 이상현상을 어떻게 할까",
-          "verbatim": true
-        },
-        "lead": {
-          "text": "180초가 끝나는 순간 아직 처리하지 않은 이상현상이 남아 있다면, 그대로 하루를 끝낼지, 남은 것을 처리하게 할지.",
-          "verbatim": true
-        },
-        "sectionPath": [
-          "3. 하루 진행: 근무가 끝나도 끝나지 않는 하루",
-          "3.5 근무가 끝났을 때 남은 이상현상을 어떻게 할까"
-        ],
+        "title": {"text": "3.5 근무가 끝났을 때 남은 이상현상을 어떻게 할까", "verbatim": true},
+        "lead": {"text": "180초가 끝나는 순간 아직 처리하지 않은 이상현상이 남아 있다면, 그대로 하루를 끝낼지, 남은 것을 처리하게 할지.", "verbatim": true},
+        "sectionPath": ["3. 하루 진행: 근무가 끝나도 끝나지 않는 하루", "3.5 근무가 끝났을 때 남은 이상현상을 어떻게 할까"],
         "points": [
-          {
-            "label": "이유",
-            "text": "\"시설을 지킨다\"는 기획에 맞게, 시간이 끝나도 남은 위험은 끝까지 처리하고 하루를 마치도록 바꿨습니다.",
-            "verbatim": true
-          },
-          {
-            "label": "",
-            "text": "보상은 정리 단계에 들어가는 순간의 값으로 고정했습니다(`FreezeRewardsForCleanup`).",
-            "verbatim": true
-          }
+          {"label": "이유", "text": "\"시설을 지킨다\"는 기획에 맞게, 시간이 끝나도 남은 위험은 끝까지 처리하고 하루를 마치도록 바꿨습니다.", "verbatim": true},
+          {"label": "", "text": "보상은 정리 단계에 들어가는 순간의 값으로 고정했습니다(`FreezeRewardsForCleanup`).", "verbatim": true}
         ],
-        "visuals": [
-          {
-            "kind": "table",
-            "n": 1,
-            "fp": "|[A] 시간이 끝나면 모두 제거|[B] 정리 단계에서 남은 것을 처리 ✓"
-          }
-        ]
+        "visuals": [{"kind": "table", "n": 1, "fp": "|[A] 시간이 끝나면 모두 제거|[B] 정리 단계에서 남은 것을 처리 ✓"}]
       },
       {
         "key": "anomaly-contract",
         "chapter": "anomaly",
         "layout": "visual",
         "tab": "구조",
-        "title": {
-          "text": "4.1 시설 입장에서는 같은 일",
-          "verbatim": true
-        },
-        "lead": {
-          "text": "세 이상현상은 처리 방법이 모두 다르지만, 시설 입장에서 보면 같은 일을 합니다.",
-          "verbatim": true
-        },
-        "sectionPath": [
-          "4. 이상현상: 세 종류를 하나의 규칙으로",
-          "4.1 시설 입장에서는 같은 일"
-        ],
+        "title": {"text": "4.1 시설 입장에서는 같은 일", "verbatim": true},
+        "lead": {"text": "세 이상현상은 처리 방법이 모두 다르지만, 시설 입장에서 보면 같은 일을 합니다.", "verbatim": true},
+        "sectionPath": ["4. 이상현상: 세 종류를 하나의 규칙으로", "4.1 시설 입장에서는 같은 일"],
         "points": [
-          {
-            "label": "",
-            "text": "시간이 지나면 성장하고, 성장하면 안정도를 깎고, 결국 처리되거나 파열합니다.",
-            "verbatim": true
-          },
+          {"label": "", "text": "시간이 지나면 성장하고, 성장하면 안정도를 깎고, 결국 처리되거나 파열합니다.", "verbatim": true},
           {
             "label": "",
             "text": "그래서 이 공통 동작을 하나의 계약(`AnomalyBehaviour`)으로 묶고, 처리 방법만 종류마다 다르게 만들었습니다.",
@@ -536,10 +323,7 @@
             "kind": "mermaid",
             "n": 1,
             "fp": "classDiagram",
-            "sectionPath": [
-              "4. 이상현상: 세 종류를 하나의 규칙으로",
-              "4.2 세 이상현상의 공통 계약"
-            ]
+            "sectionPath": ["4. 이상현상: 세 종류를 하나의 규칙으로", "4.2 세 이상현상의 공통 계약"]
           }
         ]
       },
@@ -548,93 +332,40 @@
         "chapter": "anomaly",
         "layout": "code",
         "tab": "구현",
-        "title": {
-          "text": "4.3 지속 피해와 파열 피해 나누기",
-          "verbatim": true
-        },
+        "title": {"text": "4.3 지속 피해와 파열 피해 나누기", "verbatim": true},
         "lead": null,
-        "sectionPath": [
-          "4. 이상현상: 세 종류를 하나의 규칙으로",
-          "4.3 지속 피해와 파열 피해 나누기"
-        ],
+        "sectionPath": ["4. 이상현상: 세 종류를 하나의 규칙으로", "4.3 지속 피해와 파열 피해 나누기"],
         "points": [
-          {
-            "label": "",
-            "text": "모든 이상현상에 이번 프레임의 피해를 물어봅니다.",
-            "verbatim": true
-          },
-          {
-            "label": "",
-            "text": "두 피해를 나눈 이유는 강화 때문입니다.",
-            "verbatim": true
-          },
+          {"label": "", "text": "모든 이상현상에 이번 프레임의 피해를 물어봅니다.", "verbatim": true},
+          {"label": "", "text": "두 피해를 나눈 이유는 강화 때문입니다.", "verbatim": true},
           {
             "label": "",
             "text": "\"시설 방호\" 강화는 지속 피해만 5·10·15% 줄이고, 파열 피해는 줄이지 않습니다(`persistentStabilityDamageMultiplier`).",
             "verbatim": true
           },
-          {
-            "label": "",
-            "text": "파열은 방치한 결과라 강화로 막을 수 없게 한 것입니다.",
-            "verbatim": true
-          }
+          {"label": "", "text": "파열은 방치한 결과라 강화로 막을 수 없게 한 것입니다.", "verbatim": true}
         ],
-        "visuals": [
-          {
-            "kind": "code",
-            "n": 1,
-            "fp": "// Facility/WardStatus.cs — LateUpdate 일부",
-            "lines": [
-              1,
-              19
-            ]
-          }
-        ]
+        "visuals": [{"kind": "code", "n": 1, "fp": "// Facility/WardStatus.cs — LateUpdate 일부", "lines": [1, 19]}]
       },
       {
         "key": "spawn-order",
         "chapter": "anomaly",
         "layout": "code",
         "tab": "구현",
-        "title": {
-          "text": "4.4 종류를 먼저 뽑고 위치는 나중에",
-          "verbatim": true
-        },
+        "title": {"text": "4.4 종류를 먼저 뽑고 위치는 나중에", "verbatim": true},
         "lead": null,
-        "sectionPath": [
-          "4. 이상현상: 세 종류를 하나의 규칙으로",
-          "4.4 종류를 먼저 뽑고 위치는 나중에"
-        ],
+        "sectionPath": ["4. 이상현상: 세 종류를 하나의 규칙으로", "4.4 종류를 먼저 뽑고 위치는 나중에"],
         "points": [
-          {
-            "label": "",
-            "text": "가중치로 종류를 먼저 뽑습니다.",
-            "verbatim": true
-          },
-          {
-            "label": "",
-            "text": "위치를 먼저 뽑으면 벽 지점이 많을 때 균열만 자주 나오는 식으로 치우칩니다.",
-            "verbatim": true
-          },
-          {
-            "label": "",
-            "text": "종류를 먼저 뽑으면 지점 수와 상관없이 가중치대로 나옵니다.",
-            "verbatim": true
-          },
-          {
-            "label": "",
-            "text": "난수는 하루 시드로 만든 `System.Random`을 씁니다(`NextRandom`).",
-            "verbatim": true
-          }
+          {"label": "", "text": "가중치로 종류를 먼저 뽑습니다.", "verbatim": true},
+          {"label": "", "text": "위치를 먼저 뽑으면 벽 지점이 많을 때 균열만 자주 나오는 식으로 치우칩니다.", "verbatim": true},
+          {"label": "", "text": "종류를 먼저 뽑으면 지점 수와 상관없이 가중치대로 나옵니다.", "verbatim": true},
+          {"label": "", "text": "난수는 하루 시드로 만든 `System.Random`을 씁니다(`NextRandom`).", "verbatim": true}
         ],
         "visuals": [
           {
             "kind": "code",
             "n": 1,
-            "lines": [
-              22,
-              35
-            ],
+            "lines": [22, 35],
             "fp": "// Anomalies/Common/AnomalySpawner.cs — TrySpawnNextAnomaly"
           }
         ]
@@ -644,83 +375,39 @@
         "chapter": "anomaly",
         "layout": "full",
         "tab": "선택",
-        "title": {
-          "text": "4.5 처리 보상을 단계별로 줄까",
-          "verbatim": true
-        },
-        "lead": {
-          "text": "이상현상을 처리했을 때, 성장한 정도(단계)에 따라 보상을 더 줄지, 항상 같은 보상을 줄지.",
-          "verbatim": true
-        },
-        "sectionPath": [
-          "4. 이상현상: 세 종류를 하나의 규칙으로",
-          "4.5 처리 보상을 단계별로 줄까"
-        ],
+        "title": {"text": "4.5 처리 보상을 단계별로 줄까", "verbatim": true},
+        "lead": {"text": "이상현상을 처리했을 때, 성장한 정도(단계)에 따라 보상을 더 줄지, 항상 같은 보상을 줄지.", "verbatim": true},
+        "sectionPath": ["4. 이상현상: 세 종류를 하나의 규칙으로", "4.5 처리 보상을 단계별로 줄까"],
         "points": [
           {
             "label": "",
             "text": "그래서 게임의 방향을 \"단계를 전략적으로 키우기\"에서 \"빠르게 처리하며 버티는 생존\" 으로 바꾸고, 보상 규칙도 그에 맞춰 다시 정했습니다.",
             "verbatim": true
           },
-          {
-            "label": "이유",
-            "text": "방향을 생존으로 바꾸고 나니 [A]는 오히려 방치를 이득으로 만드는 규칙이 됐습니다.",
-            "verbatim": true
-          },
-          {
-            "label": "",
-            "text": "그 대가로 초기 기획의 \"키워서 더 큰 보상을 노린다\"는 위험 · 보상 선택이 빠졌습니다.",
-            "verbatim": true
-          }
+          {"label": "이유", "text": "방향을 생존으로 바꾸고 나니 [A]는 오히려 방치를 이득으로 만드는 규칙이 됐습니다.", "verbatim": true},
+          {"label": "", "text": "그 대가로 초기 기획의 \"키워서 더 큰 보상을 노린다\"는 위험 · 보상 선택이 빠졌습니다.", "verbatim": true}
         ],
-        "visuals": [
-          {
-            "kind": "table",
-            "n": 1,
-            "fp": "|[A] 단계만큼 보상 (초기 기획)|[B] 항상 1개 ✓"
-          }
-        ]
+        "visuals": [{"kind": "table", "n": 1, "fp": "|[A] 단계만큼 보상 (초기 기획)|[B] 항상 1개 ✓"}]
       },
       {
         "key": "magic-types",
         "chapter": "magic",
         "layout": "full",
         "tab": "개요",
-        "title": {
-          "text": "5.1 마법마다 다른 조작",
-          "verbatim": true
-        },
-        "lead": {
-          "text": "마법마다 조작을 다르게 한 이유는 이상현상마다 대처 방식이 다르게 느껴지게 하기 위해서입니다.",
-          "verbatim": true
-        },
-        "sectionPath": [
-          "5. 마법: 감지하고, 종류에 맞게 해결하기",
-          "5.1 마법마다 다른 조작"
-        ],
+        "title": {"text": "5.1 마법마다 다른 조작", "verbatim": true},
+        "lead": {"text": "마법마다 조작을 다르게 한 이유는 이상현상마다 대처 방식이 다르게 느껴지게 하기 위해서입니다.", "verbatim": true},
+        "sectionPath": ["5. 마법: 감지하고, 종류에 맞게 해결하기", "5.1 마법마다 다른 조작"],
         "points": [],
-        "visuals": [
-          {
-            "kind": "table",
-            "n": 1,
-            "fp": "마법|대상|조작|실제 설정"
-          }
-        ]
+        "visuals": [{"kind": "table", "n": 1, "fp": "마법|대상|조작|실제 설정"}]
       },
       {
         "key": "magic-screens",
         "chapter": "magic",
         "layout": "screens",
         "tab": "결과",
-        "title": {
-          "text": "5.1 마법마다 다른 조작",
-          "verbatim": true
-        },
+        "title": {"text": "5.1 마법마다 다른 조작", "verbatim": true},
         "lead": null,
-        "sectionPath": [
-          "5. 마법: 감지하고, 종류에 맞게 해결하기",
-          "5.1 마법마다 다른 조작"
-        ],
+        "sectionPath": ["5. 마법: 감지하고, 종류에 맞게 해결하기", "5.1 마법마다 다른 조작"],
         "points": [],
         "visuals": [
           {
@@ -728,38 +415,23 @@
             "src": "images/magic_three.gif",
             "w": 960,
             "h": 540,
-            "caption": {
-              "text": "봉인 · 정화 · 안정화를 차례로 쓰는 장면",
-              "verbatim": true
-            }
+            "caption": {"text": "봉인 · 정화 · 안정화를 차례로 쓰는 장면", "verbatim": true}
           },
           {
             "kind": "image",
             "src": "images/seal_chain.gif",
             "w": 960,
             "h": 540,
-            "caption": {
-              "text": "Q로 감지한 뒤 봉인점을 순서대로 클릭해 균열을 닫는 장면",
-              "verbatim": true
-            },
-            "sectionPath": [
-              "5. 마법: 감지하고, 종류에 맞게 해결하기",
-              "5.3 연쇄 봉인 판정"
-            ]
+            "caption": {"text": "Q로 감지한 뒤 봉인점을 순서대로 클릭해 균열을 닫는 장면", "verbatim": true},
+            "sectionPath": ["5. 마법: 감지하고, 종류에 맞게 해결하기", "5.3 연쇄 봉인 판정"]
           },
           {
             "kind": "image",
             "src": "images/purify_stabilize.gif",
             "w": 520,
             "h": 292,
-            "caption": {
-              "text": "정화: 버튼을 누른 채 조준을 옮겨 저주 패치를 이어서 지우는 장면 → 안정화: 장치에 붙어 진행도를 쌓다가 방출 경고 뒤 폭발하는 장면",
-              "verbatim": true
-            },
-            "sectionPath": [
-              "5. 마법: 감지하고, 종류에 맞게 해결하기",
-              "5.4 누르고 있는 두 마법: 쓸어 담는 정화, 피하며 버티는 안정화"
-            ]
+            "caption": {"text": "정화: 버튼을 누른 채 조준을 옮겨 저주 패치를 이어서 지우는 장면 → 안정화: 장치에 붙어 진행도를 쌓다가 방출 경고 뒤 폭발하는 장면", "verbatim": true},
+            "sectionPath": ["5. 마법: 감지하고, 종류에 맞게 해결하기", "5.4 누르고 있는 두 마법: 쓸어 담는 정화, 피하며 버티는 안정화"]
           }
         ]
       },
@@ -768,34 +440,223 @@
         "chapter": "magic",
         "layout": "visual",
         "tab": "구조",
-        "title": {
-          "text": "5.2 입력과 판정 나누기",
-          "verbatim": true
-        },
+        "title": {"text": "5.2 입력과 판정 나누기", "verbatim": true},
         "lead": null,
-        "sectionPath": [
-          "5. 마법: 감지하고, 종류에 맞게 해결하기",
-          "5.2 입력과 판정 나누기"
-        ],
+        "sectionPath": ["5. 마법: 감지하고, 종류에 맞게 해결하기", "5.2 입력과 판정 나누기"],
         "points": [
+          {"label": "", "text": "`MagicCaster`는 어떤 마법을 골랐는지, 무엇을 조준하는지, 버튼을 눌렀는지만 봅니다.", "verbatim": true},
+          {"label": "", "text": "성공·실패 판정은 대상 쪽의 `MagicTarget`이 맡습니다.", "verbatim": true},
+          {"label": "", "text": "그래서 같은 정화 마법이라도 대상마다 시전 시간과 규칙을 Inspector에서 다르게 줄 수 있습니다.", "verbatim": true},
+          {"label": "", "text": "봉인처럼 순서가 있는 경우는 균열(`ManaRift`)이 자기 봉인점들의 순서와 제한 시간을 관리합니다.", "verbatim": true}
+        ],
+        "visuals": [{"kind": "mermaid", "n": 1, "fp": "sequenceDiagram"}]
+      },
+      {
+        "key": "seal-chain",
+        "chapter": "magic",
+        "layout": "code",
+        "tab": "구현",
+        "title": {"text": "5.3 연쇄 봉인 판정", "verbatim": true},
+        "lead": null,
+        "sectionPath": ["5. 마법: 감지하고, 종류에 맞게 해결하기", "5.3 연쇄 봉인 판정"],
+        "points": [
+          {"label": "", "text": "첫 클릭은 Q로 감지한 첫 봉인점만 받습니다.", "verbatim": true},
+          {"label": "", "text": "첫 성공부터 연쇄 전체에 하나의 마감 시간(2초)을 둡니다.", "verbatim": true},
+          {"label": "", "text": "순서가 틀리거나 시간이 지나면 처음부터 다시 해야 합니다(`FailSealChain`).", "verbatim": true},
+          {"label": "", "text": "균열이 성장하면 진행 중인 연쇄를 초기화합니다.", "verbatim": true}
+        ],
+        "visuals": [{"kind": "code", "n": 1, "lines": [7, 26], "fp": "// Anomalies/ManaRift/ManaRift.cs — TryCompleteSealClick"}]
+      },
+      {
+        "key": "magic-hold",
+        "chapter": "magic",
+        "layout": "full",
+        "tab": "구조",
+        "title": {"text": "5.4 누르고 있는 두 마법: 쓸어 담는 정화, 피하며 버티는 안정화", "verbatim": true},
+        "lead": {"text": "정화와 안정화는 둘 다 버튼을 누르고 있어야 하는 마법이지만, 플레이에서 요구하는 움직임은 다릅니다.", "verbatim": true},
+        "sectionPath": ["5. 마법: 감지하고, 종류에 맞게 해결하기", "5.4 누르고 있는 두 마법: 쓸어 담는 정화, 피하며 버티는 안정화"],
+        "points": [],
+        "visuals": [{"kind": "table", "n": 1, "fp": "|정화 (저주 오염)|안정화 (마력 장치 폭주)"}]
+      },
+      {
+        "key": "seal-choice",
+        "chapter": "magic",
+        "layout": "full",
+        "tab": "선택",
+        "title": {"text": "5.5 봉인은 타이밍 시전일까, 연쇄 클릭일까", "verbatim": true},
+        "lead": {"text": "봉인 마법을 \"누르고 있다가 알맞은 순간에 놓는\" 방식으로 할지, \"여러 지점을 순서대로 빠르게 클릭하는\" 방식으로 할지.", "verbatim": true},
+        "sectionPath": ["5. 마법: 감지하고, 종류에 맞게 해결하기", "5.5 봉인은 타이밍 시전일까, 연쇄 클릭일까"],
+        "points": [
+          {"label": "이유", "text": "타이밍 시전으로 플레이해 보니 조작이 너무 단조롭고 쉬웠습니다.", "verbatim": true},
           {
             "label": "",
-            "text": "`MagicCaster`는 어떤 마법을 골랐는지, 무엇을 조준하는지, 버튼을 눌렀는지만 봅니다.",
+            "text": "여기에 봉인점 수를 단계와 연결해(2 · 3 · 4개), \"방치할수록 처리하기 어려워진다\"는 규칙이 조작으로 바로 느껴지게 했습니다.",
             "verbatim": true
-          },
+          }
+        ],
+        "visuals": [{"kind": "table", "n": 1, "fp": "|[A] 타이밍 시전|[B] 연쇄 클릭 ✓"}]
+      },
+      {
+        "key": "ai-role",
+        "chapter": "ai",
+        "layout": "full",
+        "tab": "",
+        "title": {"text": "6.1 맡긴 것과 직접 판단한 것", "verbatim": true},
+        "lead": null,
+        "sectionPath": ["6. AI와 일한 방식", "6.1 맡긴 것과 직접 판단한 것"],
+        "points": [],
+        "visuals": [{"kind": "table", "n": 1, "fp": "|내용"}]
+      },
+      {
+        "key": "ai-structure",
+        "chapter": "ai",
+        "layout": "full",
+        "tab": "",
+        "title": {"text": "6.2 AI가 만든 구조를 읽으며 본 것", "verbatim": true},
+        "lead": {"text": "코드를 Codex로 만들었기 때문에, \"내가 설계한 구조\"가 아니라 완성된 구조를 읽고 평가한 것입니다.", "verbatim": true},
+        "sectionPath": ["6. AI와 일한 방식", "6.2 AI가 만든 구조를 읽으며 본 것"],
+        "points": [
+          {"label": "", "text": "공통 계약이 있어도 계약 밖에서 종류를 직접 검사하면 확장성의 이점이 줄어든다는 것을 이 구조에서 확인했습니다.", "verbatim": true},
+          {"label": "", "text": "기획 판단을 규칙으로 분명하게 정했을 때는 구현이 빨랐습니다.", "verbatim": false},
+          {"label": "", "text": "반대로 잘 되지 않은 것은 코드 정리였습니다.", "verbatim": false}
+        ],
+        "visuals": [{"kind": "table", "n": 1, "fp": "문제|근거|영향"}]
+      }
+    ],
+    "base": [
+      {
+        "key": "intro",
+        "chapter": "overview",
+        "layout": "overview",
+        "tab": "개요",
+        "title": {"text": "1. 개요", "verbatim": true},
+        "lead": null,
+        "sectionPath": ["1. 개요"],
+        "points": [
+          {"label": "", "text": "AETHER SHIFT는 플레이어가 마법 시설의 근무자가 되어 7일 동안 시설을 지키는 1인칭 3D 게임입니다.", "verbatim": true},
+          {"label": "", "text": "플레이어는 이상현상을 감지하고, 종류에 맞는 마법(봉인·정화·안정화)으로 처리해야 합니다.", "verbatim": true},
+          {"label": "", "text": "처음 기획에서는 이상현상을 일부러 키워 더 큰 보상을 노리는 전략적인 선택까지 의도했습니다.", "verbatim": true}
+        ],
+        "visuals": []
+      },
+      {
+        "key": "play-loop",
+        "chapter": "play",
+        "layout": "visual",
+        "tab": "흐름",
+        "title": {"text": "2.1 한 판의 흐름", "verbatim": true},
+        "lead": null,
+        "sectionPath": ["2. 플레이", "2.1 한 판의 흐름"],
+        "points": [
+          {"label": "", "text": "하루 안에서는 감지 → 처리 → 보상이 반복되고, 하루가 끝나면 강화·보급으로 다음 날을 준비합니다.", "verbatim": true},
+          {"label": "", "text": "근무 시간이 끝나도 남은 이상현상을 모두 처리해야 그날이 끝납니다(3.5).", "verbatim": true}
+        ],
+        "visuals": [{"kind": "mermaid", "n": 1, "fp": "flowchart LR"}]
+      },
+      {
+        "key": "anomaly-types",
+        "chapter": "play",
+        "layout": "full",
+        "tab": "개요",
+        "title": {"text": "2.2 이상현상 세 가지", "verbatim": true},
+        "lead": null,
+        "sectionPath": ["2. 플레이", "2.2 이상현상 세 가지"],
+        "points": [{"label": "", "text": "2단계·3단계에서는 시설 안정도가 초당 0.5·1씩 줄고, 파열하면 한 번에 20이 줄어듭니다.", "verbatim": true}],
+        "visuals": [{"kind": "table", "n": 1, "fp": "이상현상|생기는 곳|대응 마법|처리 방법|방치하면"}]
+      },
+      {
+        "key": "day-state",
+        "chapter": "day",
+        "layout": "visual",
+        "tab": "흐름",
+        "title": {"text": "3.1 하루가 흘러가는 순서", "verbatim": true},
+        "lead": {"text": "하루는 준비 → 근무 → (정리) → 성공 · 실패 순서로 진행됩니다.", "verbatim": true},
+        "sectionPath": ["3. 하루 진행: 근무가 끝나도 끝나지 않는 하루", "3.1 하루가 흘러가는 순서"],
+        "points": [
+          {"label": "", "text": "하루의 흐름을 바꾸는 것은 시간 종료, 시설 실패, UI 버튼 세 가지입니다.", "verbatim": true},
+          {"label": "", "text": "정리 단계는 별도 상태가 아니라 `Playing` 안의 `IsCleaningUp` 표시입니다.", "verbatim": true},
+          {"label": "", "text": "정리 중에도 위험 계산은 계속되므로 실패할 수 있습니다.", "verbatim": true}
+        ],
+        "visuals": [{"kind": "mermaid", "n": 1, "fp": "stateDiagram-v2"}]
+      },
+      {
+        "key": "day-session",
+        "chapter": "day",
+        "layout": "code",
+        "tab": "구조",
+        "title": {"text": "3.2 상태와 명령 나누기", "verbatim": true},
+        "lead": null,
+        "sectionPath": ["3. 하루 진행: 근무가 끝나도 끝나지 않는 하루", "3.2 상태와 명령 나누기"],
+        "points": [
+          {"label": "", "text": "`DaySession`은 Unity 오브젝트를 몰라서, 상태가 어떻게 바뀌는지만 따로 읽을 수 있습니다.", "verbatim": true},
           {
             "label": "",
-            "text": "성공·실패 판정은 대상 쪽의 `MagicTarget`이 맡습니다.",
+            "text": "예를 들어 DAY 7에서 `CompleteDay`를 부르면 `DayClear`가 아니라 `Ending`이 되는 규칙이 이 클래스 한 곳에 있습니다.",
             "verbatim": true
-          },
+          }
+        ],
+        "visuals": [{"kind": "code", "n": 1, "fp": "// Day/DaySession.cs — 상태 전이 일부"}]
+      },
+      {
+        "key": "day-tick",
+        "chapter": "day",
+        "layout": "code",
+        "tab": "구현",
+        "title": {"text": "3.3 근무 시간 흐름", "verbatim": true},
+        "lead": null,
+        "sectionPath": ["3. 하루 진행: 근무가 끝나도 끝나지 않는 하루", "3.3 근무 시간 흐름"],
+        "points": [
+          {"label": "", "text": "일시정지 중에는 시간이 흐르지 않습니다.", "verbatim": true},
+          {"label": "", "text": "끝나기 20초 전부터 새 이상현상이 생기지 않습니다.", "verbatim": true},
+          {"label": "", "text": "끝나기 직전에 생긴 현상 때문에 처리할 시간 없이 정리 단계로 넘어가는 것을 막기 위해서입니다.", "verbatim": true},
+          {"label": "", "text": "남은 현상이 없으면 생존 여부를 판정합니다.", "verbatim": true}
+        ],
+        "visuals": [{"kind": "code", "n": 1, "lines": [1, 20], "fp": "// Day/DayFlowManager.cs — LateUpdate 일부"}]
+      },
+      {
+        "key": "retry-seed",
+        "chapter": "day",
+        "layout": "code",
+        "tab": "구현",
+        "title": {"text": "3.4 재도전과 같은 날 같은 난수", "verbatim": true},
+        "lead": {"text": "실패하면 그날 시작 상태로 돌아갑니다.", "verbatim": true},
+        "sectionPath": ["3. 하루 진행: 근무가 끝나도 끝나지 않는 하루", "3.4 재도전과 같은 날 같은 난수"],
+        "points": [
+          {"label": "", "text": "재도전 때는 하루 시드를 바꾸지 않습니다.", "verbatim": true},
+          {"label": "", "text": "실패한 날을 다시 할 때 운이 아니라 대처 방법을 바꿔서 넘을 수 있게 하려는 것입니다.", "verbatim": true}
+        ],
+        "visuals": [
+          {"kind": "table", "n": 1, "fp": "저장 대상|방법"},
+          {"kind": "code", "n": 1, "fp": "// Day/DayRetryCheckpoint.cs — 참여 컴포넌트가 무엇을 저장할지 스스로 정함"}
+        ]
+      },
+      {
+        "key": "cleanup-choice",
+        "chapter": "day",
+        "layout": "full",
+        "tab": "선택",
+        "title": {"text": "3.5 근무가 끝났을 때 남은 이상현상을 어떻게 할까", "verbatim": true},
+        "lead": {"text": "180초가 끝나는 순간 아직 처리하지 않은 이상현상이 남아 있다면, 그대로 하루를 끝낼지, 남은 것을 처리하게 할지.", "verbatim": true},
+        "sectionPath": ["3. 하루 진행: 근무가 끝나도 끝나지 않는 하루", "3.5 근무가 끝났을 때 남은 이상현상을 어떻게 할까"],
+        "points": [
+          {"label": "이유", "text": "\"시설을 지킨다\"는 기획에 맞게, 시간이 끝나도 남은 위험은 끝까지 처리하고 하루를 마치도록 바꿨습니다.", "verbatim": true},
+          {"label": "", "text": "보상은 정리 단계에 들어가는 순간의 값으로 고정했습니다(`FreezeRewardsForCleanup`).", "verbatim": true}
+        ],
+        "visuals": [{"kind": "table", "n": 1, "fp": "|[A] 시간이 끝나면 모두 제거|[B] 정리 단계에서 남은 것을 처리 ✓"}]
+      },
+      {
+        "key": "anomaly-contract",
+        "chapter": "anomaly",
+        "layout": "visual",
+        "tab": "구조",
+        "title": {"text": "4.1 시설 입장에서는 같은 일", "verbatim": true},
+        "lead": {"text": "세 이상현상은 처리 방법이 모두 다르지만, 시설 입장에서 보면 같은 일을 합니다.", "verbatim": true},
+        "sectionPath": ["4. 이상현상: 세 종류를 하나의 규칙으로", "4.1 시설 입장에서는 같은 일"],
+        "points": [
+          {"label": "", "text": "시간이 지나면 성장하고, 성장하면 안정도를 깎고, 결국 처리되거나 파열합니다.", "verbatim": true},
           {
             "label": "",
-            "text": "그래서 같은 정화 마법이라도 대상마다 시전 시간과 규칙을 Inspector에서 다르게 줄 수 있습니다.",
-            "verbatim": true
-          },
-          {
-            "label": "",
-            "text": "봉인처럼 순서가 있는 경우는 균열(`ManaRift`)이 자기 봉인점들의 순서와 제한 시간을 관리합니다.",
+            "text": "그래서 이 공통 동작을 하나의 계약(`AnomalyBehaviour`)으로 묶고, 처리 방법만 종류마다 다르게 만들었습니다.",
             "verbatim": true
           }
         ],
@@ -803,186 +664,207 @@
           {
             "kind": "mermaid",
             "n": 1,
-            "fp": "sequenceDiagram"
+            "fp": "classDiagram",
+            "sectionPath": ["4. 이상현상: 세 종류를 하나의 규칙으로", "4.2 세 이상현상의 공통 계약"]
           }
         ]
+      },
+      {
+        "key": "hazard-sum",
+        "chapter": "anomaly",
+        "layout": "code",
+        "tab": "구현",
+        "title": {"text": "4.3 지속 피해와 파열 피해 나누기", "verbatim": true},
+        "lead": null,
+        "sectionPath": ["4. 이상현상: 세 종류를 하나의 규칙으로", "4.3 지속 피해와 파열 피해 나누기"],
+        "points": [
+          {"label": "", "text": "모든 이상현상에 이번 프레임의 피해를 물어봅니다.", "verbatim": true},
+          {"label": "", "text": "두 피해를 나눈 이유는 강화 때문입니다.", "verbatim": true},
+          {
+            "label": "",
+            "text": "\"시설 방호\" 강화는 지속 피해만 5·10·15% 줄이고, 파열 피해는 줄이지 않습니다(`persistentStabilityDamageMultiplier`).",
+            "verbatim": true
+          },
+          {"label": "", "text": "파열은 방치한 결과라 강화로 막을 수 없게 한 것입니다.", "verbatim": true}
+        ],
+        "visuals": [{"kind": "code", "n": 1, "fp": "// Facility/WardStatus.cs — LateUpdate 일부", "lines": [1, 19]}]
+      },
+      {
+        "key": "spawn-order",
+        "chapter": "anomaly",
+        "layout": "code",
+        "tab": "구현",
+        "title": {"text": "4.4 종류를 먼저 뽑고 위치는 나중에", "verbatim": true},
+        "lead": null,
+        "sectionPath": ["4. 이상현상: 세 종류를 하나의 규칙으로", "4.4 종류를 먼저 뽑고 위치는 나중에"],
+        "points": [
+          {"label": "", "text": "가중치로 종류를 먼저 뽑습니다.", "verbatim": true},
+          {"label": "", "text": "위치를 먼저 뽑으면 벽 지점이 많을 때 균열만 자주 나오는 식으로 치우칩니다.", "verbatim": true},
+          {"label": "", "text": "종류를 먼저 뽑으면 지점 수와 상관없이 가중치대로 나옵니다.", "verbatim": true},
+          {"label": "", "text": "난수는 하루 시드로 만든 `System.Random`을 씁니다(`NextRandom`).", "verbatim": true}
+        ],
+        "visuals": [
+          {
+            "kind": "code",
+            "n": 1,
+            "lines": [22, 35],
+            "fp": "// Anomalies/Common/AnomalySpawner.cs — TrySpawnNextAnomaly"
+          }
+        ]
+      },
+      {
+        "key": "reward-choice",
+        "chapter": "anomaly",
+        "layout": "full",
+        "tab": "선택",
+        "title": {"text": "4.5 처리 보상을 단계별로 줄까", "verbatim": true},
+        "lead": {"text": "이상현상을 처리했을 때, 성장한 정도(단계)에 따라 보상을 더 줄지, 항상 같은 보상을 줄지.", "verbatim": true},
+        "sectionPath": ["4. 이상현상: 세 종류를 하나의 규칙으로", "4.5 처리 보상을 단계별로 줄까"],
+        "points": [
+          {
+            "label": "",
+            "text": "그래서 게임의 방향을 \"단계를 전략적으로 키우기\"에서 \"빠르게 처리하며 버티는 생존\" 으로 바꾸고, 보상 규칙도 그에 맞춰 다시 정했습니다.",
+            "verbatim": true
+          },
+          {"label": "이유", "text": "방향을 생존으로 바꾸고 나니 [A]는 오히려 방치를 이득으로 만드는 규칙이 됐습니다.", "verbatim": true},
+          {"label": "", "text": "그 대가로 초기 기획의 \"키워서 더 큰 보상을 노린다\"는 위험 · 보상 선택이 빠졌습니다.", "verbatim": true}
+        ],
+        "visuals": [{"kind": "table", "n": 1, "fp": "|[A] 단계만큼 보상 (초기 기획)|[B] 항상 1개 ✓"}]
+      },
+      {
+        "key": "magic-types",
+        "chapter": "magic",
+        "layout": "full",
+        "tab": "개요",
+        "title": {"text": "5.1 마법마다 다른 조작", "verbatim": true},
+        "lead": {"text": "마법마다 조작을 다르게 한 이유는 이상현상마다 대처 방식이 다르게 느껴지게 하기 위해서입니다.", "verbatim": true},
+        "sectionPath": ["5. 마법: 감지하고, 종류에 맞게 해결하기", "5.1 마법마다 다른 조작"],
+        "points": [],
+        "visuals": [{"kind": "table", "n": 1, "fp": "마법|대상|조작|실제 설정"}]
+      },
+      {
+        "key": "magic-screens",
+        "chapter": "magic",
+        "layout": "screens",
+        "tab": "결과",
+        "title": {"text": "5.1 마법마다 다른 조작", "verbatim": true},
+        "lead": null,
+        "sectionPath": ["5. 마법: 감지하고, 종류에 맞게 해결하기", "5.1 마법마다 다른 조작"],
+        "points": [],
+        "visuals": [
+          {
+            "kind": "image",
+            "src": "images/magic_three.gif",
+            "w": 960,
+            "h": 540,
+            "caption": {"text": "봉인 · 정화 · 안정화를 차례로 쓰는 장면", "verbatim": true}
+          },
+          {
+            "kind": "image",
+            "src": "images/seal_chain.gif",
+            "w": 960,
+            "h": 540,
+            "caption": {"text": "Q로 감지한 뒤 봉인점을 순서대로 클릭해 균열을 닫는 장면", "verbatim": true},
+            "sectionPath": ["5. 마법: 감지하고, 종류에 맞게 해결하기", "5.3 연쇄 봉인 판정"]
+          },
+          {
+            "kind": "image",
+            "src": "images/purify_stabilize.gif",
+            "w": 520,
+            "h": 292,
+            "caption": {"text": "정화: 버튼을 누른 채 조준을 옮겨 저주 패치를 이어서 지우는 장면 → 안정화: 장치에 붙어 진행도를 쌓다가 방출 경고 뒤 폭발하는 장면", "verbatim": true},
+            "sectionPath": ["5. 마법: 감지하고, 종류에 맞게 해결하기", "5.4 누르고 있는 두 마법: 쓸어 담는 정화, 피하며 버티는 안정화"]
+          }
+        ]
+      },
+      {
+        "key": "magic-input",
+        "chapter": "magic",
+        "layout": "visual",
+        "tab": "구조",
+        "title": {"text": "5.2 입력과 판정 나누기", "verbatim": true},
+        "lead": null,
+        "sectionPath": ["5. 마법: 감지하고, 종류에 맞게 해결하기", "5.2 입력과 판정 나누기"],
+        "points": [
+          {"label": "", "text": "`MagicCaster`는 어떤 마법을 골랐는지, 무엇을 조준하는지, 버튼을 눌렀는지만 봅니다.", "verbatim": true},
+          {"label": "", "text": "성공·실패 판정은 대상 쪽의 `MagicTarget`이 맡습니다.", "verbatim": true},
+          {"label": "", "text": "그래서 같은 정화 마법이라도 대상마다 시전 시간과 규칙을 Inspector에서 다르게 줄 수 있습니다.", "verbatim": true},
+          {"label": "", "text": "봉인처럼 순서가 있는 경우는 균열(`ManaRift`)이 자기 봉인점들의 순서와 제한 시간을 관리합니다.", "verbatim": true}
+        ],
+        "visuals": [{"kind": "mermaid", "n": 1, "fp": "sequenceDiagram"}]
       },
       {
         "key": "seal-chain",
         "chapter": "magic",
         "layout": "code",
         "tab": "구현",
-        "title": {
-          "text": "5.3 연쇄 봉인 판정",
-          "verbatim": true
-        },
+        "title": {"text": "5.3 연쇄 봉인 판정", "verbatim": true},
         "lead": null,
-        "sectionPath": [
-          "5. 마법: 감지하고, 종류에 맞게 해결하기",
-          "5.3 연쇄 봉인 판정"
-        ],
+        "sectionPath": ["5. 마법: 감지하고, 종류에 맞게 해결하기", "5.3 연쇄 봉인 판정"],
         "points": [
-          {
-            "label": "",
-            "text": "첫 클릭은 Q로 감지한 첫 봉인점만 받습니다.",
-            "verbatim": true
-          },
-          {
-            "label": "",
-            "text": "첫 성공부터 연쇄 전체에 하나의 마감 시간(2초)을 둡니다.",
-            "verbatim": true
-          },
-          {
-            "label": "",
-            "text": "순서가 틀리거나 시간이 지나면 처음부터 다시 해야 합니다(`FailSealChain`).",
-            "verbatim": true
-          },
-          {
-            "label": "",
-            "text": "균열이 성장하면 진행 중인 연쇄를 초기화합니다.",
-            "verbatim": true
-          }
+          {"label": "", "text": "첫 클릭은 Q로 감지한 첫 봉인점만 받습니다.", "verbatim": true},
+          {"label": "", "text": "첫 성공부터 연쇄 전체에 하나의 마감 시간(2초)을 둡니다.", "verbatim": true},
+          {"label": "", "text": "순서가 틀리거나 시간이 지나면 처음부터 다시 해야 합니다(`FailSealChain`).", "verbatim": true},
+          {"label": "", "text": "균열이 성장하면 진행 중인 연쇄를 초기화합니다.", "verbatim": true}
         ],
-        "visuals": [
-          {
-            "kind": "code",
-            "n": 1,
-            "lines": [
-              7,
-              26
-            ],
-            "fp": "// Anomalies/ManaRift/ManaRift.cs — TryCompleteSealClick"
-          }
-        ]
+        "visuals": [{"kind": "code", "n": 1, "lines": [7, 26], "fp": "// Anomalies/ManaRift/ManaRift.cs — TryCompleteSealClick"}]
       },
       {
         "key": "magic-hold",
         "chapter": "magic",
         "layout": "full",
         "tab": "구조",
-        "title": {
-          "text": "5.4 누르고 있는 두 마법: 쓸어 담는 정화, 피하며 버티는 안정화",
-          "verbatim": true
-        },
-        "lead": {
-          "text": "정화와 안정화는 둘 다 버튼을 누르고 있어야 하는 마법이지만, 플레이에서 요구하는 움직임은 다릅니다.",
-          "verbatim": true
-        },
-        "sectionPath": [
-          "5. 마법: 감지하고, 종류에 맞게 해결하기",
-          "5.4 누르고 있는 두 마법: 쓸어 담는 정화, 피하며 버티는 안정화"
-        ],
+        "title": {"text": "5.4 누르고 있는 두 마법: 쓸어 담는 정화, 피하며 버티는 안정화", "verbatim": true},
+        "lead": {"text": "정화와 안정화는 둘 다 버튼을 누르고 있어야 하는 마법이지만, 플레이에서 요구하는 움직임은 다릅니다.", "verbatim": true},
+        "sectionPath": ["5. 마법: 감지하고, 종류에 맞게 해결하기", "5.4 누르고 있는 두 마법: 쓸어 담는 정화, 피하며 버티는 안정화"],
         "points": [],
-        "visuals": [
-          {
-            "kind": "table",
-            "n": 1,
-            "fp": "|정화 (저주 오염)|안정화 (마력 장치 폭주)"
-          }
-        ]
+        "visuals": [{"kind": "table", "n": 1, "fp": "|정화 (저주 오염)|안정화 (마력 장치 폭주)"}]
       },
       {
         "key": "seal-choice",
         "chapter": "magic",
         "layout": "full",
         "tab": "선택",
-        "title": {
-          "text": "5.5 봉인은 타이밍 시전일까, 연쇄 클릭일까",
-          "verbatim": true
-        },
-        "lead": {
-          "text": "봉인 마법을 \"누르고 있다가 알맞은 순간에 놓는\" 방식으로 할지, \"여러 지점을 순서대로 빠르게 클릭하는\" 방식으로 할지.",
-          "verbatim": true
-        },
-        "sectionPath": [
-          "5. 마법: 감지하고, 종류에 맞게 해결하기",
-          "5.5 봉인은 타이밍 시전일까, 연쇄 클릭일까"
-        ],
+        "title": {"text": "5.5 봉인은 타이밍 시전일까, 연쇄 클릭일까", "verbatim": true},
+        "lead": {"text": "봉인 마법을 \"누르고 있다가 알맞은 순간에 놓는\" 방식으로 할지, \"여러 지점을 순서대로 빠르게 클릭하는\" 방식으로 할지.", "verbatim": true},
+        "sectionPath": ["5. 마법: 감지하고, 종류에 맞게 해결하기", "5.5 봉인은 타이밍 시전일까, 연쇄 클릭일까"],
         "points": [
-          {
-            "label": "이유",
-            "text": "타이밍 시전으로 플레이해 보니 조작이 너무 단조롭고 쉬웠습니다.",
-            "verbatim": true
-          },
+          {"label": "이유", "text": "타이밍 시전으로 플레이해 보니 조작이 너무 단조롭고 쉬웠습니다.", "verbatim": true},
           {
             "label": "",
             "text": "여기에 봉인점 수를 단계와 연결해(2 · 3 · 4개), \"방치할수록 처리하기 어려워진다\"는 규칙이 조작으로 바로 느껴지게 했습니다.",
             "verbatim": true
           }
         ],
-        "visuals": [
-          {
-            "kind": "table",
-            "n": 1,
-            "fp": "|[A] 타이밍 시전|[B] 연쇄 클릭 ✓"
-          }
-        ]
+        "visuals": [{"kind": "table", "n": 1, "fp": "|[A] 타이밍 시전|[B] 연쇄 클릭 ✓"}]
       },
       {
         "key": "ai-role",
         "chapter": "ai",
         "layout": "full",
         "tab": "",
-        "title": {
-          "text": "6.1 맡긴 것과 직접 판단한 것",
-          "verbatim": true
-        },
+        "title": {"text": "6.1 맡긴 것과 직접 판단한 것", "verbatim": true},
         "lead": null,
-        "sectionPath": [
-          "6. AI와 일한 방식",
-          "6.1 맡긴 것과 직접 판단한 것"
-        ],
+        "sectionPath": ["6. AI와 일한 방식", "6.1 맡긴 것과 직접 판단한 것"],
         "points": [],
-        "visuals": [
-          {
-            "kind": "table",
-            "n": 1,
-            "fp": "|내용"
-          }
-        ]
+        "visuals": [{"kind": "table", "n": 1, "fp": "|내용"}]
       },
       {
         "key": "ai-structure",
         "chapter": "ai",
         "layout": "full",
         "tab": "",
-        "title": {
-          "text": "6.2 AI가 만든 구조를 읽으며 본 것",
-          "verbatim": true
-        },
-        "lead": {
-          "text": "코드를 Codex로 만들었기 때문에, \"내가 설계한 구조\"가 아니라 완성된 구조를 읽고 평가한 것입니다.",
-          "verbatim": true
-        },
-        "sectionPath": [
-          "6. AI와 일한 방식",
-          "6.2 AI가 만든 구조를 읽으며 본 것"
-        ],
+        "title": {"text": "6.2 AI가 만든 구조를 읽으며 본 것", "verbatim": true},
+        "lead": {"text": "코드를 Codex로 만들었기 때문에, \"내가 설계한 구조\"가 아니라 완성된 구조를 읽고 평가한 것입니다.", "verbatim": true},
+        "sectionPath": ["6. AI와 일한 방식", "6.2 AI가 만든 구조를 읽으며 본 것"],
         "points": [
-          {
-            "label": "",
-            "text": "공통 계약이 있어도 계약 밖에서 종류를 직접 검사하면 확장성의 이점이 줄어든다는 것을 이 구조에서 확인했습니다.",
-            "verbatim": true
-          },
-          {
-            "label": "",
-            "text": "기획 판단을 규칙으로 분명하게 정했을 때는 구현이 빨랐습니다.",
-            "verbatim": false
-          },
-          {
-            "label": "",
-            "text": "반대로 잘 되지 않은 것은 코드 정리였습니다.",
-            "verbatim": false
-          }
+          {"label": "", "text": "공통 계약이 있어도 계약 밖에서 종류를 직접 검사하면 확장성의 이점이 줄어든다는 것을 이 구조에서 확인했습니다.", "verbatim": true},
+          {"label": "", "text": "기획 판단을 규칙으로 분명하게 정했을 때는 구현이 빨랐습니다.", "verbatim": false},
+          {"label": "", "text": "반대로 잘 되지 않은 것은 코드 정리였습니다.", "verbatim": false}
         ],
-        "visuals": [
-          {
-            "kind": "table",
-            "n": 1,
-            "fp": "문제|근거|영향"
-          }
-        ]
+        "visuals": [{"kind": "table", "n": 1, "fp": "문제|근거|영향"}]
       }
-    ]
+    ],
+    "applied": "960ab24843f996a0"
   }
 }

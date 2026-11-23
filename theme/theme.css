@@ -82,3 +82,6 @@
   font-size: 15px; line-height: 1; cursor: pointer; transition: border-color .2s, transform .3s; }
 .pf-mode-btn:hover { border-color: var(--t-accent); transform: rotate(-15deg); }
 @media print { .pf-mode-btn { display: none; } }
+
+/* 슬라이드 장 표지: 항목마다 붙던 도입 요약글(.ld)은 보이지 않게 — 제목·탭·쪽 번호만 */
+.ch-list .toc-list .ld { display: none !important; }
