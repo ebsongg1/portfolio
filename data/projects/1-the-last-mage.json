@@ -353,7 +353,11 @@
             "text": "`BossAI`는 `BossState` enum과 `isAttacking`, `magicTimer`로 지금 무엇을 하는 중인지 관리합니다.",
             "verbatim": true
           },
-          {"label": "", "text": "보스 씬의 설정값은 근접 3.5, 원거리 7, 감지 40, 특수 공격 쿨타임 6초입니다.", "verbatim": true}
+          {
+            "label": "",
+            "text": "특수 공격은 쿨타임 6초가 차면 공격 중이 아닐 때 두 패턴(`CastMagic` · `CastMeteor`) 중 하나를 무작위로 씁니다.",
+            "verbatim": false
+          }
         ],
         "visuals": [
           {"kind": "mermaid", "n": 1, "fp": "stateDiagram-v2"},
@@ -976,7 +980,7 @@
         "visuals": [{"kind": "table", "n": 1, "fp": "구분|내용"}]
       }
     ],
-    "applied": "ef11e9881bb1ca85",
+    "applied": "e2f2f836212338ed",
     "retroHide": [4]
   }
 }
