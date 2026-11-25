@@ -199,7 +199,21 @@
     for (let n = tw.nextNode(); n; n = tw.nextNode()) if (n.nodeValue.includes('§')) hits.push(n);
     hits.forEach((n) => { n.nodeValue = n.nodeValue.replace(SEC_IN, '').replace(SEC_REF, ''); });
   }
-  const ncards = (points, { row = false, num = true, two = false } = {}) => (points.length
+  // 직접 고침(2026-11-25): 위아래 배치(dk-stack)에서 아래 카드 줄을 위 시각 자료 묶음의 폭에 맞춰 가운데로(그림이 좁을 때 카드만 옆으로 길어지지 않게)
+  function alignCards(s) {
+    s.querySelectorAll('.dk-stack').forEach((dk) => {
+      const vis = dk.querySelector(':scope > .vis'), cards = dk.querySelector(':scope > .cards');
+      if (!vis || !cards) return;
+      const boxes = [...vis.children].filter((b) => b.classList.contains('vbox') && b.style.width);
+      if (!boxes.length) return;
+      const ws = boxes.map((b) => parseFloat(b.style.width) || 0);
+      const w = vis.dataset.arr === 'row' ? ws.reduce((a, x) => a + x, 0) + 16 * (ws.length - 1) : Math.max(...ws);
+      if (w > 0) Object.assign(cards.style, { width: `${Math.ceil(w)}px`, maxWidth: '100%', marginInline: 'auto' });   // 장면이 측정 상자에서 떨어진 뒤라 폭은 잴 수 없음 → 시각 자료에 적힌 폭만 씀
+    });
+    return s;
+  }
+  // 직접 고침(2026-11-25): 요점이 하나뿐이면 번호(1)를 달지 않음
+  const ncards = (points, { row = false, num = true, two = false } = {}) => (num = num && points.length > 1, points.length
     ? `<div class="cards${row ? ' row' : ''}${two ? ' two' : ''}" style="--n:${Math.min(points.length, 4)}">${points.map((pt, i) =>
       `<div class="ncard${num ? '' : ' nonum'}">${num ? `<span class="num" aria-hidden="true">${i + 1}</span>` : ''}<div>${pt.label ? `<span class="lb">${esc(PF.label(pt.label))}</span>` : ''}<p>${inline(txt(pt))}</p></div></div>`).join('')}</div>` : '');
   const FLOW = { '문제': '', '원인': '', '해결': 'accent', '결과': 'ok', '배운 점': '' };   // data 값 → 칩 색(보이는 글자만 PF.label로 바뀜)
@@ -280,7 +294,7 @@
       PF.body(s).innerHTML = `<div class="pf-fill">${bodyHtml(sl, vs, v)}</div>`;
       stripSecRefs(s);
       if (meta.auto) s.querySelector('.pf-foot > span').insertAdjacentHTML('beforeend', '<span class="pf-autoband" data-pf-ui="note">예전 데이터로 자동 구성 — /portfolio-build를 다시 실행하면 슬라이드가 됩니다</span>');
-      return PF.fitVisuals(s);
+      return alignCards(PF.fitVisuals(s));
     };
     // 들어가는 변형 중 시각 자료가 가장 크게 보이는 것(같으면 앞의 것). 가로로 긴 다이어그램은 위아래 배치가, 세로로 긴 것은 옆 배치가 이김
     let best = null;
@@ -445,6 +459,7 @@
       const s = PF.scene({ id: i === 0 ? 'retro' : `retro-${i + 1}`, tpl: 'P6', eyebrow: PF.t('deck.retro-eyebrow'), rlabel: p.title, title: PF.t('deck.retro'), sub: cnt > 1 ? `${i + 1}/${cnt}` : '', foot,
         sec: PF.t('deck.retro'), group: PF.t('deck.retro') });
       PF.body(s).innerHTML = `<div class="pf-fill"><div class="rt${one ? ' one' : ''}">${html}</div></div>`;
+      stripSecRefs(s);                                                 // 직접 고침(2026-11-25): 회고 장면도 「(§6.3)」를 화면에서만 뺌
       return band(s, auto);
     };
     const s = make(achHtml + pairHtml, !achHtml || !pairHtml, 0, 1);

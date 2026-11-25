@@ -60,9 +60,7 @@
         {"label": "", "text": "구간 폭과 속도는 따로 쓰지 않고, 너무 어렵거나 너무 빨리 끝나지 않는 범위에서 철판과 함께 조절했습니다.", "verbatim": true},
         {"label": "", "text": "철판 때문에 처음에는 실패가 잦지만, 이는 감을 잡아 가는 과정으로 의도한 것입니다.", "verbatim": true}
       ],
-      "visuals": [
-        {"kind": "table", "n": 2, "fp": "|적정 구간 폭 좁히기|게이지 속도 올리기|게이지 위쪽을 철판으로 가리기 ✓"}
-      ],
+      "visuals": [{"kind": "table", "n": 2, "fp": "|적정 구간 폭 좁히기|게이지 속도 올리기|게이지 위쪽을 철판으로 가리기 ✓"}],
       "after": "fuel-cover",
       "group": "split-fuel-cover-choice"
     },
@@ -108,11 +106,27 @@
         {"label": "", "text": "순서를 틀렸을 때 퓨즈 · 회로가 모두 꺼지고 2초 동안 버튼이 잠기는 벌칙도 추가했습니다.", "verbatim": true},
         {"label": "", "text": "그래서 한 번 틀리면 처음부터 다시 순서를 찾아야 합니다.", "verbatim": true}
       ],
-      "visuals": [
-        {"kind": "table", "n": 2, "fp": "|기획서안: 회로 조각 돌리기|바꾼 안: 퓨즈 순서 맞추기 ✓"}
-      ],
+      "visuals": [{"kind": "table", "n": 2, "fp": "|기획서안: 회로 조각 돌리기|바꾼 안: 퓨즈 순서 맞추기 ✓"}],
       "after": "fuse-design",
       "group": "split-fuse-design-choice"
+    },
+    {
+      "key": "round-flow",
+      "chapter": "arch",
+      "layout": "visual",
+      "tab": "흐름",
+      "title": {"text": "2.2 미니게임 한 판의 흐름", "verbatim": true},
+      "lead": {"text": "이 그림에서 볼 것은 담당자와 관전자가 같은 시작 메시지와 같은 결과 메시지를 받아 화면을 바꾼다는 점입니다.", "verbatim": true},
+      "sectionPath": ["2. 담당 파트 구조", "2.2 미니게임 한 판의 흐름"],
+      "points": [
+        {"label": "", "text": "CheckpointZone은 팀원이 작성했습니다. 경유지 완료 처리는 방장만 합니다.", "verbatim": true}
+      ],
+      "visuals": [{"kind": "mermaid", "n": 1, "fp": "sequenceDiagram"}],
+      "from": {
+        "key": "round-flow",
+        "sectionPath": ["2. 담당 파트 구조", "2.2 미니게임 한 판의 흐름"],
+        "sig": ["2.2 미니게임 한 판의 흐름|mermaid|1|sequenceDiagram"]
+      }
     }
   ],
   "hide": []
