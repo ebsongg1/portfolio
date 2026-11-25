@@ -161,6 +161,9 @@ code { font-family: var(--mono); font-size: .88em; background: var(--accent-soft
 .md th { text-align: left; background: var(--th); color: var(--ink); font-weight: 700; padding: 10px 14px; border: 1px solid var(--line); white-space: nowrap; }
 .md td { padding: 10px 14px; border: 1px solid var(--line); vertical-align: top; color: var(--body); }
 .md td img { display: block; margin: 0; border-radius: 8px; border: 1px solid var(--line); cursor: zoom-in; height: auto; }
+/* 직접 고침(2026-11-25): 그림만 든 칸이 있는 표(그림 나란히 놓기)는 칸 너비를 똑같이, 그림은 칸에 꽉 차게 */
+.md table:has(td > img:only-child) { width: 100%; table-layout: fixed; }
+.md td > img:only-child { width: 100%; }
 
 .md .pf-figure { margin: 20px 0; }
 .md .pf-figure img { display: block; max-width: 100%; height: auto; border-radius: calc(var(--r) * .5); border: 1px solid var(--line); cursor: zoom-in; }

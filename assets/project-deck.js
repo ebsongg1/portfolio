@@ -186,6 +186,9 @@
 
   // ── 장면 틀(deck.slides[].layout) ──
   const txt = (t) => (t && typeof t === 'object' ? t.text : t) || '';
+  // 직접 고침(2026-11-25): 장면 제목·장 표지 목록에서 절 번호(「3.5 」·「1. 」)를 화면에서만 뺌. 원문·data·상세 문서는 그대로
+  const SEC_NO = /^\s*\d+(?:\.\d+)*\.?\s+/;
+  const shown = (t) => txt(t).replace(SEC_NO, '');
   const ncards = (points, { row = false, num = true, two = false } = {}) => (points.length
     ? `<div class="cards${row ? ' row' : ''}${two ? ' two' : ''}" style="--n:${Math.min(points.length, 4)}">${points.map((pt, i) =>
       `<div class="ncard${num ? '' : ' nonum'}">${num ? `<span class="num" aria-hidden="true">${i + 1}</span>` : ''}<div>${pt.label ? `<span class="lb">${esc(PF.label(pt.label))}</span>` : ''}<p>${inline(txt(pt))}</p></div></div>`).join('')}</div>` : '');
@@ -260,7 +263,7 @@
     const V = sl.layout === 'full' || sl.layout === 'screens' ? [{}, { tight: true }]
       : [{ vw: 1.4 }, { vw: 1.7 }, { vw: 1.15 }, { vw: 1.4, tight: true }, { stack: true }, { stack: true, tight: true }];
     const build = (v) => {
-      const s = PF.scene({ id: sid, tpl: 'D', eyebrow: meta.chapter, rlabel: meta.rlabel, title: txt(sl.title) || meta.chapter, sub: part, lead: part && part !== `1/${part.split('/')[1]}` ? '' : txt(sl.lead), foot: meta.foot, sec: meta.chapter, group: meta.chapter, stitle: txt(sl.title) });
+      const s = PF.scene({ id: sid, tpl: 'D', eyebrow: meta.chapter, rlabel: meta.rlabel, title: shown(sl.title) || meta.chapter, sub: part, lead: part && part !== `1/${part.split('/')[1]}` ? '' : txt(sl.lead), foot: meta.foot, sec: meta.chapter, group: meta.chapter, stitle: txt(sl.title) });
       s.classList.add(`l-${sl.layout || 'visual'}`);
       if (meta.err) s.dataset.pfErr = meta.err;
       if (sl.edited) s.dataset.pfEdited = '1';                       // 장면 고치기로 고친 장면(미리보기 개요에 ✎)
@@ -387,7 +390,7 @@
     const make = (mode) => {
       const s = PF.scene({ id: chId, tpl: 'CH', kind: 'bare', cls: mode === 'compact' ? 'compact' : '', foot, sec: c.title, group: c.title, stitle: c.title });
       const roomy = mode === 'roomy';
-      const list = slides.map((x, i) => item(String(i + 1), txt(x.sl.title) || c.title, PF.tab(x.sl.tab), x.scenes[0].id, roomy ? txt(x.sl.lead) : '')).join('');
+      const list = slides.map((x, i) => item(String(i + 1), shown(x.sl.title) || c.title, PF.tab(x.sl.tab), x.scenes[0].id, roomy ? txt(x.sl.lead) : '')).join('');
       PF.body(s).innerHTML = `<div class="toprow"><span class="pf-eyebrow long">${esc(ptitle)}</span><span class="rl">${esc(PF.t('deck.ch-count', { n: slides.length }))}</span></div>
         <div class="ch-mid"><div><p class="ch-no">${esc(PF.t('en.chapter'))} ${String(ci + 1).padStart(2, '0')}</p><h2 class="ch-t">${esc(c.title)}</h2>${DOT}</div>
         <div class="ch-list t-P2${mode === 'normal' ? '' : ' ' + mode}"><ol class="toc-list${roomy ? '' : ' sub'}">${list}</ol></div></div>`;

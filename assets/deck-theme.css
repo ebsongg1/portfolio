@@ -210,6 +210,13 @@ table.kv td.role { color: var(--accent-ink); font-weight: 800; }
 .pi-tight .intent .it { font-size: 14px; line-height: 1.55; }
 .pi-tight .lcard a { padding: 6px 28px 7px 12px; }
 .pi-tight .pi-left, .pi-tight .pi-right { gap: 12px; }
+/* 직접 고침(2026-11-25): 표지 — 링크는 작은 버튼 한 줄(영문 윗줄 없음), 왼쪽·오른쪽 내용을 세로 가운데로 */
+.t-P1 .pi-left, .t-P1 .pi-right { justify-content: center; }
+.pi-links, .pi-links.row { display: flex; flex-wrap: nowrap; gap: 8px; }
+.pi-links .lcard { flex: 0 1 auto; min-width: 0; }
+.pi-links .lcard a, .pi-tight .pi-links .lcard a { padding: 6px 28px 6px 12px; white-space: nowrap; }
+.pi-links .lcard .lc-t { font-size: 13px; font-weight: 700; }
+.pi-links .lcard a .pf-newtab-icon { top: 50%; right: 10px; transform: translateY(-50%); }
 
 /* ── 화면 카드(슬라이드 screens 장면의 열 하나): 화면 + FEATURE 0n + 제목 + 설명 ── */
 .fe-card { display: flex; flex-direction: column; gap: 10px; min-width: 0; min-height: 0; }
@@ -247,12 +254,14 @@ table.md-table th { background: var(--th); color: var(--ink); box-shadow: inset 
 table.md-table td { padding: 7px 11px; border-bottom: 1px solid var(--line); vertical-align: top; color: var(--ink); overflow-wrap: anywhere; }
 table.md-table tbody tr:nth-child(even) td { background: var(--zebra); }
 table.md-table code { font-size: max(.86em, 12px); }   /* 머리 칸(13px) 안 코드도 코드 하한 12px 아래로 내려가지 않게 */
-table.md-table img { max-height: 120px; max-width: 100%; height: auto; }   /* width·height 속성(렌더러가 미리 잰 크기)으로 불러오기 전에도 자리를 잡음 */
+table.md-table img { max-height: 120px; max-width: 100%; height: auto; }
+/* 직접 고침(2026-11-25): 그림만 든 칸(그림 나란히 놓기 표)은 칸 너비에 맞춰 크게 — 높이 상한 150px */
+table.md-table td:has(> img:only-child) img { width: 100%; max-height: 150px; object-fit: contain; }   /* width·height 속성(렌더러가 미리 잰 크기)으로 불러오기 전에도 자리를 잡음 */
 .vbox[data-kind] > .pf-vband { min-width: 0; }                         /* 그림 상자 안 띠는 상자 폭에 맞춰 꺾임(높이는 fitVisuals가 다시 잼) */
 .cards { display: grid; gap: 12px; align-content: center; min-width: 0; }
 .cards.row { grid-template-columns: repeat(var(--n, 3), minmax(0, 1fr)); align-items: stretch; }
 .cards.two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-.ncard { display: grid; grid-template-columns: 28px minmax(0, 1fr); gap: 12px; padding: 14px 16px; background: var(--card); border: 1px solid var(--line); border-radius: calc(var(--radius) * .7); align-items: start; }
+.ncard { display: grid; grid-template-columns: 28px minmax(0, 1fr); gap: 12px; padding: 14px 16px; background: var(--card); border: 1px solid var(--line); border-radius: calc(var(--radius) * .7); align-items: center; }
 .ncard.nonum { grid-template-columns: minmax(0, 1fr); }
 .ncard .num { width: 26px; height: 26px; border-radius: 50%; background: var(--glow); color: #fff; font-size: 13px; font-weight: 800; display: flex; align-items: center; justify-content: center; margin-top: 1px; }
 .ncard .lb { display: block; font-size: 13px; font-weight: 800; letter-spacing: .02em; color: var(--accent-ink); margin-bottom: 3px; }

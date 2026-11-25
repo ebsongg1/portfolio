@@ -373,7 +373,8 @@
     const meta = (p.meta || []).map((m) => `<div class="mi"><dt class="meta-k">${metaEn(m.label) ? `${esc(metaEn(m.label))} · ` : ''}${esc(m.label)}</dt><dd>${inline(m.value)}</dd></div>`);
     if (p.team?.role) meta.push(`<div class="mi wide role"><dt class="meta-k">${esc(PF.t('en.role'))} · ${esc(PF.t('name.role'))}</dt><dd>${inline(p.team.role)}</dd></div>`);
     const intent = p.intent?.text ? `<div class="intent"><p class="lc-k">${esc(PF.t('en.intent'))} · ${esc(PF.t('name.intent'))}</p><p class="it">${inline(p.intent.text)}</p></div>` : '';
-    const cards = links.map((l) => `<div class="lcard">${PF.link({ href: l.href, kind: l.kind, label: `<span class="lc-k">${esc(l.k)}</span><span class="lc-t">${esc(l.label)}</span>` })}</div>`).join('');   // 주소 글자는 싣지 않음 — 카드를 누르면 이동
+    // 직접 고침(2026-11-25): 표지 링크 카드의 영문 윗줄(GAMEPLAY·LINK…)을 빼고 작은 한 줄 버튼으로(.pi-links)
+    const cards = links.map((l) => `<div class="lcard">${PF.link({ href: l.href, kind: l.kind, label: `<span class="lc-t">${esc(l.label)}</span>` })}</div>`).join('');   // 주소 글자는 싣지 않음 — 카드를 누르면 이동
     const tags = (p.tags || []).length ? `<ul class="tags">${p.tags.map((x) => `<li>${esc(x)}</li>`).join('')}</ul>` : '';
     const cover = p.cover ? `<div class="media pi-cover"${ar ? ` style="aspect-ratio:${ar.toFixed(4)}"` : ''}>${imgTag(PF.srcPath(p.id, p.cover), p.title, d)}</div>` : '';
     const head = `<div class="pi-head"><${titleTag} class="pi-t">${esc(p.title)}</${titleTag}>${p.tagline ? `<p class="tagline">${inline(p.tagline)}</p>` : ''}</div>`;

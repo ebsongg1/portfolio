@@ -205,9 +205,10 @@
         "sectionPath": ["2. 플레이", "2.1 한 판의 흐름"],
         "points": [
           {"label": "", "text": "하루 안에서는 감지 → 처리 → 보상이 반복되고, 하루가 끝나면 강화·보급으로 다음 날을 준비합니다.", "verbatim": true},
-          {"label": "", "text": "근무 시간이 끝나도 남은 이상현상을 모두 처리해야 그날이 끝납니다(3.5).", "verbatim": true}
+          {"label": "", "text": "근무 시간이 끝나도 남은 이상현상을 모두 처리해야 그날이 끝납니다.", "verbatim": false}
         ],
-        "visuals": [{"kind": "mermaid", "n": 1, "fp": "flowchart LR"}]
+        "visuals": [{"kind": "mermaid", "n": 1, "fp": "flowchart LR"}],
+        "edited": true
       },
       {
         "key": "anomaly-types",
@@ -218,7 +219,11 @@
         "lead": null,
         "sectionPath": ["2. 플레이", "2.2 이상현상 세 가지"],
         "points": [{"label": "", "text": "2단계·3단계에서는 시설 안정도가 초당 0.5·1씩 줄고, 파열하면 한 번에 20이 줄어듭니다.", "verbatim": true}],
-        "visuals": [{"kind": "table", "n": 1, "fp": "이상현상|생기는 곳|대응 마법|처리 방법|방치하면"}]
+        "visuals": [
+          {"kind": "table", "n": 1, "fp": "마력 균열|저주 오염|마력 장치 폭주"},
+          {"kind": "table", "n": 2, "fp": "이상현상|생기는 곳|대응 마법|처리 방법|방치하면"}
+        ],
+        "edited": true
       },
       {
         "key": "day-state",
@@ -298,7 +303,20 @@
           {"label": "이유", "text": "\"시설을 지킨다\"는 기획에 맞게, 시간이 끝나도 남은 위험은 끝까지 처리하고 하루를 마치도록 바꿨습니다.", "verbatim": true},
           {"label": "", "text": "보상은 정리 단계에 들어가는 순간의 값으로 고정했습니다(`FreezeRewardsForCleanup`).", "verbatim": true}
         ],
-        "visuals": [{"kind": "table", "n": 1, "fp": "|[A] 시간이 끝나면 모두 제거|[B] 정리 단계에서 남은 것을 처리 ✓"}]
+        "visuals": [
+          {
+            "kind": "image",
+            "src": "images/cleanup_marked.png",
+            "w": 1920,
+            "h": 1080,
+            "caption": {
+              "text": "근무 시간이 끝났는데 이상현상이 하나 남아(왼쪽 빨간 상자), HUD에 「잔여 이상현상 정리 중 (1개)」가 표시된 화면(오른쪽 위 빨간 상자)",
+              "verbatim": true
+            }
+          },
+          {"kind": "table", "n": 1, "fp": "|[A] 시간이 끝나면 모두 제거|[B] 정리 단계에서 남은 것을 처리 ✓"}
+        ],
+        "edited": true
       },
       {
         "key": "anomaly-contract",
@@ -374,18 +392,19 @@
         "layout": "full",
         "tab": "선택",
         "title": {"text": "4.5 처리 보상을 단계별로 줄까", "verbatim": true},
-        "lead": {"text": "이상현상을 처리했을 때, 성장한 정도(단계)에 따라 보상을 더 줄지, 항상 같은 보상을 줄지.", "verbatim": true},
+        "lead": {"text": "게임의 방향을 \"단계를 전략적으로 키우기\"에서 \"빠르게 처리하며 버티는 생존\" 으로 바꾸고, 보상 규칙도 그에 맞춰 다시 정했습니다.", "verbatim": false},
         "sectionPath": ["4. 이상현상: 세 종류를 하나의 규칙으로", "4.5 처리 보상을 단계별로 줄까"],
         "points": [
           {
-            "label": "",
-            "text": "그래서 게임의 방향을 \"단계를 전략적으로 키우기\"에서 \"빠르게 처리하며 버티는 생존\" 으로 바꾸고, 보상 규칙도 그에 맞춰 다시 정했습니다.",
+            "label": "이유",
+            "text": "플레이 테스트에서 의도한 전략 선택은 나오지 않았고, 플레이어가 원한 것은 빠르게 치우는 것이었습니다. 방향을 생존으로 바꾸고 나니 [A]는 오히려 방치를 이득으로 만드는 규칙이 됐습니다.",
             "verbatim": true
           },
-          {"label": "이유", "text": "방향을 생존으로 바꾸고 나니 [A]는 오히려 방치를 이득으로 만드는 규칙이 됐습니다.", "verbatim": true},
+          {"label": "", "text": "그래서 보상을 1개로 고정했습니다(`AnomalyBehaviour.ResolutionReward`).", "verbatim": true},
           {"label": "", "text": "그 대가로 초기 기획의 \"키워서 더 큰 보상을 노린다\"는 위험 · 보상 선택이 빠졌습니다.", "verbatim": true}
         ],
-        "visuals": [{"kind": "table", "n": 1, "fp": "|[A] 단계만큼 보상 (초기 기획)|[B] 항상 1개 ✓"}]
+        "visuals": [{"kind": "table", "n": 1, "fp": "|[A] 단계만큼 보상 (초기 기획)|[B] 항상 1개 ✓"}],
+        "edited": true
       },
       {
         "key": "magic-types",
@@ -396,17 +415,6 @@
         "lead": {"text": "마법마다 조작을 다르게 한 이유는 이상현상마다 대처 방식이 다르게 느껴지게 하기 위해서입니다.", "verbatim": true},
         "sectionPath": ["5. 마법: 감지하고, 종류에 맞게 해결하기", "5.1 마법마다 다른 조작"],
         "points": [],
-        "visuals": [{"kind": "table", "n": 1, "fp": "마법|대상|조작|실제 설정"}]
-      },
-      {
-        "key": "magic-screens",
-        "chapter": "magic",
-        "layout": "screens",
-        "tab": "결과",
-        "title": {"text": "5.1 마법마다 다른 조작", "verbatim": true},
-        "lead": null,
-        "sectionPath": ["5. 마법: 감지하고, 종류에 맞게 해결하기", "5.1 마법마다 다른 조작"],
-        "points": [],
         "visuals": [
           {
             "kind": "image",
@@ -415,23 +423,9 @@
             "h": 540,
             "caption": {"text": "봉인 · 정화 · 안정화를 차례로 쓰는 장면", "verbatim": true}
           },
-          {
-            "kind": "image",
-            "src": "images/seal_chain.gif",
-            "w": 960,
-            "h": 540,
-            "caption": {"text": "Q로 감지한 뒤 봉인점을 순서대로 클릭해 균열을 닫는 장면", "verbatim": true},
-            "sectionPath": ["5. 마법: 감지하고, 종류에 맞게 해결하기", "5.3 연쇄 봉인 판정"]
-          },
-          {
-            "kind": "image",
-            "src": "images/purify_stabilize.gif",
-            "w": 520,
-            "h": 292,
-            "caption": {"text": "정화: 버튼을 누른 채 조준을 옮겨 저주 패치를 이어서 지우는 장면 → 안정화: 장치에 붙어 진행도를 쌓다가 방출 경고 뒤 폭발하는 장면", "verbatim": true},
-            "sectionPath": ["5. 마법: 감지하고, 종류에 맞게 해결하기", "5.4 누르고 있는 두 마법: 쓸어 담는 정화, 피하며 버티는 안정화"]
-          }
-        ]
+          {"kind": "table", "n": 1, "fp": "마법|대상|조작|실제 설정"}
+        ],
+        "edited": true
       },
       {
         "key": "magic-input",
@@ -455,15 +449,23 @@
         "layout": "code",
         "tab": "구현",
         "title": {"text": "5.3 연쇄 봉인 판정", "verbatim": true},
-        "lead": null,
+        "lead": {"text": "첫 클릭은 Q로 감지한 첫 봉인점만 받습니다.\n봉인 순서는 균열이 생길 때마다 무작위로 섞입니다(`RandomizeSealOrder`).", "verbatim": false},
         "sectionPath": ["5. 마법: 감지하고, 종류에 맞게 해결하기", "5.3 연쇄 봉인 판정"],
         "points": [
-          {"label": "", "text": "첫 클릭은 Q로 감지한 첫 봉인점만 받습니다.", "verbatim": true},
-          {"label": "", "text": "첫 성공부터 연쇄 전체에 하나의 마감 시간(2초)을 둡니다.", "verbatim": true},
           {"label": "", "text": "순서가 틀리거나 시간이 지나면 처음부터 다시 해야 합니다(`FailSealChain`).", "verbatim": true},
-          {"label": "", "text": "균열이 성장하면 진행 중인 연쇄를 초기화합니다.", "verbatim": true}
+          {"label": "", "text": "클릭할 때마다 시간이 다시 채워지지 않습니다.", "verbatim": true}
         ],
-        "visuals": [{"kind": "code", "n": 1, "lines": [7, 26], "fp": "// Anomalies/ManaRift/ManaRift.cs — TryCompleteSealClick"}]
+        "visuals": [
+          {"kind": "code", "n": 1, "lines": [19, 31], "fp": "// Anomalies/ManaRift/ManaRift.cs — TryCompleteSealClick"},
+          {
+            "kind": "image",
+            "src": "images/seal_chain.gif",
+            "w": 960,
+            "h": 540,
+            "caption": {"text": "Q로 감지한 뒤 봉인점을 순서대로 클릭해 균열을 닫는 장면", "verbatim": true}
+          }
+        ],
+        "edited": true
       },
       {
         "key": "magic-hold",
@@ -474,7 +476,17 @@
         "lead": {"text": "정화와 안정화는 둘 다 버튼을 누르고 있어야 하는 마법이지만, 플레이에서 요구하는 움직임은 다릅니다.", "verbatim": true},
         "sectionPath": ["5. 마법: 감지하고, 종류에 맞게 해결하기", "5.4 누르고 있는 두 마법: 쓸어 담는 정화, 피하며 버티는 안정화"],
         "points": [],
-        "visuals": [{"kind": "table", "n": 1, "fp": "|정화 (저주 오염)|안정화 (마력 장치 폭주)"}]
+        "visuals": [
+          {
+            "kind": "image",
+            "src": "images/purify_stabilize.gif",
+            "w": 520,
+            "h": 292,
+            "caption": {"text": "정화: 버튼을 누른 채 조준을 옮겨 저주 패치를 이어서 지우는 장면 → 안정화: 장치에 붙어 진행도를 쌓다가 방출 경고 뒤 폭발하는 장면", "verbatim": true}
+          },
+          {"kind": "table", "n": 1, "fp": "|정화 (저주 오염)|안정화 (마력 장치 폭주)"}
+        ],
+        "edited": true
       },
       {
         "key": "seal-choice",
@@ -515,10 +527,10 @@
         "sectionPath": ["6. AI와 일한 방식", "6.2 AI가 만든 구조를 읽으며 본 것"],
         "points": [
           {"label": "", "text": "공통 계약이 있어도 계약 밖에서 종류를 직접 검사하면 확장성의 이점이 줄어든다는 것을 이 구조에서 확인했습니다.", "verbatim": true},
-          {"label": "", "text": "기획 판단을 규칙으로 분명하게 정했을 때는 구현이 빨랐습니다.", "verbatim": false},
-          {"label": "", "text": "반대로 잘 되지 않은 것은 코드 정리였습니다.", "verbatim": false}
+          {"label": "", "text": "기획 판단을 규칙으로 분명하게 정했을 때는 구현이 빨랐습니다. 반대로 잘 되지 않은 것은 코드 정리였습니다.", "verbatim": false}
         ],
-        "visuals": [{"kind": "table", "n": 1, "fp": "문제|근거|영향"}]
+        "visuals": [{"kind": "table", "n": 1, "fp": "문제|근거|영향"}],
+        "edited": true
       }
     ],
     "base": [
@@ -863,6 +875,6 @@
         "visuals": [{"kind": "table", "n": 1, "fp": "문제|근거|영향"}]
       }
     ],
-    "applied": "960ab24843f996a0"
+    "applied": "f8c3d4717fc64737"
   }
 }
