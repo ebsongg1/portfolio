@@ -284,10 +284,16 @@
     else if (arr === 'col') {
       // 세로로 쌓기: 표는 똑같이 나눈 몫까지 받되 칸 폭에서의 실제 높이가 더 작으면 그만큼만(남는 높이는 다이어그램·그림에)
       const avail = H - GAP * (n - 1) - caps.reduce((a, c) => a + c, 0);
-      // 직접 고침(2026-11-25): 아주 가로로 긴 그림과 쌓을 때는 표가 제 높이를 먼저 받고, 그림은 남은 높이까지만(표가 다음 장면으로 넘어가지 않게)
-      const wideImg = nat.some((t) => t.k === 'image' && t.ar >= 3);
-      const tblH = wideImg ? nat.reduce((a, t) => a + (t.table ? t.hAt(W) : 0), 0) : 0;
-      const need = nat.map((t) => (t.table ? (wideImg ? t.hAt(W) : Math.min(avail / n, t.hAt(W))) : t.k === 'code' ? t.nh : wideImg && t.k === 'image' ? Math.min(W / t.ar, Math.max(0, avail - tblH)) : W / t.ar));
+      // 직접 고침(2026-11-25): 아주 가로로 긴 자료(그림·다이어그램, 가로:세로 3 이상)와 쌓을 때는
+      //   표 → 긴 자료(폭을 다 씀) 순서로 제 높이를 먼저 받고, 나머지 그림은 남은 높이까지만(표가 넘어가거나 흐름도가 작아지지 않게)
+      const wideK = nat.map((t) => !t.table && t.k !== 'code' && t.ar >= 3);
+      const anyWide = wideK.some(Boolean);
+      const tblH = anyWide ? nat.reduce((a, t) => a + (t.table ? t.hAt(W) : 0), 0) : 0;
+      const wideH = anyWide ? nat.reduce((a, t, i) => a + (wideK[i] ? W / t.ar : 0), 0) : 0;
+      const need = nat.map((t, i) => (t.table ? (anyWide ? t.hAt(W) : Math.min(avail / n, t.hAt(W))) : t.k === 'code' ? t.nh
+        : !anyWide ? W / t.ar
+        : wideK[i] ? Math.min(W / t.ar, Math.max(0, avail - tblH))
+        : Math.min(W / t.ar, Math.max(0, avail - tblH - wideH))));
       const f = Math.min(1, avail / Math.max(1, need.reduce((a, x) => a + x, 0)));
       nat.forEach((t, i) => { out[i] = contain(i, W, need[i] * f); });
     } else {

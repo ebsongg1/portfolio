@@ -241,31 +241,18 @@
         },
         "sectionPath": ["3. 마법책과 스킬 전환", "3.2 책을 얻고, 고르고, 쏘기까지"],
         "points": [],
-        "visuals": [{"kind": "mermaid", "n": 1, "fp": "flowchart LR"}]
-      },
-      {
-        "key": "spell-switch",
-        "chapter": "spell",
-        "layout": "screens",
-        "tab": "결과",
-        "title": {"text": "3.2 책을 얻고, 고르고, 쏘기까지", "verbatim": true},
-        "lead": {"text": "`UpdateSkillUI`는 관통 · 운석의 남은 시간을 각 쿨타임으로 나눠 스킬 아이콘의 가림 비율을 갱신합니다.", "verbatim": true},
-        "sectionPath": ["3. 마법책과 스킬 전환", "3.2 책을 얻고, 고르고, 쏘기까지"],
-        "points": [],
         "visuals": [
+          {"kind": "mermaid", "n": 1, "fp": "flowchart LR"},
           {
             "kind": "image",
             "src": "images/spellbook.webp",
+            "w": 1910,
+            "h": 1068,
             "caption": {"text": "마법책을 주워 책 UI가 열린 화면", "verbatim": true}
-          },
-          {
-            "kind": "image",
-            "src": "images/magic_switch.gif",
-            "w": 1080,
-            "h": 608,
-            "caption": {"text": "Q/E로 마법을 바꿔 운석 · 관통 · 기본 마법을 차례로 쓰는 장면", "verbatim": true}
           }
-        ]
+        ],
+        "arr": "col",
+        "edited": true
       },
       {
         "key": "projectiles",
@@ -279,7 +266,18 @@
         },
         "sectionPath": ["3. 마법책과 스킬 전환", "3.3 마법별 발사와 충돌"],
         "points": [],
-        "visuals": [{"kind": "table", "n": 1, "fp": "마법|발사 (PlayerAttack)|충돌 · 피해 (발사체 스크립트)"}]
+        "visuals": [
+          {"kind": "table", "n": 1, "fp": "마법|발사 (PlayerAttack)|충돌 · 피해 (발사체 스크립트)"},
+          {
+            "kind": "image",
+            "src": "images/magic_switch.gif",
+            "w": 1080,
+            "h": 608,
+            "caption": {"text": "Q/E로 마법을 바꿔 운석 · 관통 · 기본 마법을 차례로 쓰는 장면", "verbatim": true},
+            "sectionPath": ["3. 마법책과 스킬 전환", "3.2 책을 얻고, 고르고, 쏘기까지"]
+          }
+        ],
+        "edited": true
       },
       {
         "key": "spell-code",
@@ -604,25 +602,34 @@
       {
         "key": "intro",
         "chapter": "overview",
-        "layout": "overview",
+        "layout": "visual",
         "tab": "개요",
         "title": {"text": "1. 프로젝트 개요", "verbatim": true},
         "lead": {"text": "The Last Mage는 스테이지를 탐색하며 마법책을 모아 공격 방식을 넓히고, 스테이지 끝에서 보스 마법사와 마주하는 2D 액션 플랫포머입니다.", "verbatim": true},
         "sectionPath": ["1. 프로젝트 개요"],
         "points": [
           {
-            "label": "",
+            "label": "다회차",
             "text": "처음 플레이할 때는 의뢰를 받고 보스를 쓰러뜨리는 흐름이지만, 한 번 클리어한 뒤 다시 시작하면 타이틀 화면 · 보스와의 대화 등이 달라지고, 결말도 바뀝니다.",
             "verbatim": true
           },
           {
-            "label": "",
+            "label": "목표한 경험",
             "text": "탐색 중 발견한 마법책으로 공격 방식이 늘어나는 성장감, 그리고 같은 세계를 다시 볼 때 동일한 텍스트의 의미가 달라지는 발견감입니다.",
             "verbatim": true
           },
-          {"label": "", "text": "2주 안에 전투 · 보스 조우 · 두 번째 플레이의 서사 변화를 하나로 잇는 완성된 게임을 만드는 것이 목표였습니다.", "verbatim": true}
+          {"label": "목표", "text": "2주 안에 전투 · 보스 조우 · 두 번째 플레이의 서사 변화를 하나로 잇는 완성된 게임을 만드는 것이 목표였습니다.", "verbatim": true}
         ],
-        "visuals": []
+        "visuals": [
+          {
+            "kind": "image",
+            "src": "images/loop.gif",
+            "w": 1080,
+            "h": 608,
+            "caption": {"text": "타이틀 → 마법책 획득 → 보스방 대화 → 보스전", "verbatim": true},
+            "sectionPath": ["2. 플레이", "2.1 한 판의 흐름"]
+          }
+        ]
       },
       {
         "key": "loop",
@@ -762,16 +769,20 @@
             "text": "`BossAI`는 `BossState` enum과 `isAttacking`, `magicTimer`로 지금 무엇을 하는 중인지 관리합니다.",
             "verbatim": true
           },
-          {"label": "", "text": "보스 씬의 설정값은 근접 3.5, 원거리 7, 감지 40, 특수 공격 쿨타임 6초입니다.", "verbatim": true}
+          {
+            "label": "",
+            "text": "특수 공격은 쿨타임 6초가 차면 공격 중이 아닐 때 두 패턴(`CastMagic` · `CastMeteor`) 중 하나를 무작위로 씁니다.",
+            "verbatim": false
+          }
         ],
         "visuals": [
           {"kind": "mermaid", "n": 1, "fp": "stateDiagram-v2"},
           {
             "kind": "image",
-            "src": "images/boss_fight.png",
-            "w": 1920,
-            "h": 1080,
-            "caption": {"text": "보스전 화면", "verbatim": true}
+            "src": "images/boss_attack.gif",
+            "w": 1080,
+            "h": 608,
+            "caption": {"text": "보스가 거리를 두고 원거리 유령탄을 쓰는 장면", "verbatim": true}
           }
         ]
       },
@@ -820,7 +831,10 @@
             "verbatim": true
           }
         ],
-        "visuals": [{"kind": "table", "n": 1, "fp": "요소|ClearCount == 0|ClearCount >= 1|처리하는 곳"}]
+        "visuals": [
+          {"kind": "table", "n": 1, "fp": "요소|ClearCount == 0|ClearCount >= 1|처리하는 곳"},
+          {"kind": "table", "n": 2, "fp": "첫 플레이 (ClearCount == 0)|다음 플레이 (ClearCount >= 1)"}
+        ]
       },
       {
         "key": "glitch-gifs",
@@ -851,7 +865,7 @@
       {
         "key": "boss-room",
         "chapter": "branch",
-        "layout": "visual",
+        "layout": "full",
         "tab": "흐름",
         "title": {"text": "5.4 보스방 진입부터 결말까지", "verbatim": true},
         "lead": {"text": "같은 버튼이 회차에 따라 다른 결과를 냅니다.", "verbatim": true},
@@ -860,14 +874,31 @@
           {"label": "", "text": "보스방에 들어가면 연출이 시작됩니다.", "verbatim": true},
           {"label": "", "text": "대사는 한 글자씩 출력됩니다.", "verbatim": true}
         ],
+        "visuals": [{"kind": "mermaid", "n": 1, "fp": "flowchart LR"}]
+      },
+      {
+        "key": "boss-ending",
+        "chapter": "branch",
+        "layout": "screens",
+        "tab": "결과",
+        "title": {"text": "5.4 보스방 진입부터 결말까지", "verbatim": true},
+        "lead": {"text": "플레이어가 고르는 선택지 두 개가 아니라, 같은 버튼을 눌렀을 때 회차에 따라 결과가 갈리는 구조입니다.", "verbatim": true},
+        "sectionPath": ["5. 다회차 스토리 분기", "5.4 보스방 진입부터 결말까지"],
+        "points": [],
         "visuals": [
-          {"kind": "mermaid", "n": 1, "fp": "flowchart LR"},
           {
             "kind": "image",
             "src": "images/boss_room.png",
             "w": 1920,
             "h": 1080,
             "caption": {"text": "보스방에 들어가 연출과 대사가 시작된 화면", "verbatim": true}
+          },
+          {
+            "kind": "image",
+            "src": "images/ending_compare.gif",
+            "w": 1080,
+            "h": 1216,
+            "caption": {"text": "첫 플레이 엔딩(왕국군 화살)과 다음 플레이 엔딩(운석 · 엔딩 책)", "verbatim": true}
           }
         ]
       },
@@ -961,7 +992,7 @@
           {"label": "문제", "text": "보스 대화 중에 대사를 넘기지 않고 공격하면 연출이 이상하게 겹치는 오류가 있다는 것을 알고 있었습니다.", "verbatim": true},
           {"label": "원인", "text": "문서를 정리하면서 코드에서 겹칠 수 있는 경로를 세 곳 찾았습니다.", "verbatim": true},
           {
-            "label": "",
+            "label": "계획",
             "text": "대화가 시작되면 이동 · 공격 · 대사 진행 · 버튼 입력을 함께 잠그고, 한 단계가 끝나야 다음 단계 입력을 받도록 바꿀 계획입니다.",
             "verbatim": true
           }
@@ -980,7 +1011,7 @@
         "visuals": [{"kind": "table", "n": 1, "fp": "구분|내용"}]
       }
     ],
-    "applied": "e2f2f836212338ed",
+    "applied": "db548d6d5750deff",
     "retroHide": [4]
   }
 }

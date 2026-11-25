@@ -222,7 +222,9 @@
     `<div class="fstep${pt.label === '결과' ? ' res' : ''}${link && pt.label === '원인' ? ' to-vis' : ''}">${pt.label ? `<span class="labelchip${FLOW[pt.label] ? ' ' + FLOW[pt.label] : ''}">${esc(PF.label(pt.label))}</span>` : ''}<p>${inline(txt(pt))}</p></div>`).join('')}</div>`;
   function bodyHtml(sl, vs, variant) {
     const points = sl.points || [];
-    const vis = (list) => `<div class="vis">${list.join('')}</div>`;
+    // 직접 고침(2026-11-25): 장면 고치기의 arr("row"·"col")가 있으면 시각 자료 배치를 그것으로 고정
+    const arr = sl.arr === 'row' || sl.arr === 'col' ? ` data-arr="${sl.arr}"` : '';
+    const vis = (list) => `<div class="vis"${list.length > 1 ? arr : ''}>${list.join('')}</div>`;
     const tight = variant.tight ? ' tight' : '';
     if (!vs.length) {
       if (sl.layout === 'problem') return `<div class="dk dk-text${tight}">${flowHtml(points, variant.stack || variant.tight ? 'row' : 'col')}</div>`;

@@ -43,7 +43,7 @@ KEY_RE = re.compile(r'^[a-z][a-z0-9-]{1,31}$')
 LAYOUTS = ('overview', 'visual', 'code', 'full', 'screens', 'problem')
 TABS = ('개요', '구조', '흐름', '구현', '선택', '문제 해결', '결과', '')
 KINDS = ('mermaid', 'code', 'table', 'image')
-SLIDE_FIELDS = ('key', 'chapter', 'layout', 'tab', 'title', 'lead', 'sectionPath', 'points', 'visuals')
+SLIDE_FIELDS = ('key', 'chapter', 'layout', 'tab', 'title', 'lead', 'sectionPath', 'points', 'visuals', 'arr')   # 직접 고침(2026-11-25): arr = 시각 자료 배치 고정("row" 가로 · "col" 세로, 렌더러가 읽음)
 KIND_KO = {'mermaid': '다이어그램', 'code': '코드', 'table': '표', 'image': '그림'}
 
 for _s in (sys.stdout, sys.stderr):                                # Claude가 읽는 파이프는 UTF-8로(한글 깨짐 방지)
