@@ -284,7 +284,10 @@
     else if (arr === 'col') {
       // 세로로 쌓기: 표는 똑같이 나눈 몫까지 받되 칸 폭에서의 실제 높이가 더 작으면 그만큼만(남는 높이는 다이어그램·그림에)
       const avail = H - GAP * (n - 1) - caps.reduce((a, c) => a + c, 0);
-      const need = nat.map((t) => (t.table ? Math.min(avail / n, t.hAt(W)) : t.k === 'code' ? t.nh : W / t.ar));
+      // 직접 고침(2026-11-25): 아주 가로로 긴 그림과 쌓을 때는 표가 제 높이를 먼저 받고, 그림은 남은 높이까지만(표가 다음 장면으로 넘어가지 않게)
+      const wideImg = nat.some((t) => t.k === 'image' && t.ar >= 3);
+      const tblH = wideImg ? nat.reduce((a, t) => a + (t.table ? t.hAt(W) : 0), 0) : 0;
+      const need = nat.map((t) => (t.table ? (wideImg ? t.hAt(W) : Math.min(avail / n, t.hAt(W))) : t.k === 'code' ? t.nh : wideImg && t.k === 'image' ? Math.min(W / t.ar, Math.max(0, avail - tblH)) : W / t.ar));
       const f = Math.min(1, avail / Math.max(1, need.reduce((a, x) => a + x, 0)));
       nat.forEach((t, i) => { out[i] = contain(i, W, need[i] * f); });
     } else {
@@ -318,7 +321,9 @@
     });
     for (const { vis, boxes, W, H, col } of plans) {
       if (!boxes.length || !W || H <= 0) continue;
-      const arrs = boxes.length === 1 ? ['one'] : col ? ['col'] : (vis.dataset.arr ? [vis.dataset.arr] : ['col', 'row']);
+      // 직접 고침(2026-11-25): 아주 가로로 긴 그림(가로:세로 3 이상, 화면 두 개를 옆으로 붙인 GIF 등)이 있으면 늘 위아래로 쌓음 — 옆에 두면 너무 작아짐
+      const wide = boxes.length > 1 && boxes.some((b) => { const t = natOf(b); return t.k === 'image' && t.ar >= 3; });
+      const arrs = boxes.length === 1 ? ['one'] : col || wide ? ['col'] : (vis.dataset.arr ? [vis.dataset.arr] : ['col', 'row']);
       let best = null;
       for (const a of arrs) {
         const r = sizeBoxes(boxes, a, W, H);

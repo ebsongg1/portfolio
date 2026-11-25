@@ -236,7 +236,7 @@ table.kv td.role { color: var(--accent-ink); font-weight: 800; }
 .pf-sizing .dk-stack { grid-template-rows: minmax(0, 1fr) auto; }
 .dk-text { align-content: center; }
 .vis { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px; min-width: 0; min-height: 0; }
-.vis[data-arr="row"] { flex-direction: row; align-items: flex-start; }
+.vis[data-arr="row"] { flex-direction: row; align-items: center; }   /* 직접 고침(2026-11-25): 나란히 놓인 그림·표를 세로 가운데로(원래 flex-start) */
 .vbox { margin: 0; display: flex; flex-direction: column; gap: 6px; flex: none; max-width: 100%; min-width: 0; }
 .vmedia { border-radius: calc(var(--radius) * .6); overflow: hidden; background: var(--card); border: 1px solid var(--line); display: flex; align-items: center; justify-content: center; }
 .vbox[data-kind="mermaid"] .vmedia { background: var(--diagram-bg); border-color: var(--diagram-bg); }   /* 다이어그램은 밝은 판(학생 문서의 밝은 mermaid 테마가 그대로 읽히게) */

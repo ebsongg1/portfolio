@@ -189,6 +189,16 @@
   // 직접 고침(2026-11-25): 장면 제목·장 표지 목록에서 절 번호(「3.5 」·「1. 」)를 화면에서만 뺌. 원문·data·상세 문서는 그대로
   const SEC_NO = /^\s*\d+(?:\.\d+)*\.?\s+/;
   const shown = (t) => txt(t).replace(SEC_NO, '');
+  // 직접 고침(2026-11-25): 장면 글(도입·요점·표·캡션)의 괄호 속 절 표시 「(§5.3)」「(기본 3배, §2.6)」를 화면에서만 뺌.
+  //   원문·data·상세 문서는 그대로. 코드·다이어그램·링크·머리 오른쪽 라벨·꼬리말은 건드리지 않음
+  const SEC_IN = /\s*[,·]\s*§\s*\d+(?:\.\d+)*(?=[^()]*\))/g;          // 괄호 안 다른 말 뒤의 「, §2.6」
+  const SEC_REF = /\s*\(\s*§[^()]*\)/g;                                // §로 시작하는 괄호 통째
+  function stripSecRefs(s) {
+    const tw = document.createTreeWalker(s, NodeFilter.SHOW_TEXT, { acceptNode: (n) => (n.parentElement?.closest('pre, code, svg, a, .pf-rlabel, .pf-foot') ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT) });
+    const hits = [];
+    for (let n = tw.nextNode(); n; n = tw.nextNode()) if (n.nodeValue.includes('§')) hits.push(n);
+    hits.forEach((n) => { n.nodeValue = n.nodeValue.replace(SEC_IN, '').replace(SEC_REF, ''); });
+  }
   const ncards = (points, { row = false, num = true, two = false } = {}) => (points.length
     ? `<div class="cards${row ? ' row' : ''}${two ? ' two' : ''}" style="--n:${Math.min(points.length, 4)}">${points.map((pt, i) =>
       `<div class="ncard${num ? '' : ' nonum'}">${num ? `<span class="num" aria-hidden="true">${i + 1}</span>` : ''}<div>${pt.label ? `<span class="lb">${esc(PF.label(pt.label))}</span>` : ''}<p>${inline(txt(pt))}</p></div></div>`).join('')}</div>` : '');
@@ -268,6 +278,7 @@
       if (meta.err) s.dataset.pfErr = meta.err;
       if (sl.edited) s.dataset.pfEdited = '1';                       // 장면 고치기로 고친 장면(미리보기 개요에 ✎)
       PF.body(s).innerHTML = `<div class="pf-fill">${bodyHtml(sl, vs, v)}</div>`;
+      stripSecRefs(s);
       if (meta.auto) s.querySelector('.pf-foot > span').insertAdjacentHTML('beforeend', '<span class="pf-autoband" data-pf-ui="note">예전 데이터로 자동 구성 — /portfolio-build를 다시 실행하면 슬라이드가 됩니다</span>');
       return PF.fitVisuals(s);
     };
