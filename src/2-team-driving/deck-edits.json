@@ -118,15 +118,31 @@
       "title": {"text": "2.2 미니게임 한 판의 흐름", "verbatim": true},
       "lead": {"text": "이 그림에서 볼 것은 담당자와 관전자가 같은 시작 메시지와 같은 결과 메시지를 받아 화면을 바꾼다는 점입니다.", "verbatim": true},
       "sectionPath": ["2. 담당 파트 구조", "2.2 미니게임 한 판의 흐름"],
-      "points": [
-        {"label": "", "text": "CheckpointZone은 팀원이 작성했습니다. 경유지 완료 처리는 방장만 합니다.", "verbatim": true}
-      ],
+      "points": [{"label": "", "text": "경유지 완료 처리는 방장만 합니다.", "verbatim": true}],
       "visuals": [{"kind": "mermaid", "n": 1, "fp": "sequenceDiagram"}],
       "from": {
         "key": "round-flow",
         "sectionPath": ["2. 담당 파트 구조", "2.2 미니게임 한 판의 흐름"],
         "sig": ["2.2 미니게임 한 판의 흐름|mermaid|1|sequenceDiagram"]
       }
+    },
+    {
+      "key": "arch-diagram",
+      "chapter": "arch",
+      "layout": "visual",
+      "tab": "구조",
+      "title": {"text": "2.1 전체 구조", "verbatim": true},
+      "lead": {
+        "text": "이 그림에서 볼 것은 미니게임 Controller가 WebSocket을 직접 다루지 않고, MinigameManager가 나눠 준 메시지 객체만 받는다는 점입니다.",
+        "verbatim": true
+      },
+      "sectionPath": ["2. 담당 파트 구조", "2.1 전체 구조"],
+      "points": [
+        {"label": "", "text": "그림을 단순하게 하려고 Input · View는 주유소에만 연결해 그렸습니다. 바리케이드 · 정비소도 같은 방식입니다.", "verbatim": true},
+        {"label": "", "text": "NetworkSession · CheckpointZone은 팀원이 작성했습니다.", "verbatim": false}
+      ],
+      "visuals": [{"kind": "mermaid", "n": 1, "fp": "flowchart LR"}],
+      "from": {"key": "arch-diagram", "sectionPath": ["2. 담당 파트 구조", "2.1 전체 구조"], "sig": ["2.1 전체 구조|mermaid|1|flowchart LR"]}
     }
   ],
   "hide": []
